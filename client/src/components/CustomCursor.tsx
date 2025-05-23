@@ -4,9 +4,9 @@ export default function CustomCursor() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isClicking, setIsClicking] = useState(false);
   
   const dotRef = useRef<HTMLDivElement>(null);
-  const outlineRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
     const mobileViewport = window.matchMedia("(max-width: 768px)").matches;
@@ -23,6 +23,14 @@ export default function CustomCursor() {
     
     const handleMouseLeave = () => {
       setIsVisible(false);
+    };
+    
+    const handleMouseDown = () => {
+      setIsClicking(true);
+    };
+    
+    const handleMouseUp = () => {
+      setIsClicking(false);
     };
     
     const handleLinkHoverEvents = () => {
@@ -45,6 +53,8 @@ export default function CustomCursor() {
     document.addEventListener("mousemove", updateCursorPosition);
     document.addEventListener("mouseenter", handleMouseEnter);
     document.addEventListener("mouseleave", handleMouseLeave);
+    document.addEventListener("mousedown", handleMouseDown);
+    document.addEventListener("mouseup", handleMouseUp);
     
     const cleanup = handleLinkHoverEvents();
     
@@ -52,23 +62,19 @@ export default function CustomCursor() {
       document.removeEventListener("mousemove", updateCursorPosition);
       document.removeEventListener("mouseenter", handleMouseEnter);
       document.removeEventListener("mouseleave", handleMouseLeave);
+      document.removeEventListener("mousedown", handleMouseDown);
+      document.removeEventListener("mouseup", handleMouseUp);
       cleanup();
     };
   }, []);
   
   useEffect(() => {
-    if (dotRef.current && outlineRef.current) {
-      // Add animation effect - slight lag to the dot outline
-      const dotX = position.x;
-      const dotY = position.y;
-      
-      dotRef.current.style.transform = `translate(${dotX}px, ${dotY}px)`;
-      
-      // Apply smooth animation to outline with slight delay
-      outlineRef.current.animate({
-        transform: `translate(${dotX}px, ${dotY}px)`
+    if (dotRef.current) {
+      // Animação suave para o cursor
+      dotRef.current.animate({
+        transform: `translate(${position.x}px, ${position.y}px)`
       }, {
-        duration: 500,
+        duration: 150,
         fill: "forwards",
         easing: "ease-out"
       });
@@ -76,23 +82,22 @@ export default function CustomCursor() {
   }, [position]);
   
   return (
-    <>
-      <div 
-        ref={dotRef}
-        className="cursor-dot fixed top-0 left-0 z-[9999]"
-        style={{ 
-          opacity: isVisible ? 1 : 0,
-          transform: `translate(${position.x}px, ${position.y}px)`
-        }}
-      />
-      <div 
-        ref={outlineRef}
-        className={`cursor-dot-outline fixed top-0 left-0 z-[9999] ${isHovering ? 'cursor-hover' : ''}`}
-        style={{ 
-          opacity: isVisible ? 1 : 0,
-          transform: `translate(${position.x}px, ${position.y}px)`
-        }}
-      />
-    </>
+    <div 
+      ref={dotRef}
+      className={`fixed top-0 left-0 z-[9999] pointer-events-none 
+                  ${isHovering ? 'scale-150' : ''} 
+                  ${isClicking ? 'scale-75' : ''}`}
+      style={{ 
+        opacity: isVisible ? 1 : 0,
+        width: '16px',
+        height: '16px',
+        borderRadius: '50%',
+        backgroundColor: '#FF8C00',
+        boxShadow: '0 0 12px rgba(255, 140, 0, 0.8)',
+        marginLeft: '-8px',
+        marginTop: '-8px',
+        transition: 'transform 0.2s ease-out, width 0.2s ease-out, height 0.2s ease-out, opacity 0.2s ease-out'
+      }}
+    />
   );
 }

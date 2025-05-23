@@ -154,10 +154,11 @@ export default function Hero({ showSocialLinks = true }: HeroProps) {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="block text-secondary"
+            className="block"
             style={{ 
-              color: backgroundColor === 'rgba(135, 206, 235, 1)' ? '#FF8C00' : '#FFFFFF',
-              filter: "brightness(1.2) contrast(1.1)" 
+              color: '#FF8C00',
+              filter: "brightness(1.2) contrast(1.1)",
+              textShadow: "0 4px 20px rgba(255, 140, 0, 0.4)"
             }}
           >
             CHAVES

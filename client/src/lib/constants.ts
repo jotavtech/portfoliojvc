@@ -8,6 +8,7 @@ export type Project = {
   imageAlt: string;
   category: "web" | "ui" | "branding";
   tags: string[];
+  url?: string;
 };
 
 export type SkillCategory = {
@@ -29,87 +30,97 @@ export type Tool = {
 export const projects: Project[] = [
   {
     id: 1,
-    title: "Atlas Tech Redesign",
-    description: "Redesign completo do site da Atlas Tech, melhorando UX e performance.",
-    imageUrl: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=900&h=700",
-    imageAlt: "Website redesign project for tech company",
+    title: "Portfólio Premium",
+    description: "Portfólio profissional de alto padrão com animações avançadas, design moderno e experiência interativa imersiva.",
+    imageUrl: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3",
+    imageAlt: "Portfólio premium com animações elegantes",
     category: "web",
-    tags: ["Web Design", "React"]
+    tags: ["React", "TypeScript", "Framer Motion", "TailwindCSS"],
+    url: "https://exemplo.com/portfolio-premium"
   },
   {
     id: 2,
-    title: "Finova App UI",
-    description: "Design de interface para aplicativo de finanças pessoais com foco em clareza visual.",
-    imageUrl: "https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=900&h=700",
-    imageAlt: "Mobile app UI design for finance application",
-    category: "ui",
-    tags: ["UI/UX", "Figma"]
+    title: "Portfólio Minimalista",
+    description: "Design minimalista com foco na experiência do usuário, apresentando conteúdo de forma clara e direta com animações sutis.",
+    imageUrl: "https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&fit=crop&q=80&w=1480&ixlib=rb-4.0.3",
+    imageAlt: "Portfolio com design minimalista e elegante",
+    category: "web",
+    tags: ["React", "JavaScript", "GSAP", "Styled Components"],
+    url: "https://exemplo.com/portfolio-minimalista"
   },
   {
     id: 3,
-    title: "EcoFarm Branding",
-    description: "Identidade visual para marca de produtos orgânicos, incluindo logo e materiais de marketing.",
-    imageUrl: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=900&h=700",
-    imageAlt: "Brand identity for organic food company",
-    category: "branding",
-    tags: ["Branding", "Illustrator"]
+    title: "E-Commerce Completo",
+    description: "Plataforma de e-commerce desenvolvida com tecnologias modernas, incluindo sistema de pagamento, carrinho, e painel administrativo.",
+    imageUrl: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3",
+    imageAlt: "Plataforma de e-commerce com design moderno",
+    category: "web",
+    tags: ["Next.js", "Node.js", "MongoDB", "Stripe"],
+    url: "https://exemplo.com/ecommerce"
   },
   {
     id: 4,
-    title: "ModaStore E-commerce",
-    description: "Plataforma de e-commerce para marca de moda, com experiência de compra otimizada.",
-    imageUrl: "https://images.unsplash.com/photo-1492707892479-7bc8d5a4ee93?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=900&h=700",
-    imageAlt: "E-commerce website design for fashion brand",
+    title: "Site para Casa de Massagem",
+    description: "Site moderno e elegante para um spa de massagem, com sistema de agendamento online e área do cliente.",
+    imageUrl: "https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3",
+    imageAlt: "Website para casa de massagem com design relaxante",
     category: "web",
-    tags: ["Web Design", "Shopify"]
+    tags: ["React", "Express", "PostgreSQL", "Calendly API"],
+    url: "https://exemplo.com/casa-massagem"
   },
   {
     id: 5,
-    title: "DataView Dashboard",
-    description: "Interface de dashboard para visualização de dados complexos com gráficos interativos.",
-    imageUrl: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=900&h=700",
-    imageAlt: "Dashboard UI design for analytics platform",
-    category: "ui",
-    tags: ["UI/UX", "React"]
+    title: "Marketplace de Templates",
+    description: "Plataforma de venda de templates para websites, com sistema de preview, download e áreas de membros.",
+    imageUrl: "https://images.unsplash.com/photo-1481487196290-c152efe083f5?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3",
+    imageAlt: "Marketplace de templates com vários designs",
+    category: "web",
+    tags: ["React", "Firebase", "Stripe", "Redux"],
+    url: "https://exemplo.com/marketplace-templates"
   },
   {
     id: 6,
-    title: "Casa Italia Branding",
-    description: "Identidade visual para restaurante italiano, incluindo menu, cartões e sinalização.",
-    imageUrl: "https://images.unsplash.com/photo-1557053503-0c252e19d34b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=900&h=700",
-    imageAlt: "Restaurant branding and identity package",
-    category: "branding",
-    tags: ["Branding", "Photoshop"]
+    title: "Dashboard Administrativo",
+    description: "Painel administrativo completo com gráficos interativos, sistema de usuários e gerenciamento de conteúdo.",
+    imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3",
+    imageAlt: "Dashboard administrativo em um monitor",
+    category: "web",
+    tags: ["TypeScript", "React", "Node.js", "D3.js"],
+    url: "https://exemplo.com/dashboard"
   }
 ];
 
 export const skillBars: SkillBar[] = [
-  { name: "UI/UX Design", percentage: 95 },
-  { name: "HTML/CSS", percentage: 90 },
-  { name: "JavaScript/React", percentage: 85 },
-  { name: "Figma/Adobe XD", percentage: 92 }
+  { name: "HTML/CSS", percentage: 95 },
+  { name: "JavaScript", percentage: 90 },
+  { name: "TypeScript", percentage: 85 },
+  { name: "React", percentage: 90 },
+  { name: "Node.js", percentage: 85 },
+  { name: "Docker", percentage: 75 },
+  { name: "SQL/NoSQL", percentage: 80 },
+  { name: "Figma/Framer", percentage: 70 }
 ];
 
 export const skillCategories: SkillCategory[] = [
   {
-    iconName: "web-design",
-    title: "Web Design",
-    description: "Criação de websites responsivos com foco em usabilidade e estética."
+    iconName: "code",
+    title: "Desenvolvimento Frontend",
+    description: "Criação de interfaces modernas e responsivas com React, TypeScript e frameworks modernos."
   },
   {
-    iconName: "app-design",
-    title: "App Design",
-    description: "Design de interfaces intuitivas para aplicativos iOS e Android."
+    iconName: "database",
+    title: "Desenvolvimento Backend",
+    description: "Implementação de servidores Node.js, APIs RESTful e bancos de dados SQL e NoSQL."
   },
   {
-    iconName: "frontend-dev",
-    title: "Frontend Dev",
-    description: "Desenvolvimento de interfaces dinâmicas com HTML, CSS e JavaScript."
+    iconName: "server",
+    title: "DevOps & Infraestrutura",
+    description: "Containerização com Docker, CI/CD e deploy de aplicações em ambientes cloud."
   },
   {
-    iconName: "branding",
-    title: "Branding",
-    description: "Criação de identidades visuais memoráveis e consistentes para marcas."
+    iconName: "paintBrush",
+    title: "Design & Prototipação",
+    description: "Criação de protótipos interativos com Figma e Framer para experiências de usuário otimizadas."
   }
 ];
 

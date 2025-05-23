@@ -26,7 +26,7 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" className="py-20 bg-white">
+    <section id="projects" className="py-20 bg-muted">
       <div className="container mx-auto px-6">
         <div 
           ref={ref}
@@ -35,13 +35,13 @@ export default function Projects() {
             isInView && "active"
           )}
         >
-          <h2 className="text-sm uppercase tracking-widest text-secondary font-semibold mb-4">
+          <h2 className="text-sm uppercase tracking-widest gradient-text font-semibold mb-4">
             Meus trabalhos
           </h2>
           <h3 className="text-3xl md:text-4xl font-bold mb-6">
             Projetos em Destaque
           </h3>
-          <p className="text-neutral-500">
+          <p className="text-muted-foreground">
             Uma coleção selecionada dos meus projetos mais recentes, demonstrando habilidades em design e desenvolvimento.
           </p>
         </div>
@@ -54,10 +54,10 @@ export default function Projects() {
         >
           <button 
             className={cn(
-              "px-4 py-2 rounded-md transition-colors",
+              "px-4 py-2 rounded-lg transition-colors shadow-md",
               activeFilter === "all" 
                 ? "bg-secondary text-white" 
-                : "border border-neutral-200 hover:border-secondary hover:text-secondary"
+                : "bg-white border border-border hover:border-secondary hover:text-secondary"
             )}
             onClick={() => setActiveFilter("all")}
           >
@@ -65,10 +65,10 @@ export default function Projects() {
           </button>
           <button 
             className={cn(
-              "px-4 py-2 rounded-md transition-colors",
+              "px-4 py-2 rounded-lg transition-colors shadow-md",
               activeFilter === "web" 
                 ? "bg-secondary text-white" 
-                : "border border-neutral-200 hover:border-secondary hover:text-secondary"
+                : "bg-white border border-border hover:border-secondary hover:text-secondary"
             )}
             onClick={() => setActiveFilter("web")}
           >
@@ -76,10 +76,10 @@ export default function Projects() {
           </button>
           <button 
             className={cn(
-              "px-4 py-2 rounded-md transition-colors",
+              "px-4 py-2 rounded-lg transition-colors shadow-md",
               activeFilter === "ui" 
                 ? "bg-secondary text-white" 
-                : "border border-neutral-200 hover:border-secondary hover:text-secondary"
+                : "bg-white border border-border hover:border-secondary hover:text-secondary"
             )}
             onClick={() => setActiveFilter("ui")}
           >
@@ -87,10 +87,10 @@ export default function Projects() {
           </button>
           <button 
             className={cn(
-              "px-4 py-2 rounded-md transition-colors",
+              "px-4 py-2 rounded-lg transition-colors shadow-md",
               activeFilter === "branding" 
                 ? "bg-secondary text-white" 
-                : "border border-neutral-200 hover:border-secondary hover:text-secondary"
+                : "bg-white border border-border hover:border-secondary hover:text-secondary"
             )}
             onClick={() => setActiveFilter("branding")}
           >

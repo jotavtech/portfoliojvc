@@ -13,7 +13,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
   return (
     <motion.div 
-      className="project-card group relative overflow-hidden rounded-xl shadow-lg"
+      className="project-card group relative overflow-hidden rounded-2xl shadow-lg card-shadow hover:shadow-xl transition-shadow"
       variants={item}
     >
       <img 
@@ -21,17 +21,17 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         alt={project.imageAlt} 
         className="w-full h-64 object-cover transition-transform duration-500 ease-in-out"
       />
-      <div className="project-overlay absolute inset-0 bg-primary bg-opacity-80 p-6 flex flex-col justify-end opacity-0 transition-opacity duration-300">
+      <div className="project-overlay absolute inset-0 bg-primary bg-opacity-90 p-6 flex flex-col justify-end opacity-0 transition-opacity duration-300">
         <h4 className="text-xl font-bold text-white mb-2">{project.title}</h4>
         <p className="text-neutral-200 text-sm mb-4">{project.description}</p>
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-wrap">
           {project.tags.map((tag, index) => (
             <span 
               key={index} 
               className={`text-xs px-3 py-1 rounded-full ${
                 index === 0 
                   ? "bg-secondary text-white" 
-                  : "bg-white text-primary"
+                  : "bg-accent text-white"
               }`}
             >
               {tag}

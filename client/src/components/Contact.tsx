@@ -24,9 +24,7 @@ export default function Contact() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     
-    // In a real application, you would send this data to a server
-    console.log("Form data:", formData);
-    
+    // Site puramente estático - apenas simulação da interface
     toast({
       title: "Mensagem enviada",
       description: "Obrigado por entrar em contato! Retornarei em breve.",

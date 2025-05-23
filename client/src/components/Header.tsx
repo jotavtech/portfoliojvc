@@ -55,15 +55,15 @@ export default function Header({ activeSection, mobileMenuOpen, toggleMobileMenu
           
           <button 
             onClick={toggleMobileMenu}
-            className="flex flex-col space-y-3 items-center justify-center h-14 w-14 group"
+            className="flex flex-col space-y-3 items-center justify-center h-14 w-14 group z-50"
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
           >
             {mobileMenuOpen ? (
-              <X className="h-8 w-8 text-secondary" />
+              <X className="h-8 w-8 text-white" />
             ) : (
               <>
-                <div className="w-10 h-1 bg-secondary transform transition-all duration-300 group-hover:translate-y-1 group-hover:-translate-x-1"></div>
-                <div className="w-10 h-1 bg-secondary transform transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"></div>
+                <div className="w-10 h-1 bg-secondary transform transition-all duration-300 group-hover:translate-y-1.5 group-hover:-translate-x-2"></div>
+                <div className="w-10 h-1 bg-secondary transform transition-all duration-300 group-hover:-translate-y-1.5 group-hover:translate-x-2"></div>
               </>
             )}
           </button>

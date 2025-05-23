@@ -1,17 +1,15 @@
-import { pgTable, text, serial, integer, boolean } from "drizzle-orm/pg-core";
-import { createInsertSchema } from "drizzle-zod";
-import { z } from "zod";
+// Este arquivo foi simplificado para um site estático
+// Sem esquemas de banco de dados ou tipos relacionados a API
 
-export const users = pgTable("users", {
-  id: serial("id").primaryKey(),
-  username: text("username").notNull().unique(),
-  password: text("password").notNull(),
-});
+// Definições de tipos estáticos usados apenas no frontend
+export type PortfolioInfo = {
+  owner: string;
+  title: string;
+  lastUpdated: string;
+};
 
-export const insertUserSchema = createInsertSchema(users).pick({
-  username: true,
-  password: true,
-});
-
-export type InsertUser = z.infer<typeof insertUserSchema>;
-export type User = typeof users.$inferSelect;
+export const portfolioData: PortfolioInfo = {
+  owner: "Jota Chaves",
+  title: "Portfolio de Desenvolvimento Web",
+  lastUpdated: "2023-05-23"
+};

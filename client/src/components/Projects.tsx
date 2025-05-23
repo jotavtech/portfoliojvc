@@ -9,10 +9,13 @@ type FilterCategory = "all" | "web" | "ui" | "branding";
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState<FilterCategory>("all");
-  const { ref, isInView } = useIntersectionObserver({ threshold: 0.1, triggerOnce: true });
-  
-  const filteredProjects = projects.filter(project => 
-    activeFilter === "all" || project.category === activeFilter
+  const { ref, isInView } = useIntersectionObserver({
+    threshold: 0.1,
+    triggerOnce: true,
+  });
+
+  const filteredProjects = projects.filter(
+    (project) => activeFilter === "all" || project.category === activeFilter,
   );
 
   const container = {
@@ -20,34 +23,31 @@ export default function Projects() {
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
-      }
-    }
+        staggerChildren: 0.1,
+      },
+    },
   };
-  
+
   const sectionVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
-      transition: { 
+      transition: {
         duration: 0.8,
-        when: "beforeChildren"
-      } 
-    }
+        when: "beforeChildren",
+      },
+    },
   };
 
   return (
-    <section 
-      id="projects" 
-      className="py-20 bg-muted"
-    >
+    <section id="projects" className="py-20 bg-muted">
       <div className="container mx-auto px-6">
-        <div 
+        <div
           ref={ref}
           className={cn(
             "max-w-2xl mx-auto text-center mb-16 reveal-element",
-            isInView && "active"
+            isInView && "active",
           )}
         >
           <h2 className="text-sm uppercase tracking-widest gradient-text font-semibold mb-4">
@@ -57,63 +57,53 @@ export default function Projects() {
             Projetos em Destaque
           </h3>
           <p className="text-muted-foreground">
-            Uma coleção selecionada dos meus projetos mais recentes, demonstrando habilidades em design e desenvolvimento.
+            Uma coleção selecionada dos meus projetos mais recentes,
+            demonstrando habilidades em design e desenvolvimento.
           </p>
         </div>
-        
-        <div 
+
+        <div
           className={cn(
             "mb-10 flex flex-wrap justify-center gap-4 reveal-element",
-            isInView && "active"
+            isInView && "active",
           )}
         >
-          <button 
+          <button
             className={cn(
               "px-4 py-2 rounded-lg transition-colors shadow-md",
-              activeFilter === "all" 
-                ? "bg-secondary text-white" 
-                : "bg-white border border-border hover:border-secondary hover:text-secondary"
+              activeFilter === "all"
+                ? "bg-secondary text-white"
+                : "bg border border-border hover:border-secondary hover:text-secondary",
             )}
             onClick={() => setActiveFilter("all")}
           >
             Todos
           </button>
-          <button 
+          <button
             className={cn(
               "px-4 py-2 rounded-lg transition-colors shadow-md",
-              activeFilter === "web" 
-                ? "bg-secondary text-white" 
-                : "bg-white border border-border hover:border-secondary hover:text-secondary"
+              activeFilter === "web"
+                ? "bg-secondary text-white"
+                : "bg border border-border hover:border-secondary hover:text-secondary",
             )}
             onClick={() => setActiveFilter("web")}
           >
             Web Design
           </button>
-          <button 
+          <button
             className={cn(
               "px-4 py-2 rounded-lg transition-colors shadow-md",
-              activeFilter === "ui" 
-                ? "bg-secondary text-white" 
-                : "bg-white border border-border hover:border-secondary hover:text-secondary"
+              activeFilter === "ui"
+                ? "bg-secondary text-white"
+                : "bg- border border-border hover:border-secondary hover:text-secondary",
             )}
             onClick={() => setActiveFilter("ui")}
           >
             UI/UX
           </button>
-          <button 
-            className={cn(
-              "px-4 py-2 rounded-lg transition-colors shadow-md",
-              activeFilter === "branding" 
-                ? "bg-secondary text-white" 
-                : "bg-white border border-border hover:border-secondary hover:text-secondary"
-            )}
-            onClick={() => setActiveFilter("branding")}
-          >
-            Branding
-          </button>
         </div>
-        
-        <motion.div 
+
+        <motion.div
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 reveal-element"
           variants={container}
           initial="hidden"

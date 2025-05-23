@@ -51,6 +51,58 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
+  cursor: none;
+}
+
+/* Cursor personalizado */
+.cursor-dot,
+.cursor-dot-outline {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  z-index: 9999;
+  transition: opacity 0.15s ease-in-out;
+}
+
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background-color: hsl(var(--secondary));
+}
+
+.cursor-dot-outline {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 140, 0, 0.2);
+}
+
+.cursor-hover {
+  transform: translate(-50%, -50%) scale(2.5);
+  background-color: rgba(255, 140, 0, 0.1);
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+/* Esconder cursor padrão em elementos interativos */
+a, button, input, select, textarea {
+  cursor: none;
+}
+
+@media (max-width: 768px) {
+  html {
+    cursor: auto;
+  }
+  
+  .cursor-dot,
+  .cursor-dot-outline {
+    display: none;
+  }
+  
+  a, button, input, select, textarea {
+    cursor: auto;
+  }
 }
 
 .reveal-element {

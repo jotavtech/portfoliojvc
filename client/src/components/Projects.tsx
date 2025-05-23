@@ -24,9 +24,24 @@ export default function Projects() {
       }
     }
   };
+  
+  const sectionVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { 
+        duration: 0.8,
+        when: "beforeChildren"
+      } 
+    }
+  };
 
   return (
-    <section id="projects" className="py-20 bg-muted">
+    <section 
+      id="projects" 
+      className="py-20 bg-muted"
+    >
       <div className="container mx-auto px-6">
         <div 
           ref={ref}

@@ -2,7 +2,6 @@ import { motion, useScroll, useTransform, useMotionTemplate } from "framer-motio
 import { socialLinks } from "@/lib/constants";
 import { ExternalLink, Github, Instagram, Linkedin, ArrowDown } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
-import AnimatedSection, { AnimatedElement } from "./AnimatedSection";
 
 interface HeroProps {
   showSocialLinks?: boolean;
@@ -57,10 +56,10 @@ export default function Hero({ showSocialLinks = true }: HeroProps) {
   }, []);
 
   return (
-    <AnimatedSection 
+    <section 
       id="home" 
+      ref={sectionRef}
       className="min-h-screen relative flex justify-center items-end pb-40 overflow-hidden"
-      animationType="fadeUp"
       style={{
         backgroundImage: `url('/image_1748031086511.png')`,
         backgroundSize: 'cover',

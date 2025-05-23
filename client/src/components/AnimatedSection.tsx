@@ -5,21 +5,44 @@ interface AnimatedSectionProps {
   id: string;
   children: ReactNode;
   className?: string;
+  animationType?: "fadeUp" | "fadeDown" | "fadeLeft" | "fadeRight" | "scale";
 }
 
 export default function AnimatedSection({
   id,
   children,
-  className = ""
+  className = "",
+  animationType = "fadeUp"
 }: AnimatedSectionProps) {
+  
+  let initial = {};
+  
+  switch (animationType) {
+    case "fadeDown":
+      initial = { opacity: 0, y: -50 };
+      break;
+    case "fadeLeft":
+      initial = { opacity: 0, x: -50 };
+      break;
+    case "fadeRight":
+      initial = { opacity: 0, x: 50 };
+      break;
+    case "scale":
+      initial = { opacity: 0, scale: 0.8 };
+      break;
+    default: // fadeUp
+      initial = { opacity: 0, y: 50 };
+  }
+  
   return (
     <motion.section
       id={id}
       className={className}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: false, margin: "-100px" }}
+      initial={initial}
+      whileInView={{ opacity: 1, y: 0, x: 0, scale: 1 }}
+      exit={initial}
       transition={{ duration: 0.8 }}
+      viewport={{ once: false, margin: "-100px" }}
     >
       {children}
     </motion.section>

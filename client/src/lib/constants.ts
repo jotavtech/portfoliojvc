@@ -138,10 +138,10 @@ export type SocialLink = {
 };
 
 export const socialLinks: SocialLink[] = [
-  { name: "linkedin", url: "#", label: "LinkedIn" },
-  { name: "github", url: "#", label: "GitHub" },
-  { name: "instagram", url: "#", label: "Instagram" },
-  { name: "dribbble", url: "#", label: "Dribbble" }
+  { name: "linkedin", url: "https://www.linkedin.com/in/joão-vitor-chaves-761b102b5/", label: "LinkedIn de Jota Chaves" },
+  { name: "github", url: "https://github.com/jotavtech", label: "GitHub de Jota Chaves" },
+  { name: "instagram", url: "https://instagram.com", label: "Instagram de Jota Chaves" },
+  { name: "dribbble", url: "https://dribbble.com", label: "Dribbble de Jota Chaves" }
 ];
 
 export type ContactInfo = {
@@ -159,11 +159,11 @@ export const contactInfo: ContactInfo[] = [
   { 
     icon: "email",
     title: "Email",
-    content: "contato@joaovitorchaves.com" 
+    content: "martinsjoao1227@gmail.com" 
   },
   { 
     icon: "phone",
     title: "Telefone",
-    content: "+55 11 98765-4321" 
+    content: "+55 83 99929-0376" 
   }
 ];

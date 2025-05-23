@@ -70,8 +70,9 @@ export default function About() {
           className="text-5xl md:text-7xl font-black mb-16 text-white text-center drop-shadow-lg"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -30 }}
           transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, margin: "-10%" }}
         >
           SOBRE <span className="text-secondary">MIM</span>
         </motion.h1>

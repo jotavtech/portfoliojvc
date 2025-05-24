@@ -1,6 +1,15 @@
 {
-  "framework": "nextjs",
-  "buildCommand": "npm run build",
-  "outputDirectory": ".next",
-  "rewrites": []
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/[^.]+", // Redireciona todas as rotas para o index.html (SPA)
+      "dest": "/index.html"
+    }
+  ]
 }

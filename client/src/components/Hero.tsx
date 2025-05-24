@@ -1,6 +1,10 @@
 import { ArrowDown } from "lucide-react";
 
-export default function Hero() {
+interface HeroProps {
+  showSocialLinks: boolean;
+}
+
+export default function Hero({ showSocialLinks }: HeroProps) {
   return (
     <section
       id="home"
@@ -16,40 +20,49 @@ export default function Hero() {
       {/* Overlay transparente com blur */}
       <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
 
-      {/* Frases nos cantos superiores */}
-      <div className="absolute top-6 left-6 text-white text-lg md:text-2xl font-serif tracking-wide z-10">
-        Freedom
-      </div>
-      <div className="absolute top-6 right-6 text-white text-lg md:text-2xl font-serif tracking-wide z-10">
-        The Creative
-      </div>
-
       {/* Container principal centralizado */}
       <div className="z-10 w-full flex flex-col items-center justify-center text-center px-4">
-        <h1
-          className="font-black text-white drop-shadow-lg leading-none"
-          style={{
-            fontSize: "clamp(4rem, 20vw, 12rem)",
-            lineHeight: 1,
-            textShadow: "0 6px 30px rgba(0, 0, 0, 0.5)",
-            userSelect: "none",
-            margin: 0,
-            padding: 0,
-          }}
-          aria-label="Jota Chaves"
-        >
-          <span className="block">JOTA</span>
+        {/* Frases laterais */}
+        <div className="absolute left-6 text-white text-lg md:text-2xl font-serif tracking-wide z-10 transform -translate-y-20">
+          Freedom
+        </div>
+        <div className="absolute right-6 text-white text-lg md:text-2xl font-serif tracking-wide z-10 transform -translate-y-20">
+          The Creative
+        </div>
+
+        <h1 className="hero-name">
+          <span className="block" style={{ color: 'white' }}>JOTA</span>
           <span
             className="block"
             style={{
-              color: "#FF4500",
-              filter: "brightness(1.3) contrast(1.1)",
-              textShadow: "0 6px 30px rgba(255, 69, 0, 0.6)",
+              color: '#FF4500',
+              textShadow: '0 6px 30px rgba(255, 69, 0, 0.6)',
             }}
           >
             CHAVES
           </span>
         </h1>
+        
+        {showSocialLinks && (
+          <div className="mt-12 flex justify-center gap-6">
+            <a
+              href="https://github.com/seu-usuario"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/80 hover:text-white transition-colors"
+            >
+              GitHub
+            </a>
+            <a
+              href="https://linkedin.com/in/seu-usuario"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/80 hover:text-white transition-colors"
+            >
+              LinkedIn
+            </a>
+          </div>
+        )}
       </div>
 
       {/* Indicador de rolagem estático */}

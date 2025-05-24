@@ -8,6 +8,7 @@ import Skills from "./components/Skills";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import CustomCursor from "./components/CustomCursor";
+import { SectionObserver } from "./components/SectionObserver";
 import { useScrollSpy } from "./hooks/use-scroll-spy";
 
 function App() {
@@ -47,11 +48,25 @@ function App() {
       />
       
       <main>
-        <Hero showSocialLinks={showSocialLinks} />
-        <Projects />
-        <About />
-        <Skills />
-        <Contact />
+        <SectionObserver isFirstSection={true}>
+          <Hero showSocialLinks={showSocialLinks} />
+        </SectionObserver>
+
+        <SectionObserver rootMargin="-20%">
+          <Projects />
+        </SectionObserver>
+
+        <SectionObserver rootMargin="-20%">
+          <About />
+        </SectionObserver>
+
+        <SectionObserver rootMargin="-20%">
+          <Skills />
+        </SectionObserver>
+
+        <SectionObserver rootMargin="-20%">
+          <Contact />
+        </SectionObserver>
       </main>
       
       <Footer />

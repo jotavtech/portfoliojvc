@@ -74,79 +74,90 @@ export default function Header({ activeSection, mobileMenuOpen, toggleMobileMenu
       {/* Menu mobile com blur */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div
-            className="fixed inset-0 z-40 menu-backdrop flex flex-row justify-between"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            {/* Lado esquerdo - Relógio */}
+          <>
+            {/* Background blur overlay */}
             <motion.div
-              className="flex-1 flex items-center justify-center p-8"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <div className="text-left">
-                <div className="text-6xl md:text-8xl font-bold text-white mb-2 tracking-tighter">
-                  {time.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
-                </div>
-                <div className="text-xl text-white/70">
-                  {time.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Right side - Navigation */}
+              className="fixed inset-0 z-40 bg-black/60 backdrop-blur-2xl"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            />
+            
             <motion.div
-              className="flex-1 flex items-center justify-center p-8"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              className="fixed inset-0 z-40 flex flex-row justify-between"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
             >
-              <motion.ul
-                className="flex flex-col items-start space-y-8 text-4xl md:text-5xl font-bold"
-                initial="hidden"
-                animate="visible"
-                variants={{
-                  visible: {
-                    transition: {
-                      staggerChildren: 0.1,
-                    },
-                  },
-                  hidden: {},
-                }}
+              {/* Lado esquerdo - Relógio */}
+              <motion.div
+                className="flex-1 flex items-center justify-center p-8"
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
               >
-                {navigation.map((item, index) => (
-                  <motion.li
-                    key={item.name}
-                    variants={{
-                      visible: { opacity: 1, x: 0 },
-                      hidden: { opacity: 0, x: 50 },
-                    }}
-                    transition={{ duration: 0.5 }}
-                    whileHover={{ scale: 1.05, x: 10 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <a
-                      href={item.href}
-                      className={cn(
-                        "block py-2 transition-colors text-white hover:text-orange-500 relative overflow-hidden group",
-                        activeSection === item.href.substring(1) && "text-orange-500"
-                      )}
-                      onClick={toggleMobileMenu}
+                <div className="text-left">
+                  <div className="text-6xl md:text-8xl font-bold text-white mb-2 tracking-tighter">
+                    {time.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+                  </div>
+                  <div className="text-xl text-white/70">
+                    {time.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Right side - Navigation */}
+              <motion.div
+                className="flex-1 flex items-center justify-center p-8"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                <motion.ul
+                  className="flex flex-col items-start space-y-8 text-4xl md:text-5xl font-bold"
+                  initial="hidden"
+                  animate="visible"
+                  variants={{
+                    visible: {
+                      transition: {
+                        staggerChildren: 0.1,
+                      },
+                    },
+                    hidden: {},
+                  }}
+                >
+                  {navigation.map((item, index) => (
+                    <motion.li
+                      key={item.name}
+                      variants={{
+                        visible: { opacity: 1, x: 0 },
+                        hidden: { opacity: 0, x: 50 },
+                      }}
+                      transition={{ duration: 0.5 }}
+                      whileHover={{ scale: 1.05, x: 10 }}
+                      whileTap={{ scale: 0.95 }}
                     >
-                      <span className="inline-block relative z-10">
-                        {item.name}
-                      </span>
-                      <span className="absolute bottom-0 left-0 w-0 h-1 bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                  </motion.li>
-                ))}
-              </motion.ul>
+                      <a
+                        href={item.href}
+                        className={cn(
+                          "block py-2 transition-colors text-white hover:text-orange-500 relative overflow-hidden group",
+                          activeSection === item.href.substring(1) && "text-orange-500"
+                        )}
+                        onClick={toggleMobileMenu}
+                      >
+                        <span className="inline-block relative z-10">
+                          {item.name}
+                        </span>
+                        <span className="absolute bottom-0 left-0 w-0 h-1 bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                      </a>
+                    </motion.li>
+                  ))}
+                </motion.ul>
+              </motion.div>
             </motion.div>
-          </motion.div>
+          </>
         )}
       </AnimatePresence>
     </header>

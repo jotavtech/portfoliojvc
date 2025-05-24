@@ -1,4 +1,5 @@
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform, useScroll, useInView } from "framer-motion";
+import { useRef } from "react";
 
 interface Project {
     id: number;
@@ -86,25 +87,25 @@ function ProjectCard({ project }: { project: Project }) {
 			viewport={{ once: true }}
 			transition={{ duration: 0.5 }}
 		>
-			<div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 rounded-xl border border-white/10 backdrop-blur-sm p-6 transition-all duration-300 hover:backdrop-blur-lg">
-				<h4 className="text-2xl font-bold mb-4 text-white transform-gpu">
+			<div className="absolute inset-0 bg-gradient-to-br from-black/10 to-black/5 rounded-xl border border-black/10 backdrop-blur-sm p-6 transition-all duration-300 hover:backdrop-blur-lg">
+				<h4 className="text-2xl font-bold mb-4 text-black transform-gpu">
 					{project.title}
 				</h4>
-				<p className="text-white/80 mb-6 transform-gpu">
+				<p className="text-black/80 mb-6 transform-gpu">
 					{project.description}
 				</p>
 				<div className="flex flex-wrap gap-2 mb-4">
 					{project.tags.map((tag: string, index: number) => (
 						<span
 							key={index}
-							className="px-3 py-1 bg-white/10 rounded-full text-sm text-white/90 transform-gpu"
+							className="px-3 py-1 bg-black/10 rounded-full text-sm text-black/90 transform-gpu"
 						>
 							{tag}
 						</span>
 					))}
 				</div>
 				<motion.button
-					className="mt-4 px-6 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors transform-gpu"
+					className="mt-4 px-6 py-2 bg-black/10 hover:bg-black/20 rounded-lg text-black transition-colors transform-gpu"
 					whileHover={{ scale: 1.05 }}
 					whileTap={{ scale: 0.95 }}
 				>
@@ -116,16 +117,59 @@ function ProjectCard({ project }: { project: Project }) {
 }
 
 export default function Projects() {
+	const sectionRef = useRef(null);
+	const { scrollYProgress } = useScroll({
+		target: sectionRef,
+		offset: ["start end", "end start"]
+	});
+
+	const ballSize = useTransform(
+		scrollYProgress,
+		[0, 0.2, 0.4],
+		["2rem", "10rem", "200vw"]
+	);
+
+	const ballY = useTransform(
+		scrollYProgress,
+		[0, 0.2, 0.4],
+		["0%", "30%", "50%"]
+	);
+
+	const ballScale = useTransform(
+		scrollYProgress,
+		[0, 0.2, 0.4],
+		[0, 1, 1.5]
+	);
+
 	return (
 		<section
+			ref={sectionRef}
 			id="projects"
-			className="relative min-h-screen flex items-center justify-center bg-black py-20 cursor-none"
+			className="relative min-h-screen flex items-center justify-center py-20 cursor-none"
 		>
-			<div className="container mx-auto px-6 text-center">
-				<h2 className="text-xl uppercase tracking-widest text-gray-400 font-bold mb-3">
+			{/* Background container */}
+			<div className="absolute inset-0 overflow-hidden">
+				{/* Animated ball */}
+				<motion.div
+					className="absolute left-1/2 bg-white rounded-full"
+					style={{
+						x: "-50%",
+						y: ballY,
+						width: ballSize,
+						height: ballSize,
+						scale: ballScale,
+					}}
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					transition={{ duration: 0.5 }}
+				/>
+			</div>
+
+			<div className="container mx-auto px-6 text-center relative z-10">
+				<h2 className="text-xl uppercase tracking-widest text-black font-bold mb-3">
 					MEUS PROJETOS
 				</h2>
-				<h3 className="text-4xl md:text-5xl font-black mb-16 text-white">
+				<h3 className="text-4xl md:text-5xl font-black mb-16 text-black">
 					PROJETOS EM DESTAQUE
 				</h3>
 				<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

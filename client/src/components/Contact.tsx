@@ -64,16 +64,26 @@ export default function Contact() {
         return <Github size={20} />;
       case "instagram":
         return <Instagram size={20} />;
-      case "dribbble":
-        return <ExternalLink size={20} />;
       default:
         return <ExternalLink size={20} />;
     }
   };
 
   return (
-    <section id="contact" className="py-20 bg-black text-white">
-      <div className="container mx-auto px-6">
+    <section id="contact" className="py-20 relative overflow-hidden group">
+      {/* Background Image with Overlay */}
+      <div 
+        className="absolute inset-0 z-0 transition-transform duration-500 ease-out group-hover:scale-105"
+        style={{
+          backgroundImage: "url('https://res.cloudinary.com/dzwfuzxxw/image/upload/v1748112497/assets-task_01jw1st5n1es3br63jqstmt003-1748112399_img_3_axf4wn.webp')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          filter: "blur(8px) brightness(0.3)",
+          transform: "scale(1.1)" // Slightly larger to prevent white edges during blur
+        }}
+      />
+      
+      <div className="container mx-auto px-6 relative z-10">
         <div className="grid md:grid-cols-2 gap-12">
           <div
             ref={ref}
@@ -85,7 +95,7 @@ export default function Contact() {
             <h2 className="text-sm uppercase tracking-widest gradient-text font-semibold">
               Contato
             </h2>
-            <h3 className="text-3xl md:text-4xl font-bold">
+            <h3 className="text-3xl md:text-4xl font-bold text-white">
               Vamos trabalhar juntos
             </h3>
             <p className="text-neutral-300">
@@ -127,7 +137,7 @@ export default function Contact() {
           </div>
 
           <motion.div
-            className="bg-white/5 backdrop-blur-lg text-white p-8 rounded-xl"
+            className="bg-black/60 backdrop-blur-2xl text-white p-8 rounded-xl"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ delay: 0.4, duration: 0.5 }}
@@ -135,7 +145,7 @@ export default function Contact() {
             <h4 className="text-2xl font-bold mb-6">Envie uma mensagem</h4>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
-                <label htmlFor="name" className="block text-sm font-medium text-white/80 mb-1">
+                <label htmlFor="name" className="block text-sm font-medium text-white mb-1">
                   Nome
                 </label>
                 <input
@@ -143,14 +153,14 @@ export default function Contact() {
                   id="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-white/10 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent text-white placeholder:text-white/50"
+                  className="w-full px-4 py-3 bg-black/40 backdrop-blur-xl rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent text-white placeholder:text-white/50"
                   placeholder="Seu nome"
                   required
                 />
               </div>
 
               <div className="mb-4">
-                <label htmlFor="email" className="block text-sm font-medium text-white/80 mb-1">
+                <label htmlFor="email" className="block text-sm font-medium text-white mb-1">
                   Email
                 </label>
                 <input
@@ -158,14 +168,14 @@ export default function Contact() {
                   id="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-white/10 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent text-white placeholder:text-white/50"
+                  className="w-full px-4 py-3 bg-black/40 backdrop-blur-xl rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent text-white placeholder:text-white/50"
                   placeholder="Seu email"
                   required
                 />
               </div>
 
               <div className="mb-4">
-                <label htmlFor="subject" className="block text-sm font-medium text-white/80 mb-1">
+                <label htmlFor="subject" className="block text-sm font-medium text-white mb-1">
                   Assunto
                 </label>
                 <input
@@ -173,14 +183,14 @@ export default function Contact() {
                   id="subject"
                   value={formData.subject}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-white/10 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent text-white placeholder:text-white/50"
+                  className="w-full px-4 py-3 bg-black/40 backdrop-blur-xl rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent text-white placeholder:text-white/50"
                   placeholder="Assunto da mensagem"
                   required
                 />
               </div>
 
               <div className="mb-6">
-                <label htmlFor="message" className="block text-sm font-medium text-white/80 mb-1">
+                <label htmlFor="message" className="block text-sm font-medium text-white mb-1">
                   Mensagem
                 </label>
                 <textarea
@@ -188,7 +198,7 @@ export default function Contact() {
                   rows={4}
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-white/10 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent text-white placeholder:text-white/50"
+                  className="w-full px-4 py-3 bg-black/40 backdrop-blur-xl rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent text-white placeholder:text-white/50"
                   placeholder="Sua mensagem"
                   required
                 ></textarea>
@@ -196,7 +206,7 @@ export default function Contact() {
 
               <button
                 type="submit"
-                className="w-full py-3 bg-secondary text-white rounded-lg hover:bg-secondary/90 transition-colors shadow-lg glow"
+                className="w-full py-3 bg-secondary text-black font-medium rounded-lg hover:bg-secondary/90 transition-colors shadow-lg glow"
               >
                 Enviar mensagem
               </button>

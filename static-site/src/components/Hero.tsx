@@ -69,7 +69,7 @@ export default function Hero({ showSocialLinks = true }: HeroProps) {
     >
       {/* Overlay com filtro de cor dinâmico */}
       <motion.div 
-        className="absolute inset-0 bg-background/40 backdrop-blur-sm"
+        className="absolute inset-0 bg-background/20 backdrop-blur-lg"
         style={{ filter: backgroundFilter }}
       ></motion.div>
       

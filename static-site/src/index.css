@@ -27,42 +27,42 @@
 }
 
 :root {
-  --background: 199 85% 70%;
+  --background: 28 100% 98%;
   --foreground: 0 0% 100%;
-  --muted: 199 50% 60%;
+  --muted: 28 30% 90%;
   --muted-foreground: 0 0% 100%;
-  --popover: 199 85% 70%;
+  --popover: 28 100% 98%;
   --popover-foreground: 0 0% 100%;
-  --card: 199 70% 65%;
+  --card: 28 70% 95%;
   --card-foreground: 0 0% 100%;
-  --border: 199 50% 60%;
-  --input: 199 50% 60%;
-  --primary: 0 0% 0%;
+  --border: 28 50% 85%;
+  --input: 28 50% 85%;
+  --primary: 28 100% 50%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 28 100% 50%;
+  --secondary: 32 100% 50%;  /* Mudando para um laranja */
   --secondary-foreground: 0 0% 100%;
-  --accent: 28 100% 50%;
+  --accent: 32 100% 50%;    /* Ajustando o accent para combinar */
   --accent-foreground: 0 0% 100%;
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 0 0% 100%;
   --ring: 28 100% 50%;
   --radius: 0.75rem;
   --chart-1: 28 100% 50%;
-  --chart-2: 199 85% 70%;
-  --chart-3: 0 0% 0%;
-  --chart-4: 199 50% 60%;
+  --chart-2: 28 85% 70%;
+  --chart-3: 28 100% 50%;
+  --chart-4: 28 50% 60%;
   --chart-5: 0 0% 100%;
-  --sidebar-background: 199 85% 70%;
+  --sidebar-background: 28 85% 70%;
   --sidebar-foreground: 0 0% 100%;
   --sidebar-primary: 28 100% 50%;
   --sidebar-primary-foreground: 0 0% 100%;
   --sidebar-accent: 28 100% 50%;
   --sidebar-accent-foreground: 0 0% 100%;
-  --sidebar-border: 199 50% 60%;
+  --sidebar-border: 28 50% 60%;
   --sidebar-ring: 28 100% 50%;
   
   /* Cores específicas para uso em styles inline */
-  --blue-main: #87CEEB;
+  --blue-main: #FF8C00;
   --orange-main: #FF8C00;
 }
 

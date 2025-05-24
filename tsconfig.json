@@ -2,22 +2,22 @@
   "include": ["client/src/**/*", "shared/**/*", "server/**/*"],
   "exclude": ["node_modules", "build", "dist", "**/*.test.ts"],
   "compilerOptions": {
-    "incremental": true,
-    "tsBuildInfoFile": "./node_modules/typescript/tsbuildinfo",
-    "noEmit": true,
-    "module": "ESNext",
-    "strict": true,
-    "lib": ["esnext", "dom", "dom.iterable"],
-    "jsx": "preserve",
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "allowImportingTsExtensions": true,
-    "moduleResolution": "bundler",
-    "baseUrl": ".",
-    "types": ["node", "vite/client"],
+    "target": "ES2020", // Define o alvo de compilação
+    "incremental": true, // Habilita builds incrementais
+    "tsBuildInfoFile": "./node_modules/typescript/tsbuildinfo", // Local do arquivo de cache
+    "noEmit": true, // Não gera arquivos de saída
+    "module": "ESNext", // Usa o sistema de módulos ESNext
+    "strict": true, // Habilita verificações estritas
+    "lib": ["esnext", "dom", "dom.iterable"], // Bibliotecas padrão
+    "jsx": "preserve", // Preserva JSX para frameworks como React
+    "esModuleInterop": true, // Habilita interoperabilidade com CommonJS
+    "skipLibCheck": true, // Ignora checagem de tipos em arquivos de definição
+    "moduleResolution": "node16", // Usa resolução de módulos Node.js
+    "baseUrl": ".", // Define a base para caminhos relativos
+    "types": ["node", "vite/client"], // Tipos adicionais para Node.js e Vite
     "paths": {
-      "@/*": ["./client/src/*"],
-      "@shared/*": ["./shared/*"]
+      "@/*": ["./client/src/*"], // Alias para o diretório src
+      "@shared/*": ["./shared/*"] // Alias para o diretório shared
     }
   }
 }

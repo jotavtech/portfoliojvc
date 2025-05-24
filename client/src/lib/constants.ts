@@ -17,11 +17,6 @@ export type SkillCategory = {
   description: string;
 };
 
-export type SkillBar = {
-  name: string;
-  percentage: number;
-};
-
 export type Tool = {
   name: string;
   icon: string;
@@ -90,45 +85,36 @@ export const projects: Project[] = [
   }
 ];
 
-export const skillBars: SkillBar[] = [
-  { name: "HTML/CSS", percentage: 95 },
-  { name: "JavaScript", percentage: 90 },
-  { name: "TypeScript", percentage: 85 },
-  { name: "React", percentage: 90 },
-  { name: "Node.js", percentage: 85 },
-  { name: "Docker", percentage: 75 },
-  { name: "SQL/NoSQL", percentage: 80 },
-  { name: "Figma/Framer", percentage: 70 }
-];
-
 export const skillCategories: SkillCategory[] = [
   {
     iconName: "code",
     title: "Desenvolvimento Frontend",
-    description: "Criação de interfaces modernas e responsivas com React, TypeScript e frameworks modernos."
+    description: "Criação de interfaces modernas com React e TypeScript, focando em experiências interativas e responsivas."
   },
   {
     iconName: "database",
-    title: "Desenvolvimento Backend",
-    description: "Implementação de servidores Node.js, APIs RESTful e bancos de dados SQL e NoSQL."
+    title: "Banco de Dados",
+    description: "Experiência com modelagem e gestão de bancos de dados SQL e NoSQL para aplicações escaláveis."
   },
   {
-    iconName: "server",
-    title: "DevOps & Infraestrutura",
-    description: "Containerização com Docker, CI/CD e deploy de aplicações em ambientes cloud."
+    iconName: "design",
+    title: "Design & Prototipagem",
+    description: "Criação de protótipos e designs no Figma, com animações avançadas usando Framer Motion."
   },
   {
-    iconName: "paintBrush",
-    title: "Design & Prototipação",
-    description: "Criação de protótipos interativos com Figma e Framer para experiências de usuário otimizadas."
+    iconName: "dev",
+    title: "Desenvolvimento Web",
+    description: "Desenvolvimento full-stack com foco em TypeScript e React para criar aplicações robustas e performáticas."
   }
 ];
 
-export const tools: Tool[] = [
-  { name: "Figma", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
-  { name: "Photoshop", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg" },
-  { name: "Illustrator", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg" },
-  { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" }
+export const tools = [
+  { name: "React", icon: "react" },
+  { name: "TypeScript", icon: "typescript" },
+  { name: "Banco de Dados", icon: "database" },
+  { name: "Figma", icon: "figma" },
+  { name: "Framer", icon: "framer" },
+  { name: "Prototipagem", icon: "prototype" }
 ];
 
 export type SocialLink = {
@@ -154,7 +140,7 @@ export const contactInfo: ContactInfo[] = [
   { 
     icon: "location",
     title: "Localização",
-    content: "São Paulo, Brasil" 
+    content: "João Pessoa, Brasil" 
   },
   { 
     icon: "email",

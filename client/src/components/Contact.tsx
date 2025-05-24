@@ -1,9 +1,9 @@
-import { useState, FormEvent } from "react";
-import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
-import { cn } from "@/lib/utils";
-import { contactInfo, socialLinks } from "@/lib/constants";
+import React, { useState, FormEvent, useEffect } from "react";
+import { useIntersectionObserver } from "../hooks/use-intersection-observer.js";
+import { cn } from "../lib/utils.js";
+import { contactInfo, socialLinks, ContactInfo, SocialLink } from "../lib/constants.js";
+import { useToast } from "../hooks/use-toast.js";
 import { motion } from "framer-motion";
-import { useToast } from "@/hooks/use-toast";
 import { MapPin, Mail, Phone, ExternalLink, Github, Instagram, Linkedin } from "lucide-react";
 
 export default function Contact() {
@@ -23,13 +23,17 @@ export default function Contact() {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    
+
+    const message = `Olá, me chamo ${formData.name}!\n\n${formData.message}\n\nEmail: ${formData.email}`;
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/5583999290376?text=${encodedMessage}`, '_blank');
+
     // Site puramente estático - apenas simulação da interface
     toast({
       title: "Mensagem enviada",
       description: "Obrigado por entrar em contato! Retornarei em breve.",
     });
-    
+
     // Reset form
     setFormData({
       name: "",
@@ -68,10 +72,10 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 bg-primary text-white">
+    <section id="contact" className="py-20 bg-black text-white">
       <div className="container mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-12">
-          <div 
+          <div
             ref={ref}
             className={cn(
               "space-y-6 reveal-element",
@@ -87,10 +91,10 @@ export default function Contact() {
             <p className="text-neutral-300">
               Estou interessado em projetos freelance e oportunidades de colaboração. Se você tem um projeto que gostaria de discutir, entre em contato.
             </p>
-            
+
             <div className="space-y-4 mt-8">
-              {contactInfo.map((info, index) => (
-                <motion.div 
+              {contactInfo.map((info: ContactInfo, index: number) => (
+                <motion.div
                   key={index}
                   className="flex items-center space-x-4"
                   initial={{ opacity: 0, x: -20 }}
@@ -107,12 +111,12 @@ export default function Contact() {
                 </motion.div>
               ))}
             </div>
-            
+
             <div className="flex space-x-4 pt-6">
-              {socialLinks.map((link, index) => (
-                <a 
+              {socialLinks.map((link: SocialLink, index: number) => (
+                <a
                   key={index}
-                  href={link.url} 
+                  href={link.url}
                   className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center hover:bg-secondary transition-colors"
                   aria-label={link.label}
                 >
@@ -121,9 +125,9 @@ export default function Contact() {
               ))}
             </div>
           </div>
-          
-          <motion.div 
-            className="bg-white text-primary p-8 rounded-xl shadow-lg card-shadow"
+
+          <motion.div
+            className="bg-white/5 backdrop-blur-lg text-white p-8 rounded-xl"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ delay: 0.4, duration: 0.5 }}
@@ -131,67 +135,67 @@ export default function Contact() {
             <h4 className="text-2xl font-bold mb-6">Envie uma mensagem</h4>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
-                <label htmlFor="name" className="block text-sm font-medium text-muted-foreground mb-1">
+                <label htmlFor="name" className="block text-sm font-medium text-white/80 mb-1">
                   Nome
                 </label>
-                <input 
-                  type="text" 
-                  id="name" 
+                <input
+                  type="text"
+                  id="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent" 
-                  placeholder="Seu nome" 
+                  className="w-full px-4 py-3 bg-white/10 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent text-white placeholder:text-white/50"
+                  placeholder="Seu nome"
                   required
                 />
               </div>
-              
+
               <div className="mb-4">
-                <label htmlFor="email" className="block text-sm font-medium text-muted-foreground mb-1">
+                <label htmlFor="email" className="block text-sm font-medium text-white/80 mb-1">
                   Email
                 </label>
-                <input 
-                  type="email" 
+                <input
+                  type="email"
                   id="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent" 
-                  placeholder="Seu email" 
+                  className="w-full px-4 py-3 bg-white/10 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent text-white placeholder:text-white/50"
+                  placeholder="Seu email"
                   required
                 />
               </div>
-              
+
               <div className="mb-4">
-                <label htmlFor="subject" className="block text-sm font-medium text-muted-foreground mb-1">
+                <label htmlFor="subject" className="block text-sm font-medium text-white/80 mb-1">
                   Assunto
                 </label>
-                <input 
-                  type="text" 
-                  id="subject" 
+                <input
+                  type="text"
+                  id="subject"
                   value={formData.subject}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent" 
-                  placeholder="Assunto da mensagem" 
+                  className="w-full px-4 py-3 bg-white/10 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent text-white placeholder:text-white/50"
+                  placeholder="Assunto da mensagem"
                   required
                 />
               </div>
-              
+
               <div className="mb-6">
-                <label htmlFor="message" className="block text-sm font-medium text-muted-foreground mb-1">
+                <label htmlFor="message" className="block text-sm font-medium text-white/80 mb-1">
                   Mensagem
                 </label>
-                <textarea 
-                  id="message" 
+                <textarea
+                  id="message"
                   rows={4}
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent" 
+                  className="w-full px-4 py-3 bg-white/10 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent text-white placeholder:text-white/50"
                   placeholder="Sua mensagem"
                   required
                 ></textarea>
               </div>
-              
-              <button 
-                type="submit" 
+
+              <button
+                type="submit"
                 className="w-full py-3 bg-secondary text-white rounded-lg hover:bg-secondary/90 transition-colors shadow-lg glow"
               >
                 Enviar mensagem

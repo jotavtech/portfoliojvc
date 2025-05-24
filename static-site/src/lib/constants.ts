@@ -154,7 +154,7 @@ export const contactInfo: ContactInfo[] = [
   { 
     icon: "location",
     title: "Localização",
-    content: "São Paulo, Brasil" 
+    content: "João Pessoa, Brasil" 
   },
   { 
     icon: "email",

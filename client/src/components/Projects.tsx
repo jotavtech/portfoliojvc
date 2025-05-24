@@ -1,119 +1,139 @@
-import { useState } from "react";
-import { cn } from "@/lib/utils";
-import { projects } from "@/lib/constants";
-import { motion } from "framer-motion";
-import ProjectCard from "./ui/project-card";
-import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
-type FilterCategory = "all" | "web" | "ui" | "branding";
+interface Project {
+    id: number;
+    title: string;
+    description: string;
+    tags: string[];
+    link: string;
+}
+
+const projects = [
+	{
+		id: 1,
+		title: "Portfólio Pessoal",
+		description:
+			"Um portfólio moderno e responsivo desenvolvido com React, Next.js, Tailwind CSS e Framer Motion. Apresenta designs modernos, animações suaves e é totalmente responsivo.",
+		tags: ["React", "Next.js", "Tailwind", "Framer Motion"],
+		link: "#",
+	},
+	{
+		id: 2,
+		title: "E-commerce de Maquiagem",
+		description:
+			"Plataforma completa de e-commerce para produtos de maquiagem com carrinho de compras, sistema de pagamento e painel administrativo.",
+		tags: ["React", "Node.js", "PostgreSQL", "Stripe"],
+		link: "#",
+	},
+	{
+		id: 3,
+		title: "Venda de Templates",
+		description:
+			"Marketplace para venda de templates de sites com preview em tempo real e sistema de download automático.",
+		tags: ["TypeScript", "Next.js", "Prisma", "AWS"],
+		link: "#",
+	},
+];
+
+function ProjectCard({ project }: { project: Project }) {
+	const x = useMotionValue(0);
+	const y = useMotionValue(0);
+	const scale = useMotionValue(1);
+
+	const rotateX = useTransform(y, [-100, 100], [30, -30]);
+	const rotateY = useTransform(x, [-100, 100], [-30, 30]);
+	const skewX = useTransform(x, [-100, 100], [-15, 15]);
+	const skewY = useTransform(y, [-100, 100], [-15, 15]);
+
+	const springConfig = { damping: 15, stiffness: 150 };
+	const springRotateX = useSpring(rotateX, springConfig);
+	const springRotateY = useSpring(rotateY, springConfig);
+	const springSkewX = useSpring(skewX, springConfig);
+	const springSkewY = useSpring(skewY, springConfig);
+	const springScale = useSpring(scale, springConfig);
+
+	function handleMouseMove(event: React.MouseEvent<HTMLDivElement>) {
+		const rect = event.currentTarget.getBoundingClientRect();
+		const centerX = rect.x + rect.width / 2;
+		const centerY = rect.y + rect.height / 2;
+
+		x.set(event.clientX - centerX);
+		y.set(event.clientY - centerY);
+		scale.set(1.1);
+	}
+
+	function handleMouseLeave() {
+		x.set(0);
+		y.set(0);
+		scale.set(1);
+	}
+
+	return (
+		<motion.div
+			className="relative h-[400px] rounded-xl p-6 cursor-none perspective-1000 backdrop-blur-sm"
+			style={{
+				rotateX: springRotateX,
+				rotateY: springRotateY,
+				skewX: springSkewX,
+				skewY: springSkewY,
+				scale: springScale,
+				transformStyle: "preserve-3d",
+			}}
+			onMouseMove={handleMouseMove}
+			onMouseLeave={handleMouseLeave}
+			initial={{ opacity: 0, y: 50 }}
+			whileInView={{ opacity: 1, y: 0 }}
+			viewport={{ once: true }}
+			transition={{ duration: 0.5 }}
+		>
+			<div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 rounded-xl border border-white/10 backdrop-blur-sm p-6 transition-all duration-300 hover:backdrop-blur-lg">
+				<h4 className="text-2xl font-bold mb-4 text-white transform-gpu">
+					{project.title}
+				</h4>
+				<p className="text-white/80 mb-6 transform-gpu">
+					{project.description}
+				</p>
+				<div className="flex flex-wrap gap-2 mb-4">
+					{project.tags.map((tag: string, index: number) => (
+						<span
+							key={index}
+							className="px-3 py-1 bg-white/10 rounded-full text-sm text-white/90 transform-gpu"
+						>
+							{tag}
+						</span>
+					))}
+				</div>
+				<motion.button
+					className="mt-4 px-6 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors transform-gpu"
+					whileHover={{ scale: 1.05 }}
+					whileTap={{ scale: 0.95 }}
+				>
+					Ver Projeto
+				</motion.button>
+			</div>
+		</motion.div>
+	);
+}
 
 export default function Projects() {
-  const [activeFilter, setActiveFilter] = useState<FilterCategory>("all");
-  const { ref, isInView } = useIntersectionObserver({
-    threshold: 0.1,
-    triggerOnce: true,
-  });
-
-  const filteredProjects = projects.filter(
-    (project) => activeFilter === "all" || project.category === activeFilter,
-  );
-
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        when: "beforeChildren",
-      },
-    },
-  };
-
-  return (
-    <section id="projects" className="py-20 bg-muted">
-      <div className="container mx-auto px-6">
-        <div
-          ref={ref}
-          className={cn(
-            "max-w-2xl mx-auto text-center mb-16 reveal-element",
-            isInView && "active",
-          )}
-        >
-          <h2 className="text-sm uppercase tracking-widest gradient-text font-semibold mb-4">
-            Meus trabalhos
-          </h2>
-          <h3 className="text-3xl md:text-4xl font-bold mb-6">
-            Projetos em Destaque
-          </h3>
-          <p className="text-muted-foreground">
-            Uma coleção selecionada dos meus projetos mais recentes,
-            demonstrando habilidades em design e desenvolvimento.
-          </p>
-        </div>
-
-        <div
-          className={cn(
-            "mb-10 flex flex-wrap justify-center gap-4 reveal-element",
-            isInView && "active",
-          )}
-        >
-          <button
-            className={cn(
-              "px-4 py-2 rounded-lg transition-colors shadow-md",
-              activeFilter === "all"
-                ? "bg-secondary text-white"
-                : "bg border border-border hover:border-secondary hover:text-secondary",
-            )}
-            onClick={() => setActiveFilter("all")}
-          >
-            Todos
-          </button>
-          <button
-            className={cn(
-              "px-4 py-2 rounded-lg transition-colors shadow-md",
-              activeFilter === "web"
-                ? "bg-secondary text-white"
-                : "bg border border-border hover:border-secondary hover:text-secondary",
-            )}
-            onClick={() => setActiveFilter("web")}
-          >
-            Web Design
-          </button>
-          <button
-            className={cn(
-              "px-4 py-2 rounded-lg transition-colors shadow-md",
-              activeFilter === "ui"
-                ? "bg-secondary text-white"
-                : "bg- border border-border hover:border-secondary hover:text-secondary",
-            )}
-            onClick={() => setActiveFilter("ui")}
-          >
-            UI/UX
-          </button>
-        </div>
-
-        <motion.div
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 reveal-element"
-          variants={container}
-          initial="hidden"
-          animate={isInView ? "show" : "hidden"}
-        >
-          {filteredProjects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </motion.div>
-      </div>
-    </section>
-  );
+	return (
+		<section
+			id="projects"
+			className="relative min-h-screen flex items-center justify-center bg-black py-20 cursor-none"
+		>
+			<div className="container mx-auto px-6 text-center">
+				<h2 className="text-xl uppercase tracking-widest text-gray-400 font-bold mb-3">
+					MEUS PROJETOS
+				</h2>
+				<h3 className="text-4xl md:text-5xl font-black mb-16 text-white">
+					PROJETOS EM DESTAQUE
+				</h3>
+				<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+					{projects.map((project) => (
+						<ProjectCard key={project.id} project={project} />
+					))}
+				</div>
+			</div>
+		</section>
+	);
 }

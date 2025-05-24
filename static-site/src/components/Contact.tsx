@@ -1,9 +1,9 @@
-import { useState, FormEvent } from "react";
-import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
-import { cn } from "@/lib/utils";
-import { contactInfo, socialLinks } from "@/lib/constants";
+import React, { useState, FormEvent } from "react";
+import { useIntersectionObserver } from "../hooks/use-intersection-observer";
+import { cn } from "../lib/utils";
+import { contactInfo, socialLinks } from "../lib/constants";
 import { motion } from "framer-motion";
-import { useToast } from "@/hooks/use-toast";
+import { useToast } from "../hooks/use-toast";
 import { MapPin, Mail, Phone, ExternalLink, Github, Instagram, Linkedin } from "lucide-react";
 
 export default function Contact() {
@@ -192,7 +192,7 @@ export default function Contact() {
               
               <button 
                 type="submit" 
-                className="w-full py-3 bg-secondary text-white rounded-lg hover:bg-secondary/90 transition-colors shadow-lg glow"
+                className="w-full py-3 bg-secondary text-black rounded-lg hover:bg-secondary/90 transition-colors shadow-lg glow"
               >
                 Enviar mensagem
               </button>

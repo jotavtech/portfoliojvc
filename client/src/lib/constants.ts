@@ -1,5 +1,3 @@
-import { ExternalLink, Github, Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react";
-
 export type Project = {
   id: number;
   title: string;
@@ -25,63 +23,43 @@ export type Tool = {
 export const projects: Project[] = [
   {
     id: 1,
-    title: "Portfólio Premium",
-    description: "Portfólio profissional de alto padrão com animações avançadas, design moderno e experiência interativa imersiva.",
-    imageUrl: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3",
-    imageAlt: "Portfólio premium com animações elegantes",
+    title: "PlayOff",
+    description: "Aplicação completa para gestão de campeonatos e torneios esportivos, com sistema de chaveamento automático, placar em tempo real e gerenciamento de times.",
+    imageUrl: "https://res.cloudinary.com/dzwfuzxxw/image/upload/v1748972944/2025-06-03_12-50_iodj9l.png",
+    imageAlt: "Aplicação PlayOff para gestão de torneios",
     category: "web",
-    tags: ["React", "TypeScript", "Framer Motion", "TailwindCSS"],
-    url: "https://exemplo.com/portfolio-premium"
+    tags: ["JavaScript", "Vue.js", "Node.js"],
+    url: "https://exemplo.com/playoff"
   },
   {
     id: 2,
-    title: "Portfólio Minimalista",
-    description: "Design minimalista com foco na experiência do usuário, apresentando conteúdo de forma clara e direta com animações sutis.",
-    imageUrl: "https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&fit=crop&q=80&w=1480&ixlib=rb-4.0.3",
-    imageAlt: "Portfolio com design minimalista e elegante",
+    title: "Cynthia Makes",
+    description: "Plataforma moderna para showcase de projetos criativos com galeria interativa, sistema de categorização e interface responsiva elegante.",
+    imageUrl: "https://res.cloudinary.com/dzwfuzxxw/image/upload/v1748972944/2025-06-03_13-54_aj7yd0.png",
+    imageAlt: "Plataforma Cynthia Makes para projetos criativos",
     category: "web",
-    tags: ["React", "JavaScript", "GSAP", "Styled Components"],
-    url: "https://exemplo.com/portfolio-minimalista"
+    tags: ["TypeScript", "React", "Vite", "Tailwind CSS"],
+    url: "https://exemplo.com/cynthia-makes"
   },
   {
     id: 3,
-    title: "E-Commerce Completo",
-    description: "Plataforma de e-commerce desenvolvida com tecnologias modernas, incluindo sistema de pagamento, carrinho, e painel administrativo.",
-    imageUrl: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3",
-    imageAlt: "Plataforma de e-commerce com design moderno",
+    title: "Comparate",
+    description: "Plataforma de comparação de produtos com sistema de filtros avançados, análise de preços e recomendações inteligentes.",
+    imageUrl: "https://res.cloudinary.com/dzwfuzxxw/image/upload/v1748972944/comparate_ea3kgx.png",
+    imageAlt: "Plataforma Comparate para comparação de produtos",
     category: "web",
-    tags: ["Next.js", "Node.js", "MongoDB", "Stripe"],
-    url: "https://exemplo.com/ecommerce"
+    tags: ["React", "Express", "API REST"],
+    url: "https://exemplo.com/comparate"
   },
   {
     id: 4,
-    title: "Site para Casa de Massagem",
-    description: "Site moderno e elegante para um spa de massagem, com sistema de agendamento online e área do cliente.",
-    imageUrl: "https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3",
-    imageAlt: "Website para casa de massagem com design relaxante",
+    title: "Folheando",
+    description: "Aplicação moderna para leitura e organização de livros digitais com interface intuitiva e recursos avançados de navegação.",
+    imageUrl: "https://res.cloudinary.com/dzwfuzxxw/image/upload/v1748972944/folheando_u5ifrg.png",
+    imageAlt: "Aplicativo Folheando para leitura digital",
     category: "web",
-    tags: ["React", "Express", "PostgreSQL", "Calendly API"],
-    url: "https://exemplo.com/casa-massagem"
-  },
-  {
-    id: 5,
-    title: "Marketplace de Templates",
-    description: "Plataforma de venda de templates para websites, com sistema de preview, download e áreas de membros.",
-    imageUrl: "https://images.unsplash.com/photo-1481487196290-c152efe083f5?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3",
-    imageAlt: "Marketplace de templates com vários designs",
-    category: "web",
-    tags: ["React", "Firebase", "Stripe", "Redux"],
-    url: "https://exemplo.com/marketplace-templates"
-  },
-  {
-    id: 6,
-    title: "Dashboard Administrativo",
-    description: "Painel administrativo completo com gráficos interativos, sistema de usuários e gerenciamento de conteúdo.",
-    imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3",
-    imageAlt: "Dashboard administrativo em um monitor",
-    category: "web",
-    tags: ["TypeScript", "React", "Node.js", "D3.js"],
-    url: "https://exemplo.com/dashboard"
+    tags: ["React", "TypeScript", "Vite", "Tailwind CSS"],
+    url: "https://exemplo.com/folheando"
   }
 ];
 

@@ -1,4 +1,5 @@
 import { ArrowDown } from "lucide-react";
+import TextPressure from './TextPressure';
 
 interface HeroProps {
   showSocialLinks: boolean;
@@ -21,7 +22,7 @@ export default function Hero({ showSocialLinks }: HeroProps) {
       <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
 
       {/* Container principal centralizado */}
-      <div className="z-10 w-full flex flex-col items-center justify-center text-center px-4">
+      <div className="z-10 w-full flex flex-col items-center justify-end text-center px-4 pb-32">
         {/* Frases laterais */}
         <div className="absolute left-6 text-white text-lg md:text-2xl font-serif tracking-wide z-10 transform -translate-y-20">
           Freedom
@@ -30,18 +31,22 @@ export default function Hero({ showSocialLinks }: HeroProps) {
           The Creative
         </div>
 
-        <h1 className="hero-name">
-          <span className="block" style={{ color: 'white' }}>JOTA</span>
-          <span
-            className="block"
-            style={{
-              color: '#FF4500',
-              textShadow: '0 6px 30px rgba(255, 69, 0, 0.6)',
-            }}
-          >
-            CHAVES
-          </span>
-        </h1>
+        {/* TextPressure component com tamanho original */}
+        <div style={{position: 'relative', height: '400px', width: '100%'}}>
+          <TextPressure
+            text="JOTA CHAVES"
+            flex={true}
+            alpha={false}
+            stroke={false}
+            width={true}
+            weight={true}
+            italic={true}
+            textColor="#FF4500"
+            strokeColor="#ff0000"
+            minFontSize={80}
+            letterSpacing="-0.05em"
+          />
+        </div>
         
         {showSocialLinks && (
           <div className="mt-12 flex justify-center gap-6">

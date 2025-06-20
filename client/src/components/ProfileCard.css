@@ -1,0 +1,276 @@
+:root {
+  --glow-color: hsl(180, 100%, 50%);
+  --glow-spread: 5px;
+  --card-bg: hsl(240, 20%, 6%);
+  --border-bg: radial-gradient(
+      100% 100% at 50% 0%,
+      transparent 50%,
+      hsl(190, 100%, 50%) 120%
+    ),
+    conic-gradient(
+      from 180deg at 50% 50%,
+      hsla(260, 100%, 50%, 0.7) 0%,
+      hsla(180, 100%, 50%, 0.7) 33%,
+      hsla(40, 100%, 50%, 0.7) 66%,
+      hsla(340, 100%, 50%, 0.7) 100%
+    );
+}
+
+.pc-perspective {
+  perspective: 1000px;
+}
+
+.pc-card {
+  position: relative;
+  width: 320px;
+  height: 480px;
+  background: var(--card-bg);
+  border-radius: 20px;
+  transform-style: preserve-3d;
+  transition: transform 0.1s linear;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.pc-glow, .pc-border {
+  position: absolute;
+  inset: -1px;
+  border-radius: 21px;
+  transform: translateZ(-1px);
+}
+
+.pc-glow {
+  background: var(--border-bg);
+  filter: blur(var(--glow-spread));
+  z-index: -2;
+}
+
+.pc-border {
+  background: var(--border-bg);
+  z-index: -1;
+}
+
+.pc-content {
+  position: relative;
+  height: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  z-index: 1;
+  background-color: var(--card-bg);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.pc-content::before {
+  content: '';
+  position: absolute;
+  inset: -100%;
+  background: radial-gradient(
+    circle at var(--pointer-x, 50%) var(--pointer-y, 50%),
+    rgba(255, 255, 255, 0.05) 0%,
+    transparent 40%
+  );
+  transition: opacity 0.5s ease;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.pc-header, .pc-avatar, .pc-footer {
+  position: relative;
+  z-index: 1;
+}
+
+.pc-holographic-letters {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.pc-holographic-letters span {
+  position: absolute;
+  font-family: 'Arial Black', sans-serif;
+  font-weight: 900;
+  color: hsla(240, 50%, 80%, 0.05);
+  user-select: none;
+  transition: transform 0.2s ease-out;
+}
+
+/* Efeito de glitch e cor dinâmica */
+.pc-holographic-letters span::before,
+.pc-holographic-letters span::after {
+  content: 'J';
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: none;
+  pointer-events: none;
+}
+
+.pc-holographic-letters span::before {
+  /* Cor dinâmica baseada na posição do mouse */
+  text-shadow: 1px 1px 0 hsla(calc(var(--pointer-x, 50) * 3.6), 100%, 70%, 0.5);
+  animation: fluid-glitch-1 6s infinite ease-in-out;
+}
+
+.pc-holographic-letters span::after {
+  /* Cor dinâmica invertida */
+  text-shadow: -1px -1px 0 hsla(calc(360 - (var(--pointer-x, 50) * 3.6)), 100%, 70%, 0.4);
+  animation: fluid-glitch-2 8s infinite ease-in-out reverse;
+}
+
+@keyframes fluid-glitch-1 {
+  0%, 100% {
+    opacity: 0.3;
+    transform: skew(0deg, 0deg) translateY(0);
+  }
+  25% {
+    opacity: 0.7;
+    transform: skew(5deg, 2deg) translateY(-5px);
+  }
+  75% {
+    opacity: 0.2;
+    transform: skew(-5deg, -2deg) translateY(5px);
+  }
+}
+
+@keyframes fluid-glitch-2 {
+  0%, 100% {
+    opacity: 0.5;
+    transform: skew(0deg, 0deg) translateX(0);
+  }
+  25% {
+    opacity: 0.2;
+    transform: skew(-2deg, -5deg) translateX(-3px);
+  }
+  75% {
+    opacity: 0.8;
+    transform: skew(2deg, 5deg) translateX(3px);
+  }
+}
+
+.pc-holographic-letters span:nth-child(1) {
+  top: 15%;
+  left: 10%;
+  font-size: 150px;
+  --dx: calc((var(--pointer-x, 50) - 50) * -0.4%);
+  --dy: calc((var(--pointer-y, 50) - 50) * -0.8%);
+  transform: rotate(-25deg) translate(var(--dx), var(--dy)) skew(-10deg, -5deg);
+}
+
+.pc-holographic-letters span:nth-child(2) {
+  top: 40%;
+  right: 5%;
+  font-size: 180px;
+  --dx: calc((var(--pointer-x, 50) - 50) * 0.5%);
+  --dy: calc((var(--pointer-y, 50) - 50) * 0.3%);
+  transform: rotate(15deg) translate(var(--dx), var(--dy)) skew(15deg, 0deg);
+}
+
+.pc-holographic-letters span:nth-child(3) {
+  bottom: 10%;
+  left: 20%;
+  font-size: 130px;
+  --dx: calc((var(--pointer-x, 50) - 50) * -0.8%);
+  --dy: calc((var(--pointer-y, 50) - 50) * 0.6%);
+  transform: rotate(5deg) translate(var(--dx), var(--dy)) skew(0deg, -10deg);
+}
+
+.pc-header {
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.pc-name {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.pc-title {
+  font-size: 1rem;
+  font-weight: 300;
+  margin: 0.25rem 0 0;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.pc-avatar {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 1rem 0;
+  flex-shrink: 0;
+}
+
+.pc-footer {
+  width: 100%;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pc-user-details {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.pc-mini-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.pc-user-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.pc-handle {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+}
+
+.pc-status {
+  font-size: 0.8rem;
+  color: #00ffaa;
+  font-weight: 500;
+}
+
+.pc-contact-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  padding: 0.6rem 1.2rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.pc-contact-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Responsividade */
+@media (max-width: 400px) {
+  .pc-card {
+    width: 90vw;
+    height: calc(90vw * 1.5);
+  }
+} 

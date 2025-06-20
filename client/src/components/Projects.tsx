@@ -1,169 +1,167 @@
-import { motion, useMotionValue, useSpring, useTransform, useScroll } from "framer-motion";
+import { motion } from "framer-motion";
 import { useRef } from "react";
 import { projects, Project } from "@/lib/constants";
-import { ExternalLink } from "lucide-react";
+import CardSwap, { Card } from "./CardSwap";
 
-function ProjectCard({ project }: { project: Project }) {
-	const x = useMotionValue(0);
-	const y = useMotionValue(0);
-	const scale = useMotionValue(1);
-
-	const rotateX = useTransform(y, [-100, 100], [30, -30]);
-	const rotateY = useTransform(x, [-100, 100], [-30, 30]);
-	const skewX = useTransform(x, [-100, 100], [-15, 15]);
-	const skewY = useTransform(y, [-100, 100], [-15, 15]);
-
-	const springConfig = { damping: 15, stiffness: 150 };
-	const springRotateX = useSpring(rotateX, springConfig);
-	const springRotateY = useSpring(rotateY, springConfig);
-	const springSkewX = useSpring(skewX, springConfig);
-	const springSkewY = useSpring(skewY, springConfig);
-	const springScale = useSpring(scale, springConfig);
-
-	function handleMouseMove(event: React.MouseEvent<HTMLDivElement>) {
-		const rect = event.currentTarget.getBoundingClientRect();
-		const centerX = rect.x + rect.width / 2;
-		const centerY = rect.y + rect.height / 2;
-
-		x.set(event.clientX - centerX);
-		y.set(event.clientY - centerY);
-		scale.set(1.1);
-	}
-
-	function handleMouseLeave() {
-		x.set(0);
-		y.set(0);
-		scale.set(1);
-	}
-
-	const handleViewProject = () => {
-		if (project.url) {
-			window.open(project.url, '_blank');
-		}
-	};
-
+// Componente de fundo animado alternativo
+function AnimatedBackground() {
 	return (
+		<div className="absolute inset-0 overflow-hidden">
+			{/* Gradiente animado */}
 		<motion.div
-			className="relative h-[500px] rounded-xl cursor-none perspective-1000 backdrop-blur-sm overflow-hidden"
-			style={{
-				rotateX: springRotateX,
-				rotateY: springRotateY,
-				skewX: springSkewX,
-				skewY: springSkewY,
-				scale: springScale,
-				transformStyle: "preserve-3d",
+				className="absolute inset-0 bg-gradient-to-br from-slate-800 via-purple-900 to-slate-900"
+			animate={{ 
+					background: [
+						'linear-gradient(45deg, #1e293b, #7c3aed, #334155)',
+						'linear-gradient(45deg, #334155, #1e293b, #7c3aed)',
+						'linear-gradient(45deg, #7c3aed, #334155, #1e293b)',
+						'linear-gradient(45deg, #1e293b, #7c3aed, #334155)'
+					]
 			}}
-			onMouseMove={handleMouseMove}
-			onMouseLeave={handleMouseLeave}
-			initial={{ opacity: 0, y: 50 }}
-			whileInView={{ opacity: 1, y: 0 }}
-			viewport={{ once: true }}
-			transition={{ duration: 0.5 }}
-		>
-			{/* Image Background */}
-			<div className="absolute inset-0">
-				<img 
-					src={project.imageUrl} 
-					alt={project.imageAlt}
-					className="w-full h-full object-cover"
-				/>
-				<div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20" />
-			</div>
-
-			{/* Content */}
-			<div className="absolute inset-0 p-6 flex flex-col justify-end text-white transform-gpu">
-				<h4 className="text-2xl font-bold mb-3">
-					{project.title}
-				</h4>
-				<p className="text-white/90 mb-4 line-clamp-2">
-					{project.description}
-				</p>
-				<div className="flex flex-wrap gap-2 mb-6">
-					{project.tags.map((tag: string, index: number) => (
-						<span
-							key={index}
-							className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm text-white border border-white/20"
-						>
-							{tag}
-						</span>
-					))}
-				</div>
-				{project.url && (
-					<motion.button
-						onClick={handleViewProject}
-						className="flex items-center justify-center gap-2 px-6 py-3 bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-lg text-white transition-colors border border-white/20"
-						whileHover={{ scale: 1.05 }}
-						whileTap={{ scale: 0.95 }}
-					>
-						Ver Projeto
-						<ExternalLink size={16} />
-					</motion.button>
-				)}
-			</div>
-		</motion.div>
+			transition={{ 
+					duration: 8,
+					repeat: Infinity,
+					ease: "linear"
+				}}
+			/>
+			
+			{/* Padrão de ondas */}
+			<motion.div
+				className="absolute inset-0 opacity-20"
+				style={{
+					background: `
+						radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+						radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+						radial-gradient(circle at 40% 80%, rgba(120, 219, 255, 0.3) 0%, transparent 50%)
+					`
+				}}
+				animate={{
+					background: [
+						`
+							radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+							radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+							radial-gradient(circle at 40% 80%, rgba(120, 219, 255, 0.3) 0%, transparent 50%)
+						`,
+						`
+							radial-gradient(circle at 80% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+							radial-gradient(circle at 20% 80%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+							radial-gradient(circle at 60% 20%, rgba(120, 219, 255, 0.3) 0%, transparent 50%)
+						`,
+						`
+							radial-gradient(circle at 40% 20%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+							radial-gradient(circle at 60% 80%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+							radial-gradient(circle at 20% 40%, rgba(120, 219, 255, 0.3) 0%, transparent 50%)
+						`,
+						`
+							radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+							radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+							radial-gradient(circle at 40% 80%, rgba(120, 219, 255, 0.3) 0%, transparent 50%)
+						`
+					]
+				}}
+				transition={{
+					duration: 12,
+					repeat: Infinity,
+					ease: "linear"
+				}}
+			/>
+		</div>
 	);
 }
 
 export default function Projects() {
 	const sectionRef = useRef(null);
-	const { scrollYProgress } = useScroll({
-		target: sectionRef,
-		offset: ["start end", "end start"]
-	});
-
-	const ballSize = useTransform(
-		scrollYProgress,
-		[0, 0.2, 0.4],
-		["2rem", "10rem", "200vw"]
-	);
-
-	const ballY = useTransform(
-		scrollYProgress,
-		[0, 0.2, 0.4],
-		["0%", "30%", "50%"]
-	);
-
-	const ballScale = useTransform(
-		scrollYProgress,
-		[0, 0.2, 0.4],
-		[0, 1, 1.5]
-	);
 
 	return (
 		<section
 			ref={sectionRef}
 			id="projects"
-			className="relative min-h-screen flex items-center justify-center py-20 cursor-none"
+			className="relative min-h-screen flex items-center justify-center py-20 overflow-hidden"
 		>
 			{/* Background container */}
-			<div className="absolute inset-0 overflow-hidden">
-				{/* Animated ball */}
-				<motion.div
-					className="absolute left-1/2 bg-white rounded-full"
-					style={{
-						x: "-50%",
-						y: ballY,
-						width: ballSize,
-						height: ballSize,
-						scale: ballScale,
-					}}
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
-					transition={{ duration: 0.5 }}
-				/>
-			</div>
+			<AnimatedBackground />
 
-			<div className="container mx-auto px-6 text-center relative z-10">
-				<h2 className="text-xl uppercase tracking-widest text-black font-bold mb-3">
-					MEUS PROJETOS
-				</h2>
-				<h3 className="text-4xl md:text-5xl font-black mb-16 text-black">
+			{/* Transição suave para a próxima seção */}
+			<div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-900 via-slate-800/80 to-transparent z-10" />
+
+			<div className="container mx-auto px-6 relative z-10">
+				<div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
+					{/* Título à esquerda */}
+				<motion.div
+						className="flex-1 flex items-center justify-center lg:justify-start"
+						initial={{ opacity: 0, x: -50 }}
+						whileInView={{ opacity: 1, x: 0 }}
+						transition={{ duration: 0.8, delay: 0.1 }}
+					>
+						<div className="text-center lg:text-left max-w-md">
+							<motion.h3 
+								className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight"
+								initial={{ opacity: 0, y: 20 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								transition={{ duration: 0.6, delay: 0.2 }}
+							>
 					PROJETOS EM DESTAQUE
-				</h3>
-				<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-					{projects.map((project) => (
-						<ProjectCard key={project.id} project={project} />
-					))}
+							</motion.h3>
+							<motion.p 
+								className="text-lg md:text-xl text-gray-300 mt-6 leading-relaxed"
+								initial={{ opacity: 0, y: 20 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								transition={{ duration: 0.6, delay: 0.4 }}
+							>
+								Explore meus principais projetos desenvolvidos com as mais modernas tecnologias e melhores práticas de desenvolvimento.
+							</motion.p>
+						</div>
+					</motion.div>
+					
+					{/* CardSwap Container à direita */}
+					<motion.div 
+						className="flex-1 flex justify-center items-center w-full lg:w-auto"
+						initial={{ opacity: 0, x: 50 }}
+						whileInView={{ opacity: 1, x: 0 }}
+						transition={{ duration: 0.8, delay: 0.3 }}
+					>
+						<div className="relative w-full max-w-[700px] h-[600px] flex items-center justify-center">
+							<CardSwap
+								cardDistance={100}
+								verticalDistance={120}
+								delay={5000}
+								pauseOnHover={true}
+								width={600}
+								height={500}
+							>
+								{projects.map((project) => (
+									<Card key={project.id}>
+										<img 
+											src={project.imageUrl} 
+											alt={project.imageAlt}
+											className="project-image"
+										/>
+										<h3>{project.title}</h3>
+										<p>{project.description}</p>
+										<div className="tech-stack">
+											{project.tags.map((tag, index) => (
+												<span key={index} className="tech-tag">
+													{tag}
+												</span>
+						))}
+					</div>
+										{project.url && (
+											<div className="project-links">
+												<a 
+													href={project.url} 
+													target="_blank" 
+													rel="noopener noreferrer"
+													className="project-link"
+												>
+													Ver Projeto
+												</a>
+											</div>
+										)}
+									</Card>
+								))}
+							</CardSwap>
+					</div>
+					</motion.div>
 				</div>
 			</div>
 		</section>

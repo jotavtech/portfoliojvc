@@ -24,7 +24,7 @@ export const projects: Project[] = [
   {
     id: 1,
     title: "PlayOff",
-    description: "Aplicação completa para gestão de campeonatos e torneios esportivos, com sistema de chaveamento automático, placar em tempo real e gerenciamento de times.",
+    description: "Batalha de músicas em tempo real com sistema de votação dinâmica, ranking em tempo real e interface interativa para competições musicais.",
     imageUrl: "https://res.cloudinary.com/dzwfuzxxw/image/upload/v1748972944/2025-06-03_12-50_iodj9l.png",
     imageAlt: "Aplicação PlayOff para gestão de torneios",
     category: "web",

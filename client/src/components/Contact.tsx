@@ -1,10 +1,11 @@
-import React, { useState, FormEvent, useEffect } from "react";
+import React, { useState, FormEvent } from "react";
 import { useIntersectionObserver } from "../hooks/use-intersection-observer.js";
 import { cn } from "../lib/utils.js";
 import { contactInfo, socialLinks, ContactInfo, SocialLink } from "../lib/constants.js";
 import { useToast } from "../hooks/use-toast.js";
 import { motion } from "framer-motion";
 import { MapPin, Mail, Phone, ExternalLink, Github, Instagram, Linkedin } from "lucide-react";
+import Hyperspeed from "./Hyperspeed";
 
 export default function Contact() {
   const { ref, isInView } = useIntersectionObserver({ threshold: 0.1, triggerOnce: true });
@@ -46,40 +47,69 @@ export default function Contact() {
   const getContactIcon = (name: string) => {
     switch (name) {
       case "location":
-        return <MapPin className="text-xl text-secondary" />;
+        return <MapPin className="text-xl text-white" />;
       case "email":
-        return <Mail className="text-xl text-secondary" />;
+        return <Mail className="text-xl text-white" />;
       case "phone":
-        return <Phone className="text-xl text-secondary" />;
+        return <Phone className="text-xl text-white" />;
       default:
-        return <Mail className="text-xl text-secondary" />;
+        return <Mail className="text-xl text-white" />;
     }
   };
 
   const getSocialIcon = (name: string) => {
     switch (name) {
       case "linkedin":
-        return <Linkedin size={20} />;
+        return <Linkedin size={20} className="text-white" />;
       case "github":
-        return <Github size={20} />;
+        return <Github size={20} className="text-white" />;
       case "instagram":
-        return <Instagram size={20} />;
+        return <Instagram size={20} className="text-white" />;
       default:
-        return <ExternalLink size={20} />;
+        return <ExternalLink size={20} className="text-white" />;
     }
   };
 
   return (
     <section id="contact" className="py-20 relative overflow-hidden group">
-      {/* Background Image with Overlay */}
-      <div 
-        className="absolute inset-0 z-0 transition-transform duration-500 ease-out group-hover:scale-105"
-        style={{
-          backgroundImage: "url('https://res.cloudinary.com/dzwfuzxxw/image/upload/v1748112497/assets-task_01jw1st5n1es3br63jqstmt003-1748112399_img_3_axf4wn.webp')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          filter: "blur(8px) brightness(0.3)",
-          transform: "scale(1.1)" // Slightly larger to prevent white edges during blur
+      {/* Hyperspeed Background */}
+      <Hyperspeed
+        effectOptions={{
+          onSpeedUp: () => { },
+          onSlowDown: () => { },
+          distortion: 'turbulentDistortion',
+          length: 400,
+          roadWidth: 10,
+          islandWidth: 2,
+          lanesPerRoad: 4,
+          fov: 90,
+          fovSpeedUp: 150,
+          speedUp: 2,
+          carLightsFade: 0.4,
+          totalSideLightSticks: 20,
+          lightPairsPerRoadWay: 40,
+          shoulderLinesWidthPercentage: 0.05,
+          brokenLinesWidthPercentage: 0.1,
+          brokenLinesLengthPercentage: 0.5,
+          lightStickWidth: [0.12, 0.5],
+          lightStickHeight: [1.3, 1.7],
+          movingAwaySpeed: [60, 80],
+          movingCloserSpeed: [-120, -160],
+          carLightsLength: [400 * 0.03, 400 * 0.2],
+          carLightsRadius: [0.05, 0.14],
+          carWidthPercentage: [0.3, 0.5],
+          carShiftX: [-0.8, 0.8],
+          carFloorSeparation: [0, 5],
+          colors: {
+            roadColor: 0x000000,
+            islandColor: 0x000000,
+            background: 0x000000,
+            shoulderLines: 0xFFFFFF,
+            brokenLines: 0xFFFFFF,
+            leftCars: [0xD856BF, 0x6750A2, 0xC247AC],
+            rightCars: [0x03B3C3, 0x0E5EA5, 0x324555],
+            sticks: 0x03B3C3,
+          }
         }}
       />
       
@@ -92,13 +122,13 @@ export default function Contact() {
               isInView && "active"
             )}
           >
-            <h2 className="text-sm uppercase tracking-widest gradient-text font-semibold">
+            <h2 className="text-sm uppercase tracking-widest text-white font-semibold">
               Contato
             </h2>
             <h3 className="text-3xl md:text-4xl font-bold text-white">
               Vamos trabalhar juntos
             </h3>
-            <p className="text-neutral-300">
+            <p className="text-white">
               Estou interessado em projetos freelance e oportunidades de colaboração. Se você tem um projeto que gostaria de discutir, entre em contato.
             </p>
 
@@ -111,12 +141,12 @@ export default function Contact() {
                   animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                   transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
                 >
-                  <div className="w-12 h-12 bg-secondary/20 rounded-full flex items-center justify-center">
+                  <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
                     {getContactIcon(info.icon)}
                   </div>
                   <div>
-                    <h4 className="text-lg font-medium">{info.title}</h4>
-                    <p className="text-neutral-300">{info.content}</p>
+                    <h4 className="text-lg font-medium text-white">{info.title}</h4>
+                    <p className="text-white">{info.content}</p>
                   </div>
                 </motion.div>
               ))}
@@ -127,7 +157,7 @@ export default function Contact() {
                 <a
                   key={index}
                   href={link.url}
-                  className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center hover:bg-secondary transition-colors"
+                  className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors"
                   aria-label={link.label}
                 >
                   {getSocialIcon(link.name)}

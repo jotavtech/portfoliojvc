@@ -30,8 +30,13 @@ export default function Skills() {
     },
     { 
       link: '#', 
-      text: 'Backend com Node.js', 
+      text: 'PHP & Laravel', 
       image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=400&fit=crop' 
+    },
+    { 
+      link: '#', 
+      text: 'Deploy & DevOps', 
+      image: 'https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=600&h=400&fit=crop' 
     },
     { 
       link: '#', 
@@ -41,11 +46,11 @@ export default function Skills() {
   ];
 
   return (
-    <section id="skills" className="py-20 relative overflow-hidden bg-black">
+    <section id="skills" className="py-12 pb-64 md:pb-80 lg:pb-96 relative overflow-hidden bg-black">
       <div className="container mx-auto px-6">
         <motion.div 
           ref={ref}
-          className="text-center mb-16"
+          className="text-center mb-8"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
@@ -53,14 +58,14 @@ export default function Skills() {
           <motion.h2 className="text-xl uppercase tracking-widest text-white font-bold mb-3">
             MINHAS HABILIDADES
           </motion.h2>
-          <motion.h3 className="text-4xl md:text-5xl font-black mb-6 text-white">
+          <motion.h3 className="text-4xl md:text-5xl font-black mb-4 text-white">
             EXPERTISE & TECNOLOGIAS
           </motion.h3>
         </motion.div>
 
         {/* FlowingMenu com habilidades */}
         <motion.div 
-          className="h-[600px] relative"
+          className="h-[500px] md:h-[500px] relative"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6, delay: 0.3 }}

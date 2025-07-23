@@ -5,7 +5,8 @@ import { contactInfo, socialLinks, ContactInfo, SocialLink } from "../lib/consta
 import { useToast } from "../hooks/use-toast.js";
 import { motion } from "framer-motion";
 import { MapPin, Mail, Phone, ExternalLink, Github, Instagram, Linkedin } from "lucide-react";
-import Hyperspeed from "./Hyperspeed";
+import DarkVeil from "./DarkVeil";
+// import Hyperspeed from "./Hyperspeed";
 
 export default function Contact() {
   const { ref, isInView } = useIntersectionObserver({ threshold: 0.1, triggerOnce: true });
@@ -71,47 +72,21 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 relative overflow-hidden group">
-      {/* Hyperspeed Background */}
-      <Hyperspeed
-        effectOptions={{
-          onSpeedUp: () => { },
-          onSlowDown: () => { },
-          distortion: 'turbulentDistortion',
-          length: 400,
-          roadWidth: 10,
-          islandWidth: 2,
-          lanesPerRoad: 4,
-          fov: 90,
-          fovSpeedUp: 150,
-          speedUp: 2,
-          carLightsFade: 0.4,
-          totalSideLightSticks: 20,
-          lightPairsPerRoadWay: 40,
-          shoulderLinesWidthPercentage: 0.05,
-          brokenLinesWidthPercentage: 0.1,
-          brokenLinesLengthPercentage: 0.5,
-          lightStickWidth: [0.12, 0.5],
-          lightStickHeight: [1.3, 1.7],
-          movingAwaySpeed: [60, 80],
-          movingCloserSpeed: [-120, -160],
-          carLightsLength: [400 * 0.03, 400 * 0.2],
-          carLightsRadius: [0.05, 0.14],
-          carWidthPercentage: [0.3, 0.5],
-          carShiftX: [-0.8, 0.8],
-          carFloorSeparation: [0, 5],
-          colors: {
-            roadColor: 0x000000,
-            islandColor: 0x000000,
-            background: 0x000000,
-            shoulderLines: 0xFFFFFF,
-            brokenLines: 0xFFFFFF,
-            leftCars: [0xD856BF, 0x6750A2, 0xC247AC],
-            rightCars: [0x03B3C3, 0x0E5EA5, 0x324555],
-            sticks: 0x03B3C3,
-          }
-        }}
-      />
+    <section id="contact" className="pt-64 md:pt-80 lg:pt-96 pb-20 relative overflow-hidden group">
+      {/* DarkVeil Background */}
+      <div className="absolute inset-0 z-0">
+        <DarkVeil
+          hueShift={240}
+          noiseIntensity={0.02}
+          scanlineIntensity={0.1}
+          speed={0.3}
+          scanlineFrequency={0.5}
+          warpAmount={0.1}
+          resolutionScale={1}
+        />
+        {/* Overlay azul para garantir a cor correta */}
+        <div className="absolute inset-0 bg-[#3A29FF]/20 mix-blend-mode-overlay" />
+      </div>
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid md:grid-cols-2 gap-12">

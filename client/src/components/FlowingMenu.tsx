@@ -27,6 +27,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ link, text, image }) => {
   const itemRef = React.useRef<HTMLDivElement>(null);
   const marqueeRef = React.useRef<HTMLDivElement>(null);
   const marqueeInnerRef = React.useRef<HTMLDivElement>(null);
+  const linkRef = React.useRef<HTMLAnchorElement>(null);
 
   const animationDefaults: gsap.TweenVars = { duration: 0.6, ease: "expo" };
 
@@ -48,7 +49,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ link, text, image }) => {
   };
 
   const handleMouseEnter = (ev: React.MouseEvent<HTMLAnchorElement>) => {
-    if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current)
+    if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current || !linkRef.current)
       return;
     const rect = itemRef.current.getBoundingClientRect();
     const x = ev.clientX - rect.left;
@@ -57,13 +58,16 @@ const MenuItem: React.FC<MenuItemProps> = ({ link, text, image }) => {
 
     const tl = gsap.timeline({ defaults: animationDefaults });
 
-    tl.set(marqueeRef.current, { y: edge === "top" ? "-101%" : "101%" }, 0)
+    // Esconder o texto principal
+    tl.to(linkRef.current, { opacity: 0, y: -20 }, 0)
+      // Mostrar o marquee
+      .set(marqueeRef.current, { y: edge === "top" ? "-101%" : "101%" }, 0)
       .set(marqueeInnerRef.current, { y: edge === "top" ? "101%" : "-101%" }, 0)
-      .to([marqueeRef.current, marqueeInnerRef.current], { y: "0%" }, 0);
+      .to([marqueeRef.current, marqueeInnerRef.current], { y: "0%" }, 0.1);
   };
 
   const handleMouseLeave = (ev: React.MouseEvent<HTMLAnchorElement>) => {
-    if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current)
+    if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current || !linkRef.current)
       return;
     const rect = itemRef.current.getBoundingClientRect();
     const x = ev.clientX - rect.left;
@@ -72,11 +76,11 @@ const MenuItem: React.FC<MenuItemProps> = ({ link, text, image }) => {
 
     const tl = gsap.timeline({ defaults: animationDefaults });
 
-    tl.to(marqueeRef.current, { y: edge === "top" ? "-101%" : "101%" }, 0).to(
-      marqueeInnerRef.current,
-      { y: edge === "top" ? "101%" : "-101%" },
-      0
-    );
+    // Esconder o marquee
+    tl.to(marqueeRef.current, { y: edge === "top" ? "-101%" : "101%" }, 0)
+      .to(marqueeInnerRef.current, { y: edge === "top" ? "101%" : "-101%" }, 0)
+      // Mostrar o texto principal novamente
+      .to(linkRef.current, { opacity: 1, y: 0 }, 0.1);
   };
 
   const repeatedMarqueeContent = React.useMemo(() => {
@@ -94,6 +98,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ link, text, image }) => {
   return (
     <div className="menu__item" ref={itemRef}>
       <a
+        ref={linkRef}
         className="menu__item-link"
         href={link}
         onMouseEnter={handleMouseEnter}

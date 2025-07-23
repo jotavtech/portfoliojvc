@@ -26,7 +26,7 @@ export const projects: Project[] = [
     title: "PlayOff",
     description: "Batalha de músicas em tempo real com sistema de votação dinâmica, ranking em tempo real e interface interativa para competições musicais.",
     imageUrl: "https://res.cloudinary.com/dzwfuzxxw/image/upload/v1748972944/2025-06-03_12-50_iodj9l.png",
-    imageAlt: "Aplicação PlayOff para gestão de torneios",
+    imageAlt: "Aplicação PlayOff para votação de músicas",
     category: "web",
     tags: ["JavaScript", "Vue.js", "Node.js"],
     url: "https://exemplo.com/playoff"
@@ -36,7 +36,7 @@ export const projects: Project[] = [
     title: "Cynthia Makes",
     description: "Plataforma moderna para showcase de projetos criativos com galeria interativa, sistema de categorização e interface responsiva elegante.",
     imageUrl: "https://res.cloudinary.com/dzwfuzxxw/image/upload/v1748972944/2025-06-03_13-54_aj7yd0.png",
-    imageAlt: "Plataforma Cynthia Makes para projetos criativos",
+    imageAlt: "Plataforma Cynthia Makes E-commerce de produtos de beleza",
     category: "web",
     tags: ["TypeScript", "React", "Vite", "Tailwind CSS"],
     url: "https://exemplo.com/cynthia-makes"
@@ -46,7 +46,7 @@ export const projects: Project[] = [
     title: "Comparate",
     description: "Plataforma de comparação de produtos com sistema de filtros avançados, análise de preços e recomendações inteligentes.",
     imageUrl: "https://res.cloudinary.com/dzwfuzxxw/image/upload/v1748972944/comparate_ea3kgx.png",
-    imageAlt: "Plataforma Comparate para comparação de produtos",
+    imageAlt: "Plataforma Comparate para comparação de Veículos",
     category: "web",
     tags: ["React", "Express", "API REST"],
     url: "https://exemplo.com/comparate"
@@ -60,6 +60,16 @@ export const projects: Project[] = [
     category: "web",
     tags: ["React", "TypeScript", "Vite", "Tailwind CSS"],
     url: "https://exemplo.com/folheando"
+  },
+  {
+    id: 5,
+    title: "Portfolio Atualizado",
+    description: "Portfolio pessoal moderno com design responsivo, animações fluidas e interface interativa desenvolvida com as mais recentes tecnologias web.",
+    imageUrl: "https://res.cloudinary.com/dzwfuzxxw/image/upload/v1753137375/2025-07-21_19-35_b1mbvm.png",
+    imageAlt: "Portfolio pessoal moderno e responsivo",
+    category: "web",
+    tags: ["React", "TypeScript", "Vite", "Tailwind CSS", "Framer Motion"],
+    url: "https://exemplo.com/portfolio"
   }
 ];
 

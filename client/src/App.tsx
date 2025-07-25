@@ -8,19 +8,21 @@ import { useScrollSpy } from "./hooks/use-scroll-spy";
 import { useLazySection } from "./hooks/use-lazy-section";
 import SectionPlaceholder from "./components/SectionPlaceholder";
 import Footer from "./components/Footer";
+import InitialLoading from "./components/InitialLoading";
+import { Toaster } from "./components/ui/toaster";
 
-// Lazy loading das seções
+// Lazy loading sections
 const Projects = lazy(() => import("./components/Projects"));
 const About = lazy(() => import("./components/About"));
 const Skills = lazy(() => import("./components/Skills"));
 const Contact = lazy(() => import("./components/Contact"));
 
-// Componente de loading para as seções
+// Loading component for sections
 const SectionLoader = () => (
   <div className="min-h-screen flex items-center justify-center bg-black">
     <div className="text-white text-center">
       <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
-      <p>Carregando seção...</p>
+      <p>Loading section...</p>
     </div>
   </div>
 );
@@ -59,6 +61,8 @@ const LazySection = ({
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showSocialLinks, setShowSocialLinks] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [logoTransformed, setLogoTransformed] = useState(false);
   const [loadedSections, setLoadedSections] = useState({
     projects: false,
     about: false,
@@ -79,13 +83,13 @@ function App() {
     }
   }, [activeSection]);
 
-  // Mostrar links sociais somente após rolar além da seção Hero
+  // Show social links only after scrolling beyond Hero section
   useMotionValueEvent(scrollY, "change", (latest) => {
     const heroHeight = window.innerHeight;
     setShowSocialLinks(latest > heroHeight * 0.7);
   });
 
-  // Função para marcar seção como carregada
+  // Function to mark section as loaded
   const markSectionLoaded = (sectionName: keyof typeof loadedSections) => {
     setLoadedSections(prev => ({
       ...prev,
@@ -97,19 +101,31 @@ function App() {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  const handleLoadingComplete = () => {
+    setIsLoading(false);
+  };
+
+  if (isLoading) {
+    return <InitialLoading onComplete={handleLoadingComplete} />;
+  }
+
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-black">
       <CustomCursor />
       
       <Header 
         activeSection={activeSection} 
         mobileMenuOpen={mobileMenuOpen}
         toggleMobileMenu={toggleMobileMenu}
+        logoTransformed={logoTransformed}
       />
       
       <main>
         <SectionObserver>
-          <Hero showSocialLinks={showSocialLinks} />
+          <Hero 
+            showSocialLinks={showSocialLinks} 
+            onLogoTransform={setLogoTransformed}
+          />
         </SectionObserver>
 
         <LazySection 
@@ -130,6 +146,8 @@ function App() {
           rootMargin="-20%"
         />
 
+        {/* Gradiente de transição entre Skills e Contato removido */}
+
         <LazySection 
           component={Contact} 
           onLoad={() => markSectionLoaded('contact')}
@@ -138,6 +156,7 @@ function App() {
       </main>
       
       <Footer />
+      <Toaster />
     </div>
   );
 }

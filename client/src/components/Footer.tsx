@@ -13,14 +13,14 @@ export default function Footer() {
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
-            <a href="#home" className="text-xl font-bold tracking-tight">
+            <a href="#home" className="text-xl font-bold tracking-tight space-grotesk-bold">
               João<span className="gradient-text">.</span>
             </a>
           </div>
           
           <div>
             <p className="text-neutral-400 text-sm">
-              © {new Date().getFullYear()} João Vitor Chaves. Todos os direitos reservados.
+              © {new Date().getFullYear()} João Vitor Chaves. All rights reserved.
             </p>
           </div>
           
@@ -28,10 +28,10 @@ export default function Footer() {
             <button
               onClick={scrollToTop}
               className="inline-flex items-center p-2 text-neutral-400 hover:gradient-text transition-colors"
-              aria-label="Voltar ao topo"
+              aria-label="Back to top"
             >
               <ChevronUp className="mr-2 h-4 w-4" />
-              Voltar ao topo
+              Back to top
             </button>
           </div>
         </div>

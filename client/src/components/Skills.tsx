@@ -1,76 +1,84 @@
-import { useIntersectionObserver } from "../hooks/use-intersection-observer.js";
 import { motion } from "framer-motion";
-import FlowingMenu from "./FlowingMenu";
-import "./FlowingMenu.css";
+import { useIntersectionObserver } from "../hooks/use-intersection-observer.js";
+import InfiniteScroll from "./InfiniteScroll";
+
+const skills = [
+  { name: "Database", level: "Advanced" },
+  { name: "JavaScript", level: "Advanced" },
+  { name: "CSS", level: "Advanced" },
+  { name: "React", level: "Advanced" },
+  { name: "Vue", level: "Intermediate" },
+  { name: "PHP", level: "Advanced" },
+  { name: "Blade", level: "Advanced" },
+  { name: "Laravel", level: "Advanced" },
+  { name: "Deploy", level: "Intermediate" },
+  { name: "Figma", level: "Intermediate" },
+];
+
+const items = skills.map(skill => ({
+  content: (
+    <div className="flex flex-col items-center justify-center h-full">
+      <h3 className="text-xl font-bold text-[#ff4500]">{skill.name}</h3>
+    </div>
+  )
+}));
 
 export default function Skills() {
   const { ref, isInView } = useIntersectionObserver({ threshold: 0.1, triggerOnce: true });
 
-  // Dados das habilidades para o FlowingMenu
-  const skillItems = [
-    { 
-      link: '#', 
-      text: 'React & TypeScript', 
-      image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600&h=400&fit=crop' 
-    },
-    { 
-      link: '#', 
-      text: 'Frontend Development', 
-      image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=400&fit=crop' 
-    },
-    { 
-      link: '#', 
-      text: 'UI/UX Design', 
-      image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=400&fit=crop' 
-    },
-    { 
-      link: '#', 
-      text: 'Database Management', 
-      image: 'https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=600&h=400&fit=crop' 
-    },
-    { 
-      link: '#', 
-      text: 'PHP & Laravel', 
-      image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=400&fit=crop' 
-    },
-    { 
-      link: '#', 
-      text: 'Deploy & DevOps', 
-      image: 'https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=600&h=400&fit=crop' 
-    },
-    { 
-      link: '#', 
-      text: 'Responsive Design', 
-      image: 'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=600&h=400&fit=crop' 
-    }
-  ];
-
   return (
-    <section id="skills" className="py-12 pb-64 md:pb-80 lg:pb-96 relative overflow-hidden bg-black">
-      <div className="container mx-auto px-6">
-        <motion.div 
-          ref={ref}
-          className="text-center mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6 }}
+    <section
+      ref={ref}
+      id="skills"
+      className="min-h-screen bg-black py-20 relative overflow-hidden"
+    >
+      {/* Gradiente de fundo removido */}
+      <div className="container mx-auto px-6 relative z-10">
+        {/* Section Header */}
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ duration: 0.8 }}
         >
-          <motion.h2 className="text-xl uppercase tracking-widest text-white font-bold mb-3">
-            MINHAS HABILIDADES
-          </motion.h2>
-          <motion.h3 className="text-4xl md:text-5xl font-black mb-4 text-white">
-            EXPERTISE & TECNOLOGIAS
-          </motion.h3>
+          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 space-grotesk-bold">
+            Skills & Technologies
+          </h2>
         </motion.div>
 
-        {/* FlowingMenu com habilidades */}
-        <motion.div 
-          className="h-[500px] md:h-[500px] relative"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+        {/* Navigation Instructions */}
+        <motion.div
+          className="text-center mb-8"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
         >
-          <FlowingMenu items={skillItems} />
+          <p className="text-gray-400 text-lg space-grotesk-regular">
+            <span className="text-[#ff4500] font-semibold">💡 Como navegar:</span> Role o scroll do mouse para navegar pelos cards. 
+            Passe o mouse sobre os cards para pausar o autoplay.
+          </p>
+        </motion.div>
+
+        {/* Infinite Scroll Skills */}
+        <motion.div
+          className="flex justify-center w-full"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          <div style={{height: '700px', position: 'relative', width: '100%'}}>
+            <InfiniteScroll
+              items={items}
+              isTilted={true}
+              tiltDirection='left'
+              autoplay={true}
+              autoplaySpeed={0.05}
+              autoplayDirection="down"
+              pauseOnHover={true}
+              width="40rem"
+              itemMinHeight={120}
+            />
+          </div>
         </motion.div>
       </div>
     </section>

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import React from 'react';
 
 interface SectionObserverProps {
   children: React.ReactNode;

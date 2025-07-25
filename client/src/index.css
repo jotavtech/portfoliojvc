@@ -1,4 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Yesteryear&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+.yesteryear-regular {
+  font-family: "Yesteryear", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
 
 @tailwind base;
 @tailwind components;
@@ -15,7 +25,7 @@
   z-index: 9999;
   width: 12px;
   height: 12px;
-  background-color: #FF4500;
+  background-color: #ff4500;
   transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
   mix-blend-mode: difference;
 }
@@ -30,7 +40,7 @@ a:hover ~ .cursor-dot,
 button:hover ~ .cursor-dot {
   width: 20px;
   height: 20px;
-  background-color: #FF6B00;
+  background-color: #ff4500;
 }
 
 @media (max-width: 768px) {
@@ -54,7 +64,7 @@ html {
 }
 
 body {
-  @apply font-sans antialiased bg-background text-foreground;
+  @apply font-sans antialiased bg-black text-foreground;
   cursor: none;
 }
 
@@ -66,19 +76,19 @@ body {
   --card-foreground: 222.2 84% 4.9%;
   --popover: 0 0% 100%;
   --popover-foreground: 222.2 84% 4.9%;
-  --primary: 24 95% 53%;  /* Laranja #FF4500 */
-  --primary-foreground: 0 0% 100%;  /* Branco */
+  --primary: 16 100% 50%;  /* Laranja forte #ff4500 */
+  --primary-foreground: 0 0% 0%;  /* Preto */
   --secondary: 0 0% 100%;  /* Branco */
-  --secondary-foreground: 24 95% 53%;  /* Laranja */
+  --secondary-foreground: 142 47% 73%;  /* Verde suave */
   --muted: 24 20% 95%;
   --muted-foreground: 24 10% 40%;
-  --accent: 24 95% 53%;
-  --accent-foreground: 0 0% 100%;
+  --accent: 142 47% 73%;
+  --accent-foreground: 0 0% 0%;
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 0 0% 100%;
   --border: 24 30% 90%;
   --input: 24 30% 90%;
-  --ring: 24 95% 53%;
+  --ring: 142 47% 73%;
   --radius: 0.5rem;
 }
 
@@ -112,4 +122,46 @@ body {
   letter-spacing: -0.02em;
   font-weight: 900;
   text-transform: uppercase;
+}
+
+/* Fonte Space Grotesk para títulos */
+.space-grotesk-light {
+  font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.space-grotesk-regular {
+  font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.space-grotesk-medium {
+  font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.space-grotesk-semibold {
+  font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* Fonte Space Grotesk */
+.space-grotesk-bold {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Fonte Y2K */
+.y2k-font {
+  font-family: 'Orbitron', monospace;
+  font-weight: 900;
 }

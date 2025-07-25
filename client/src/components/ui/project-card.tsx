@@ -103,7 +103,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             }}
             transition={{ duration: 0.3 }}
           >
-            Visualizar Projeto
+            View Project
             <ExternalLink size={16} />
           </motion.button>
         )}

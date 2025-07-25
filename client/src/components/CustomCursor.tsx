@@ -64,49 +64,37 @@ export default function CustomCursor() {
   
   useEffect(() => {
     if (dotRef.current) {
-      dotRef.current.animate({
-        transform: `translate(${position.x}px, ${position.y}px)`
-      }, {
-        duration: 150,
-        fill: "forwards",
-        easing: "ease-out"
-      });
+      dotRef.current.style.transform = `translate(${position.x}px, ${position.y}px)`;
     }
 
     if (projectsCursorRef.current) {
-      projectsCursorRef.current.animate({
-        transform: `translate(${position.x - 50}px, ${position.y - 50}px)`
-      }, {
-        duration: 150,
-        fill: "forwards",
-        easing: "ease-out"
-      });
+      projectsCursorRef.current.style.transform = `translate(${position.x - 50}px, ${position.y - 50}px)`;
     }
   }, [position]);
   
   return (
     <>
-      {/* Cursor padrão (bolinha laranja) */}
+      {/* Default cursor (orange circle) */}
       <div 
         ref={dotRef}
-        className={`fixed top-0 left-0 z-[9999] pointer-events-none transition-all duration-300
-                    ${isInProjectsSection ? 'opacity-0' : 'opacity-100'}`}
+        className={`fixed top-0 left-0 z-[9999] pointer-events-none
+                    ${isVisible ? 'opacity-100' : 'opacity-0'}
+                    ${isInProjectsSection ? 'opacity-0' : ''}`}
         style={{ 
           width: isHovering ? '20px' : '12px',
           height: isHovering ? '20px' : '12px',
-          backgroundColor: '#F45000',
+          backgroundColor: '#ff4500',
           borderRadius: '50%',
           marginLeft: isHovering ? '-10px' : '-6px',
-          marginTop: isHovering ? '-10px' : '-6px',
-          transition: 'all 0.2s ease-out'
+          marginTop: isHovering ? '-10px' : '-6px'
         }}
       />
 
-      {/* Cursor especial para seção de projetos */}
+      {/* Special cursor for projects section */}
       <div
         ref={projectsCursorRef}
-        className={`fixed top-0 left-0 pointer-events-none z-[9999] transition-all duration-300
-                   ${isInProjectsSection ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`}
+        className={`fixed top-0 left-0 pointer-events-none z-[9999]
+                   ${isVisible && isInProjectsSection ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`}
       >
         <div className="relative w-[100px] h-[100px] flex items-center justify-center">
           <div className="absolute inset-0 bg-black/20 rounded-full backdrop-blur-md" />

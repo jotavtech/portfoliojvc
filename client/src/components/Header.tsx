@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { AlignJustify, X } from "lucide-react";
+import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -7,17 +7,18 @@ interface HeaderProps {
   activeSection: string | null;
   mobileMenuOpen: boolean;
   toggleMobileMenu: () => void;
+  logoTransformed?: boolean;
 }
 
 const navigation = [
   { name: "Home", href: "#home" },
-  { name: "Projetos", href: "#projects" },
-  { name: "Sobre", href: "#about" },
-  { name: "Habilidades", href: "#skills" },
-  { name: "Contato", href: "#contact" },
+  { name: "Projects", href: "#projects" },
+  { name: "About", href: "#about" },
+  { name: "Skills", href: "#skills" },
+  { name: "Contact", href: "#contact" },
 ];
 
-export default function Header({ activeSection, mobileMenuOpen, toggleMobileMenu }: HeaderProps) {
+export default function Header({ activeSection, mobileMenuOpen, toggleMobileMenu, logoTransformed = false }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [time, setTime] = useState(new Date());
 
@@ -46,12 +47,34 @@ export default function Header({ activeSection, mobileMenuOpen, toggleMobileMenu
     )}>
       <div className="container mx-auto px-6">
         <div className="flex justify-between items-center">
+          <div className="flex items-center">
+            {/* Logo original */}
           <a
             href="#home"
-            className="text-xl font-bold tracking-tight text-white hover:text-orange-500 transition-colors"
-          >
-            João<span className="text-orange-500">.</span>
-          </a>
+              className={cn(
+                "text-xl font-bold tracking-tight text-white hover:text-[#ff4500] transition-all duration-500",
+                logoTransformed ? "opacity-0 scale-0" : "opacity-100 scale-100"
+              )}
+            >
+              João<span className="text-[#ff4500]">.</span>
+            </a>
+            
+            {/* JC transformado */}
+            <AnimatePresence>
+              {logoTransformed && (
+                <motion.a
+                  href="#home"
+                  className="text-xl font-bold tracking-tight text-white hover:text-[#ff4500] transition-colors"
+                  initial={{ opacity: 0, scale: 0, x: -20 }}
+                  animate={{ opacity: 1, scale: 1, x: 0 }}
+                  exit={{ opacity: 0, scale: 0, x: -20 }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
+                >
+                  <span className="text-[#ff4500]">JC</span>
+                </motion.a>
+              )}
+            </AnimatePresence>
+          </div>
 
           {/* Mobile menu button */}
           <button
@@ -63,8 +86,8 @@ export default function Header({ activeSection, mobileMenuOpen, toggleMobileMenu
               <X className="h-8 w-8 text-white" />
             ) : (
               <>
-                <div className="w-10 h-1 bg-white transform transition-all duration-300 group-hover:bg-orange-500 group-hover:translate-y-1.5 group-hover:-translate-x-2"></div>
-                <div className="w-10 h-1 bg-white transform transition-all duration-300 group-hover:bg-orange-500 group-hover:-translate-y-1.5 group-hover:translate-x-2"></div>
+                        <div className="w-10 h-1 bg-white transform transition-all duration-300 group-hover:bg-[#ff4500] group-hover:rotate-45 group-hover:translate-y-1.5"></div>
+        <div className="w-10 h-1 bg-white transform transition-all duration-300 group-hover:bg-[#ff4500] group-hover:-rotate-45 group-hover:-translate-y-1.5"></div>
               </>
             )}
           </button>
@@ -110,13 +133,13 @@ export default function Header({ activeSection, mobileMenuOpen, toggleMobileMenu
 
               {/* Right side - Navigation */}
               <motion.div
-                className="flex-1 flex items-center justify-center p-8"
+                className="flex-1 flex items-center justify-end p-8 pr-0"
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
                 <motion.ul
-                  className="flex flex-col items-start space-y-8 text-4xl md:text-5xl font-bold"
+                  className="flex flex-col items-end space-y-2 text-7xl md:text-8xl font-extrabold tracking-tight pr-8"
                   initial="hidden"
                   animate="visible"
                   variants={{
@@ -128,7 +151,7 @@ export default function Header({ activeSection, mobileMenuOpen, toggleMobileMenu
                     hidden: {},
                   }}
                 >
-                  {navigation.map((item, index) => (
+                  {navigation.map((item) => (
                     <motion.li
                       key={item.name}
                       variants={{
@@ -142,15 +165,15 @@ export default function Header({ activeSection, mobileMenuOpen, toggleMobileMenu
                       <a
                         href={item.href}
                         className={cn(
-                          "block py-2 transition-colors text-white hover:text-orange-500 relative overflow-hidden group",
-                          activeSection === item.href.substring(1) && "text-orange-500"
+                          "block py-2 transition-colors text-white hover:text-[#ff4500] relative overflow-hidden group",
+                                                      activeSection === item.href.substring(1) && "text-[#ff4500]"
                         )}
                         onClick={toggleMobileMenu}
                       >
                         <span className="inline-block relative z-10">
                           {item.name}
                         </span>
-                        <span className="absolute bottom-0 left-0 w-0 h-1 bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                        <span className="absolute bottom-0 left-0 w-0 h-1 bg-[#ff4500] transition-all duration-300 group-hover:w-full"></span>
                       </a>
                     </motion.li>
                   ))}

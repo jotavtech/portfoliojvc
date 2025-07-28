@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface HeaderProps {
   activeSection: string | null;
@@ -21,6 +22,7 @@ const navigation = [
 export default function Header({ activeSection, mobileMenuOpen, toggleMobileMenu, logoTransformed = false }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [time, setTime] = useState(new Date());
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -114,32 +116,38 @@ export default function Header({ activeSection, mobileMenuOpen, toggleMobileMenu
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
             >
-              {/* Lado esquerdo - Relógio */}
-              <motion.div
-                className="flex-1 flex items-center justify-center p-8"
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                <div className="text-left">
-                  <div className="text-6xl md:text-8xl font-bold text-white mb-2 tracking-tighter">
-                    {time.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+              {/* Lado esquerdo - Relógio (oculto no mobile) */}
+              {!isMobile && (
+                <motion.div
+                  className="flex-1 flex items-center justify-center p-8"
+                  initial={{ opacity: 0, x: -50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                >
+                  <div className="text-left">
+                    <div className="text-6xl md:text-8xl font-bold text-white mb-2 tracking-tighter">
+                      {time.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+                    </div>
+                    <div className="text-xl text-white/70">
+                      {time.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
+                    </div>
                   </div>
-                  <div className="text-xl text-white/70">
-                    {time.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
-                  </div>
-                </div>
-              </motion.div>
+                </motion.div>
+              )}
 
               {/* Right side - Navigation */}
               <motion.div
-                className="flex-1 flex items-center justify-end p-8 pr-0"
+                className={isMobile ? "w-full flex items-center justify-center p-8" : "flex-1 flex items-center justify-end p-8 pr-0"}
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
                 <motion.ul
-                  className="flex flex-col items-end space-y-2 text-7xl md:text-8xl font-extrabold tracking-tight pr-8"
+                  className={`flex flex-col space-y-2 font-extrabold tracking-tight ${
+                    isMobile 
+                      ? "items-center text-5xl md:text-6xl" 
+                      : "items-end text-7xl md:text-8xl pr-8"
+                  }`}
                   initial="hidden"
                   animate="visible"
                   variants={{

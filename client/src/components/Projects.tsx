@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import MagicBento from './MagicBento';
+import ScrollStack, { ScrollStackItem } from './ScrollStack';
 
 export default function Projects() {
 	return (
@@ -38,20 +38,73 @@ export default function Projects() {
 									</motion.p>
 							</motion.div>
 
-				{/* MagicBento Grid */}
-				<div className="w-full max-w-7xl mx-auto">
-					<MagicBento 
-						textAutoHide={true}
-						enableStars={true}
-						enableSpotlight={true}
-						enableBorderGlow={true}
-						enableTilt={true}
-						enableMagnetism={true}
-						clickEffect={true}
-						spotlightRadius={300}
-						particleCount={12}
-						glowColor="191, 255, 0"
-					/>
+				{/* ScrollStack Projects */}
+				<div className="w-full max-w-7xl mx-auto h-screen">
+					<ScrollStack 
+						itemDistance={150}
+						itemScale={0.05}
+						itemStackDistance={40}
+						stackPosition="25%"
+						scaleEndPosition="15%"
+						baseScale={0.8}
+						rotationAmount={2}
+						blurAmount={1}
+					>
+						<ScrollStackItem itemClassName="card-orange">
+							<div className="project-label">Dashboard</div>
+							<h2>DashMEBoard</h2>
+							<img 
+								src="https://res.cloudinary.com/dzwfuzxxw/image/upload/v1753404264/2025-07-24_21-44_jtqh8i.png"
+								alt="DashMEBoard"
+								className="project-image"
+							/>
+							<p>Modern and intuitive dashboard for data management with responsive interface and advanced visualization features.</p>
+						</ScrollStackItem>
+						
+						<ScrollStackItem itemClassName="card-white">
+							<div className="project-label">E-commerce</div>
+							<h2>Cynthia Makes</h2>
+							<img 
+								src="https://res.cloudinary.com/dzwfuzxxw/image/upload/v1748972944/2025-06-03_13-54_aj7yd0.png"
+								alt="Cynthia Makes"
+								className="project-image"
+							/>
+							<p>E-commerce especializado em maquiagem e produtos de beleza com interface moderna, sistema de filtros avançados e experiência de compra otimizada.</p>
+						</ScrollStackItem>
+						
+						<ScrollStackItem itemClassName="card-black">
+							<div className="project-label">Comparison</div>
+							<h2>Comparate</h2>
+							<img 
+								src="https://res.cloudinary.com/dzwfuzxxw/image/upload/v1748972944/comparate_ea3kgx.png"
+								alt="Comparate"
+								className="project-image"
+							/>
+							<p>Car comparison website based on FIPE table with detailed price analysis, technical specifications and value history.</p>
+						</ScrollStackItem>
+						
+						<ScrollStackItem itemClassName="card-white-black">
+							<div className="project-label">Literature</div>
+							<h2>Folheando</h2>
+							<img 
+								src="https://res.cloudinary.com/dzwfuzxxw/image/upload/v1748972944/folheando_u5ifrg.png"
+								alt="Folheando"
+								className="project-image"
+							/>
+							<p>Book evaluation and discovery platform with review system, personalized recommendations and reader community.</p>
+						</ScrollStackItem>
+						
+						<ScrollStackItem itemClassName="card-orange">
+							<div className="project-label">Music</div>
+							<h2>PlayOff</h2>
+							<img 
+								src="https://res.cloudinary.com/dzwfuzxxw/image/upload/v1748972944/2025-06-03_12-50_iodj9l.png"
+								alt="PlayOff"
+								className="project-image"
+							/>
+							<p>Real-time music battle with dynamic voting system, real-time ranking and interactive interface for music competitions.</p>
+						</ScrollStackItem>
+					</ScrollStack>
 				</div>
 			</div>
 		</motion.section>

@@ -36,6 +36,13 @@ const MOBILE_BREAKPOINT = 768;
 const cardData: BentoCardProps[] = [
   {
     color: "#1a1a1a",
+    title: "DashMEBoard",
+    description: "Modern and intuitive dashboard for data management with responsive interface and advanced visualization features.",
+    label: "Dashboard",
+    icon: <FaList className="text-3xl text-[#ff4500]" />,
+  },
+  {
+    color: "#1a1a1a",
     title: "Cynthia Makes",
     description: "E-commerce especializado em maquiagem e produtos de beleza com interface moderna, sistema de filtros avançados e experiência de compra otimizada.",
     label: "E-commerce",
@@ -61,13 +68,6 @@ const cardData: BentoCardProps[] = [
     description: "Real-time music battle with dynamic voting system, real-time ranking and interactive interface for music competitions.",
     label: "Music",
     icon: <FaHeadphones className="text-3xl text-[#ff4500]" />,
-  },
-  {
-    color: "#1a1a1a",
-    title: "DashMEBoard",
-    description: "Modern and intuitive dashboard for data management with responsive interface and advanced visualization features.",
-    label: "Dashboard",
-    icon: <FaList className="text-3xl text-[#ff4500]" />,
   },
 ];
 

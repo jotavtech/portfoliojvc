@@ -40,7 +40,7 @@ export default function About() {
         {/* CircularText destacado no topo da seção About */}
         <div className="mb-10 pointer-events-auto">
           <CircularText
-            text=" hit the world is the objective"
+            text="*hit the world is the objective"
             onHover="speedUp"
             spinDuration={20}
             className="custom-class"

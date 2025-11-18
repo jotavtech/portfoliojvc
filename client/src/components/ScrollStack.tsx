@@ -77,6 +77,11 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
     const endElement = scroller.querySelector('.scroll-stack-end') as HTMLElement;
     const endElementTop = endElement ? endElement.offsetTop : 0;
 
+    // Check if any card is near the stack position to trigger glow effect
+    let isCardNearStack = false;
+    let activeCardClass = '';
+    const glowThreshold = 200; // pixels from stack position
+
     cardsRef.current.forEach((card, i) => {
       if (!card) return;
 
@@ -85,6 +90,18 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
       const triggerEnd = cardTop - scaleEndPositionPx;
       const pinStart = cardTop - stackPositionPx - (itemStackDistance * i);
       const pinEnd = endElementTop - containerHeight / 2;
+
+      // Check if card is near stack position for glow effect and color reflection
+      const distanceFromStack = Math.abs(scrollTop - pinStart);
+      if (distanceFromStack < glowThreshold) {
+        isCardNearStack = true;
+        // Extract the card class name for dynamic scrollbar coloring
+        const cardClasses = card.className.split(' ');
+        const colorClass = cardClasses.find(cls => cls.startsWith('card-'));
+        if (colorClass && !activeCardClass) {
+          activeCardClass = colorClass;
+        }
+      }
 
       const scaleProgress = calculateProgress(scrollTop, triggerStart, triggerEnd);
       const targetScale = baseScale + (i * itemScale);
@@ -151,6 +168,19 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
         }
       }
     });
+
+    // Remove all card color classes first
+    scroller.classList.remove('card-orange', 'card-white', 'card-black', 'card-white-black');
+    
+    // Add or remove glow effect and active card color class
+    if (isCardNearStack) {
+      scroller.classList.add('glowing');
+      if (activeCardClass) {
+        scroller.classList.add(activeCardClass);
+      }
+    } else {
+      scroller.classList.remove('glowing');
+    }
 
     isUpdatingRef.current = false;
   }, [

@@ -5,8 +5,7 @@ export default function CustomCursor() {
   const [isVisible, setIsVisible] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const [isInProjectsSection, setIsInProjectsSection] = useState(false);
-  const dotRef = useRef<HTMLDivElement>(null);
-  const projectsCursorRef = useRef<HTMLDivElement>(null);
+  const cursorRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
     const mobileViewport = window.matchMedia("(max-width: 768px)").matches;
@@ -62,47 +61,66 @@ export default function CustomCursor() {
     };
   }, []);
   
+  // Calcular tamanho e offset baseado no estado
+  const getSize = () => {
+    if (isInProjectsSection) return 100;
+    if (isHovering) return 20;
+    return 12;
+  };
+  
+  const size = getSize();
+  const offset = size / 2;
+  
   useEffect(() => {
-    if (dotRef.current) {
-      dotRef.current.style.transform = `translate(${position.x}px, ${position.y}px)`;
+    if (cursorRef.current) {
+      cursorRef.current.style.transform = `translate(${position.x - offset}px, ${position.y - offset}px)`;
     }
-
-    if (projectsCursorRef.current) {
-      projectsCursorRef.current.style.transform = `translate(${position.x - 50}px, ${position.y - 50}px)`;
-    }
-  }, [position]);
+  }, [position, offset]);
   
   return (
-    <>
-      {/* Default cursor (orange circle) */}
+    <div 
+      ref={cursorRef}
+      className={`fixed top-0 left-0 z-[9999] pointer-events-none flex items-center justify-center
+                  ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+      style={{ 
+        width: `${size}px`,
+        height: `${size}px`,
+        transition: 'width 0.5s cubic-bezier(0.4, 0, 0.2, 1), height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-in-out, background-color 0.5s ease, box-shadow 0.5s ease',
+      }}
+    >
+      {/* Fundo do cursor que transiciona */}
       <div 
-        ref={dotRef}
-        className={`fixed top-0 left-0 z-[9999] pointer-events-none
-                    ${isVisible ? 'opacity-100' : 'opacity-0'}
-                    ${isInProjectsSection ? 'opacity-0' : ''}`}
-        style={{ 
-          width: isHovering ? '20px' : '12px',
-          height: isHovering ? '20px' : '12px',
-          backgroundColor: '#ff4500',
-          borderRadius: '50%',
-          marginLeft: isHovering ? '-10px' : '-6px',
-          marginTop: isHovering ? '-10px' : '-6px'
+        className="absolute inset-0 rounded-full"
+        style={{
+          backgroundColor: isInProjectsSection ? 'transparent' : '#ff4500',
+          boxShadow: isInProjectsSection 
+            ? 'none' 
+            : '0 0 20px rgba(255, 69, 0, 0.6)',
+          transition: 'background-color 0.5s ease, box-shadow 0.5s ease',
         }}
       />
-
-      {/* Special cursor for projects section */}
-      <div
-        ref={projectsCursorRef}
-        className={`fixed top-0 left-0 pointer-events-none z-[9999]
-                   ${isVisible && isInProjectsSection ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`}
+      
+      {/* Background blur apenas para seção de projetos */}
+      <div 
+        className="absolute inset-0 rounded-full backdrop-blur-md"
+        style={{
+          backgroundColor: isInProjectsSection ? 'rgba(0, 0, 0, 0.2)' : 'transparent',
+          opacity: isInProjectsSection ? 1 : 0,
+          transition: 'opacity 0.5s ease, background-color 0.5s ease',
+        }}
+      />
+      
+      {/* Texto "Projects" */}
+      <span 
+        className="relative text-white font-bold text-lg z-10"
+        style={{
+          opacity: isInProjectsSection ? 1 : 0,
+          transform: isInProjectsSection ? 'scale(1)' : 'scale(0)',
+          transition: 'opacity 0.5s ease, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+        }}
       >
-        <div className="relative w-[100px] h-[100px] flex items-center justify-center">
-          <div className="absolute inset-0 bg-black/20 rounded-full backdrop-blur-md" />
-          <span className="relative text-white font-bold text-lg z-10">
-            Projects
-          </span>
-        </div>
-      </div>
-    </>
+        Projects
+      </span>
+    </div>
   );
 }

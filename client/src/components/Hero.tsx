@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { motion, useScroll } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 
@@ -9,10 +9,40 @@ interface HeroProps {
 
 export default function Hero({ showSocialLinks, onLogoTransform }: HeroProps) {
   const ref = useRef(null);
+  const textContainerRef = useRef<HTMLDivElement>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
+  
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"]
   });
+  
+  // Magnetic mouse tracking effect
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (textContainerRef.current && isHovering) {
+        const rect = textContainerRef.current.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        
+        const deltaX = (e.clientX - centerX) / 15;
+        const deltaY = (e.clientY - centerY) / 15;
+        
+        setMousePosition({ x: deltaX, y: deltaY });
+      }
+    };
+
+    if (isHovering) {
+      window.addEventListener('mousemove', handleMouseMove);
+    } else {
+      setMousePosition({ x: 0, y: 0 });
+    }
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, [isHovering]);
   
   // Notificar Header sobre transformação (mantido para integração)
   useEffect(() => {
@@ -39,45 +69,79 @@ export default function Hero({ showSocialLinks, onLogoTransform }: HeroProps) {
       />
 
       {/* Texto "JOTA CHAVES" em cor contrária */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-20">
-        <div 
-          className="relative"
+      <div className="absolute inset-0 flex items-center justify-center select-none z-20">
+        <motion.div 
+          ref={textContainerRef}
+          className="relative cursor-pointer"
           style={{
             width: 'fit-content',
             height: 'fit-content',
+          }}
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+          animate={{
+            x: mousePosition.x,
+            y: mousePosition.y,
+            scale: isHovering ? 1.05 : 1,
+          }}
+          transition={{
+            type: "spring",
+            stiffness: 150,
+            damping: 15,
+            mass: 0.1
           }}
         >
           {/* Texto "JOTA CHAVES" com cor contrária */}
           <div className="flex flex-col items-center">
             <div className="flex items-center justify-center">
               {/* (27) removido */}
-              <h1
+              <motion.h1
                 className="text-9xl md:text-[10rem] lg:text-[13rem] xl:text-[16rem] font-black leading-none tracking-tighter relative z-10 space-grotesk-bold"
                 style={{
                   color: '#ff4500',
                   textShadow: '0 0 30px rgba(255, 69, 0, 0.5)',
                   mixBlendMode: 'normal',
                   filter: 'contrast(1.2) brightness(1.1)',
+                  transition: 'letter-spacing 0.3s ease, text-shadow 0.3s ease',
+                  letterSpacing: isHovering ? '0.05em' : '0em',
                 }}
+                animate={{
+                  textShadow: isHovering 
+                    ? '0 0 50px rgba(255, 69, 0, 0.8), 0 0 80px rgba(255, 69, 0, 0.4)' 
+                    : '0 0 30px rgba(255, 69, 0, 0.5)',
+                  rotateX: isHovering ? mousePosition.y / 5 : 0,
+                  rotateY: isHovering ? mousePosition.x / 5 : 0,
+                }}
+                transition={{ duration: 0.3 }}
               >
                 JOTA
-              </h1>
+              </motion.h1>
             </div>
-            <h1
+            <motion.h1
               className="text-7xl md:text-8xl lg:text-[10rem] xl:text-[12rem] font-black leading-none tracking-tighter relative z-10 ml-8 md:ml-12 lg:ml-16 xl:ml-20 space-grotesk-bold"
               style={{
                 color: '#ff4500',
                 textShadow: '0 0 30px rgba(255, 69, 0, 0.5)',
                 mixBlendMode: 'normal',
                 filter: 'contrast(1.2) brightness(1.1)',
+                transition: 'letter-spacing 0.3s ease, text-shadow 0.3s ease',
+                letterSpacing: isHovering ? '0.05em' : '0em',
               }}
+              animate={{
+                textShadow: isHovering 
+                  ? '0 0 50px rgba(255, 69, 0, 0.8), 0 0 80px rgba(255, 69, 0, 0.4)' 
+                  : '0 0 30px rgba(255, 69, 0, 0.5)',
+                rotateX: isHovering ? mousePosition.y / 5 : 0,
+                rotateY: isHovering ? mousePosition.x / 5 : 0,
+              }}
+              transition={{ duration: 0.3 }}
             >
               CHAVES
-            </h1>
+            </motion.h1>
             {/* CircularText abaixo do texto principal */}
             {/* Removido conforme solicitado */}
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {/* Frases laterais */}

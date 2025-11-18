@@ -104,6 +104,17 @@ export default function Projects() {
 							/>
 							<p>Real-time music battle with dynamic voting system, real-time ranking and interactive interface for music competitions.</p>
 						</ScrollStackItem>
+						
+						<ScrollStackItem itemClassName="card-white">
+							<div className="project-label">Education</div>
+							<h2>Ksim</h2>
+							<img 
+								src="https://res.cloudinary.com/dzwfuzxxw/image/upload/v1763477153/Captura_de_tela_de_2025-11-14_15-48-41_hnrejk.png"
+								alt="Ksim"
+								className="project-image"
+							/>
+							<p>Online and in-person testing platform with artificial intelligence for automated assessment and enhanced educational experience.</p>
+						</ScrollStackItem>
 					</ScrollStack>
 				</div>
 			</div>

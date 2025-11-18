@@ -4,6 +4,7 @@ import { cn } from "../lib/utils.js";
 import { contactInfo, socialLinks, ContactInfo, SocialLink } from "../lib/constants.js";
 import { motion } from "framer-motion";
 import { MapPin, Mail, Phone, ExternalLink, Github, Instagram, Linkedin } from "lucide-react";
+import ColorBends from "./ColorBends";
 
 export default function Contact() {
   const { ref, isInView } = useIntersectionObserver({ threshold: 0.1, triggerOnce: true });
@@ -63,25 +64,20 @@ export default function Contact() {
 
   return (
     <section id="contact" className="pt-64 md:pt-80 lg:pt-96 pb-20 relative overflow-hidden group">
-      {/* Background simples com gradiente */}
-      <div className="absolute inset-0 z-0 pointer-events-none select-none" style={{background: 'linear-gradient(0deg, #ff4500 0%, #000 100%)', opacity: 0.25}} />
-      
-      {/* Background com imagem */}
-      <div className="absolute inset-0 z-0">
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            position: 'absolute',
-            inset: 0,
-            backgroundImage: `url('https://res.cloudinary.com/dzwfuzxxw/image/upload/v1753371594/assets_task_01k0ygtk0ze8esydawgypqj1hz_1753371062_img_1_wyrih1.webp')`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            filter: 'grayscale(1)',
-          }}
+      {/* ColorBends Animated Background */}
+      <div className="absolute inset-0 z-0 pointer-events-none select-none">
+        <ColorBends
+          colors={["#ff5c7a", "#8a5cff", "#00ffd1"]}
+          rotation={30}
+          speed={0.3}
+          scale={1.2}
+          frequency={1.4}
+          warpStrength={1.2}
+          mouseInfluence={0.8}
+          parallax={0.6}
+          noise={0.08}
+          transparent
         />
-        {/* Overlay para garantir legibilidade do texto */}
-        <div className="absolute inset-0 bg-black/40" />
       </div>
       
       <div className="container mx-auto px-6 relative z-10">

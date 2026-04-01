@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "start": "vite"
+    "start": "node serve-static.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",

@@ -3,8 +3,11 @@ import { useIntersectionObserver } from "../hooks/use-intersection-observer.js";
 import { cn } from "../lib/utils.js";
 import { contactInfo, socialLinks, ContactInfo, SocialLink } from "../lib/constants.js";
 import { motion } from "framer-motion";
-import { MapPin, Mail, Phone, ExternalLink, Github, Instagram, Linkedin } from "lucide-react";
+import { MapPin, Mail, Phone, ExternalLink, Github, Instagram, Linkedin, Send, Sparkles } from "lucide-react";
 import ColorBends from "./ColorBends";
+import SplitText from "./SplitText";
+import SpotlightCard from "./SpotlightCard";
+import Magnet from "./Magnet";
 
 export default function Contact() {
   const { ref, isInView } = useIntersectionObserver({ threshold: 0.1, triggerOnce: true });
@@ -89,15 +92,33 @@ export default function Contact() {
               isInView && "active"
             )}
           >
-            <h2 className="text-sm uppercase tracking-widest text-white font-semibold space-grotesk-semibold">
-              Contact
-            </h2>
-            <h3 className="text-3xl md:text-4xl font-bold text-white space-grotesk-bold">
-              Let's work together
-            </h3>
-            <p className="text-white">
-              I'm interested in freelance projects and collaboration opportunities. If you have a project you'd like to discuss, get in touch.
-            </p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5 }}
+            >
+              <span className="text-sm uppercase tracking-widest text-primary font-semibold space-grotesk-semibold flex items-center gap-2">
+                <Sparkles className="w-4 h-4" />
+                Contato
+              </span>
+            </motion.div>
+            
+            <SplitText 
+              text="Vamos trabalhar juntos?"
+              className="text-3xl md:text-5xl font-bold text-white space-grotesk-bold"
+              delay={30}
+              textAlign="left"
+            />
+            
+            <motion.p 
+              className="text-white/80 text-lg leading-relaxed"
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              Estou aberto a projetos freelance e oportunidades de colaboração. 
+              Se você tem um projeto que gostaria de discutir, entre em contato!
+            </motion.p>
 
             <div className="space-y-4 mt-8">
               {contactInfo.map((info: ContactInfo, index: number) => (
@@ -121,43 +142,54 @@ export default function Contact() {
 
             <div className="flex space-x-4 pt-6">
               {socialLinks.map((link: SocialLink, index: number) => (
-                <a
-                  key={index}
-                  href={link.url}
-                  className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors"
-                  aria-label={link.label}
-                >
-                  {getSocialIcon(link.name)}
-                </a>
+                <Magnet key={index} padding={40} magnetStrength={0.4}>
+                  <motion.a
+                    href={link.url}
+                    className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-lg border border-white/20 flex items-center justify-center hover:bg-primary hover:border-primary transition-all duration-300"
+                    aria-label={link.label}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {getSocialIcon(link.name)}
+                  </motion.a>
+                </Magnet>
               ))}
             </div>
           </div>
 
-          <motion.div
-            className="bg-black/60 backdrop-blur-2xl text-white p-8 rounded-xl"
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
+          <SpotlightCard 
+            className="p-8"
+            spotlightColor="rgba(var(--primary-rgb), 0.2)"
           >
-            <h4 className="text-2xl font-bold mb-6 space-grotesk-bold">Send a message</h4>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+            >
+            <h4 className="text-2xl font-bold mb-6 space-grotesk-bold text-white flex items-center gap-3">
+              <Send className="w-6 h-6 text-primary" />
+              Envie uma mensagem
+            </h4>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
-                <label htmlFor="name" className="block text-sm font-medium text-white mb-1">
-                  Name
+                <label htmlFor="name" className="block text-sm font-medium text-white/80 mb-2">
+                  Nome
                 </label>
                 <input
                   type="text"
                   id="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-black/40 backdrop-blur-xl rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent text-white placeholder:text-white/50"
-                  placeholder="Your name"
+                  className="w-full px-4 py-3 bg-white/5 backdrop-blur-xl rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-white placeholder:text-white/30 transition-all duration-300"
+                  placeholder="Seu nome"
                   required
                 />
               </div>
 
               <div className="mb-4">
-                <label htmlFor="email" className="block text-sm font-medium text-white mb-1">
+                <label htmlFor="email" className="block text-sm font-medium text-white/80 mb-2">
                   Email
                 </label>
                 <input
@@ -165,50 +197,54 @@ export default function Contact() {
                   id="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-black/40 backdrop-blur-xl rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent text-white placeholder:text-white/50"
-                  placeholder="Your email"
+                  className="w-full px-4 py-3 bg-white/5 backdrop-blur-xl rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-white placeholder:text-white/30 transition-all duration-300"
+                  placeholder="seu@email.com"
                   required
                 />
               </div>
 
               <div className="mb-4">
-                <label htmlFor="subject" className="block text-sm font-medium text-white mb-1">
-                  Subject
+                <label htmlFor="subject" className="block text-sm font-medium text-white/80 mb-2">
+                  Assunto
                 </label>
                 <input
                   type="text"
                   id="subject"
                   value={formData.subject}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-black/40 backdrop-blur-xl rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent text-white placeholder:text-white/50"
-                  placeholder="Message subject"
+                  className="w-full px-4 py-3 bg-white/5 backdrop-blur-xl rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-white placeholder:text-white/30 transition-all duration-300"
+                  placeholder="Assunto da mensagem"
                   required
                 />
               </div>
 
               <div className="mb-6">
-                <label htmlFor="message" className="block text-sm font-medium text-white mb-1">
-                  Message
+                <label htmlFor="message" className="block text-sm font-medium text-white/80 mb-2">
+                  Mensagem
                 </label>
                 <textarea
                   id="message"
                   rows={4}
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-black/40 backdrop-blur-xl rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent text-white placeholder:text-white/50"
-                  placeholder="Your message"
+                  className="w-full px-4 py-3 bg-white/5 backdrop-blur-xl rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-white placeholder:text-white/30 transition-all duration-300 resize-none"
+                  placeholder="Sua mensagem..."
                   required
                 ></textarea>
               </div>
 
-              <button
+              <motion.button
                 type="submit"
-                className="w-full py-3 bg-secondary text-black font-medium rounded-lg hover:bg-secondary/90 transition-colors shadow-lg glow"
+                className="w-full py-4 bg-primary text-primary-foreground font-bold rounded-xl hover:opacity-90 transition-all duration-300 shadow-lg shadow-primary/30 flex items-center justify-center gap-2"
+                whileHover={{ scale: 1.02, boxShadow: "0 20px 40px rgba(var(--primary-rgb), 0.4)" }}
+                whileTap={{ scale: 0.98 }}
               >
-                Send message
-              </button>
+                <Send className="w-5 h-5" />
+                Enviar mensagem
+              </motion.button>
             </form>
-          </motion.div>
+            </motion.div>
+          </SpotlightCard>
         </div>
       </div>
     </section>

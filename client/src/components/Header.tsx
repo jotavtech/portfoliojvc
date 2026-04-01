@@ -3,6 +3,7 @@ import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 interface HeaderProps {
   activeSection: string | null;
@@ -49,36 +50,44 @@ export default function Header({ activeSection, mobileMenuOpen, toggleMobileMenu
     )}>
       <div className="container mx-auto px-6">
         <div className="flex justify-between items-center">
-          <div className="flex items-center">
-            {/* Logo original */}
-          <a
-            href="#home"
+          <div className="flex items-center gap-4">
+            <a
+              href="#home"
               className={cn(
-                "text-xl font-bold tracking-tight text-white hover:text-[#ff4500] transition-all duration-500",
+                "text-xl font-bold tracking-tight text-white hover:text-primary transition-all duration-500",
                 logoTransformed ? "opacity-0 scale-0" : "opacity-100 scale-100"
               )}
             >
-              João<span className="text-[#ff4500]">.</span>
+              João<span className="text-primary">.</span>
             </a>
-            
-            {/* JC transformado */}
+
             <AnimatePresence>
               {logoTransformed && (
                 <motion.a
                   href="#home"
-                  className="text-xl font-bold tracking-tight text-white hover:text-[#ff4500] transition-colors"
+                  className="text-xl font-bold tracking-tight text-white hover:text-primary transition-colors"
                   initial={{ opacity: 0, scale: 0, x: -20 }}
                   animate={{ opacity: 1, scale: 1, x: 0 }}
                   exit={{ opacity: 0, scale: 0, x: -20 }}
                   transition={{ duration: 0.5, ease: "easeOut" }}
                 >
-                  <span className="text-[#ff4500]">JC</span>
+                  <span className="text-primary">JC</span>
                 </motion.a>
               )}
             </AnimatePresence>
+
+            {/* Theme switcher (desktop) */}
+            {!isMobile && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.4 }}
+              >
+                <ThemeSwitcher />
+              </motion.div>
+            )}
           </div>
 
-          {/* Mobile menu button */}
           <button
             onClick={toggleMobileMenu}
             className="flex flex-col space-y-3 items-center justify-center h-14 w-14 group z-50"
@@ -88,19 +97,18 @@ export default function Header({ activeSection, mobileMenuOpen, toggleMobileMenu
               <X className="h-8 w-8 text-white" />
             ) : (
               <>
-                        <div className="w-10 h-1 bg-white transform transition-all duration-300 group-hover:bg-[#ff4500] group-hover:rotate-45 group-hover:translate-y-1.5"></div>
-        <div className="w-10 h-1 bg-white transform transition-all duration-300 group-hover:bg-[#ff4500] group-hover:-rotate-45 group-hover:-translate-y-1.5"></div>
+                <div className="w-10 h-1 bg-white transform transition-all duration-300 group-hover:bg-primary group-hover:rotate-45 group-hover:translate-y-1.5"></div>
+                <div className="w-10 h-1 bg-white transform transition-all duration-300 group-hover:bg-primary group-hover:-rotate-45 group-hover:-translate-y-1.5"></div>
               </>
             )}
           </button>
         </div>
       </div>
 
-      {/* Menu mobile com blur */}
+      {/* Menu overlay */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <>
-            {/* Background blur overlay */}
             <motion.div
               className="fixed inset-0 z-40 bg-black/60 backdrop-blur-2xl"
               initial={{ opacity: 0 }}
@@ -108,7 +116,7 @@ export default function Header({ activeSection, mobileMenuOpen, toggleMobileMenu
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
             />
-            
+
             <motion.div
               className="fixed inset-0 z-40 flex flex-row justify-between"
               initial={{ opacity: 0 }}
@@ -116,7 +124,7 @@ export default function Header({ activeSection, mobileMenuOpen, toggleMobileMenu
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
             >
-              {/* Lado esquerdo - Relógio (oculto no mobile) */}
+              {/* Clock (desktop only) */}
               {!isMobile && (
                 <motion.div
                   className="flex-1 flex items-center justify-center p-8"
@@ -135,27 +143,34 @@ export default function Header({ activeSection, mobileMenuOpen, toggleMobileMenu
                 </motion.div>
               )}
 
-              {/* Right side - Navigation */}
+              {/* Navigation */}
               <motion.div
-                className={isMobile ? "w-full flex items-center justify-center p-8" : "flex-1 flex items-center justify-end p-8 pr-0"}
+                className={isMobile ? "w-full flex flex-col items-center justify-center p-8 gap-8" : "flex-1 flex flex-col items-end justify-center p-8 pr-8 gap-8"}
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
+                {/* Theme switcher inside mobile menu */}
+                {isMobile && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                  >
+                    <ThemeSwitcher />
+                  </motion.div>
+                )}
+
                 <motion.ul
                   className={`flex flex-col space-y-2 font-extrabold tracking-tight ${
-                    isMobile 
-                      ? "items-center text-5xl md:text-6xl" 
-                      : "items-end text-7xl md:text-8xl pr-8"
+                    isMobile
+                      ? "items-center text-5xl md:text-6xl"
+                      : "items-end text-7xl md:text-8xl"
                   }`}
                   initial="hidden"
                   animate="visible"
                   variants={{
-                    visible: {
-                      transition: {
-                        staggerChildren: 0.1,
-                      },
-                    },
+                    visible: { transition: { staggerChildren: 0.1 } },
                     hidden: {},
                   }}
                 >
@@ -173,15 +188,15 @@ export default function Header({ activeSection, mobileMenuOpen, toggleMobileMenu
                       <a
                         href={item.href}
                         className={cn(
-                          "block py-2 transition-colors text-white hover:text-[#ff4500] relative overflow-hidden group",
-                                                      activeSection === item.href.substring(1) && "text-[#ff4500]"
+                          "block py-2 transition-colors text-white hover:text-primary relative overflow-hidden group",
+                          activeSection === item.href.substring(1) && "text-primary"
                         )}
                         onClick={toggleMobileMenu}
                       >
                         <span className="inline-block relative z-10">
                           {item.name}
                         </span>
-                        <span className="absolute bottom-0 left-0 w-0 h-1 bg-[#ff4500] transition-all duration-300 group-hover:w-full"></span>
+                        <span className="absolute bottom-0 left-0 w-0 h-1 bg-primary transition-all duration-300 group-hover:w-full"></span>
                       </a>
                     </motion.li>
                   ))}

@@ -29,7 +29,7 @@ export interface BentoProps {
 
 const DEFAULT_PARTICLE_COUNT = 12;
 const DEFAULT_SPOTLIGHT_RADIUS = 300;
-const DEFAULT_GLOW_COLOR = "255, 69, 0";
+const DEFAULT_GLOW_COLOR = "196, 30, 58";
 const MOBILE_BREAKPOINT = 768;
 
 /** Substituir os ícones por imagens fornecidas, aplicar grayscale e rounded-lg */
@@ -39,35 +39,35 @@ const cardData: BentoCardProps[] = [
     title: "DashMEBoard",
     description: "Modern and intuitive dashboard for data management with responsive interface and advanced visualization features.",
     label: "Dashboard",
-    icon: <FaList className="text-3xl text-[#ff4500]" />,
+    icon: <FaList className="text-3xl text-primary" />,
   },
   {
     color: "#1a1a1a",
     title: "Cynthia Makes",
     description: "E-commerce especializado em maquiagem e produtos de beleza com interface moderna, sistema de filtros avançados e experiência de compra otimizada.",
     label: "E-commerce",
-    icon: <FaBrush className="text-3xl text-[#ff4500]" />,
+    icon: <FaBrush className="text-3xl text-primary" />,
   },
   {
     color: "#1a1a1a",
     title: "Comparate",
     description: "Car comparison website based on FIPE table with detailed price analysis, technical specifications and value history.",
     label: "Comparison",
-    icon: <FaCar className="text-3xl text-[#ff4500]" />,
+    icon: <FaCar className="text-3xl text-primary" />,
   },
   {
     color: "#1a1a1a",
     title: "Folheando",
     description: "Book evaluation and discovery platform with review system, personalized recommendations and reader community.",
     label: "Literature",
-    icon: <FaBook className="text-3xl text-[#ff4500]" />,
+    icon: <FaBook className="text-3xl text-primary" />,
   },
   {
     color: "#1a1a1a",
     title: "PlayOff",
     description: "Real-time music battle with dynamic voting system, real-time ranking and interactive interface for music competitions.",
     label: "Music",
-    icon: <FaHeadphones className="text-3xl text-[#ff4500]" />,
+    icon: <FaHeadphones className="text-3xl text-primary" />,
   },
 ];
 

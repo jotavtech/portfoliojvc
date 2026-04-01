@@ -1,123 +1,285 @@
-import { motion } from 'framer-motion';
-import ScrollStack, { ScrollStackItem } from './ScrollStack';
+import { useState, useRef, useEffect, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowLeft, ArrowRight, ArrowUpRight, ExternalLink } from "lucide-react";
+import { projects } from "@/lib/constants";
+import { cn } from "@/lib/utils";
 
 export default function Projects() {
-	return (
-		<motion.section
-			id="projects"
-			className="relative min-h-screen py-20 overflow-hidden bg-black z-10"
-			initial={{ scale: 0.95, opacity: 0 }}
-			whileInView={{ scale: 1, opacity: 1 }}
-			viewport={{ once: true, amount: 0.3 }}
-			transition={{ duration: 0.8, ease: 'easeOut' }}
-		>
-			{/* Conteúdo */}
-			<div className="container mx-auto px-6 relative z-10">
-				{/* Título da seção */}
-					<motion.div 
-					className="text-center mb-20"
-					initial={{ opacity: 0, y: 30 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.8, delay: 0.2 }}
-							>
-									<motion.h3 
-						className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight drop-shadow-2xl mb-6 space-grotesk-bold"
-										initial={{ opacity: 0, y: 15 }}
-										whileInView={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.6, delay: 0.3 }}
-									>
-						FEATURED PROJECTS
-									</motion.h3>
-									<motion.p 
-						className="text-lg md:text-xl text-gray-300 leading-relaxed drop-shadow-lg max-w-3xl mx-auto"
-										initial={{ opacity: 0, y: 15 }}
-										whileInView={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.6, delay: 0.4 }}
-									>
-						Explore my main projects developed with the most modern technologies and best development practices.
-									</motion.p>
-							</motion.div>
+  const [active, setActive] = useState(0);
+  const [direction, setDirection] = useState(0);
+  const project = projects[active];
+  const touchStart = useRef(0);
 
-				{/* ScrollStack Projects */}
-				<div className="w-full max-w-7xl mx-auto h-screen">
-					<ScrollStack 
-						itemDistance={150}
-						itemScale={0.05}
-						itemStackDistance={40}
-						stackPosition="25%"
-						scaleEndPosition="15%"
-						baseScale={0.8}
-						rotationAmount={2}
-						blurAmount={1}
-					>
-						<ScrollStackItem itemClassName="card-orange">
-							<div className="project-label">Dashboard</div>
-							<h2>DashMEBoard</h2>
-							<img 
-								src="https://res.cloudinary.com/dzwfuzxxw/image/upload/v1753404264/2025-07-24_21-44_jtqh8i.png"
-								alt="DashMEBoard"
-								className="project-image"
-							/>
-							<p>Modern and intuitive dashboard for data management with responsive interface and advanced visualization features.</p>
-						</ScrollStackItem>
-						
-						<ScrollStackItem itemClassName="card-white">
-							<div className="project-label">E-commerce</div>
-							<h2>Cynthia Makes</h2>
-							<img 
-								src="https://res.cloudinary.com/dzwfuzxxw/image/upload/v1748972944/2025-06-03_13-54_aj7yd0.png"
-								alt="Cynthia Makes"
-								className="project-image"
-							/>
-							<p>E-commerce especializado em maquiagem e produtos de beleza com interface moderna, sistema de filtros avançados e experiência de compra otimizada.</p>
-						</ScrollStackItem>
-						
-						<ScrollStackItem itemClassName="card-black">
-							<div className="project-label">Comparison</div>
-							<h2>Comparate</h2>
-							<img 
-								src="https://res.cloudinary.com/dzwfuzxxw/image/upload/v1748972944/comparate_ea3kgx.png"
-								alt="Comparate"
-								className="project-image"
-							/>
-							<p>Car comparison website based on FIPE table with detailed price analysis, technical specifications and value history.</p>
-						</ScrollStackItem>
-						
-						<ScrollStackItem itemClassName="card-white-black">
-							<div className="project-label">Literature</div>
-							<h2>Folheando</h2>
-							<img 
-								src="https://res.cloudinary.com/dzwfuzxxw/image/upload/v1748972944/folheando_u5ifrg.png"
-								alt="Folheando"
-								className="project-image"
-							/>
-							<p>Book evaluation and discovery platform with review system, personalized recommendations and reader community.</p>
-						</ScrollStackItem>
-						
-						<ScrollStackItem itemClassName="card-orange">
-							<div className="project-label">Music</div>
-							<h2>PlayOff</h2>
-							<img 
-								src="https://res.cloudinary.com/dzwfuzxxw/image/upload/v1748972944/2025-06-03_12-50_iodj9l.png"
-								alt="PlayOff"
-								className="project-image"
-							/>
-							<p>Real-time music battle with dynamic voting system, real-time ranking and interactive interface for music competitions.</p>
-						</ScrollStackItem>
-						
-						<ScrollStackItem itemClassName="card-white">
-							<div className="project-label">Education</div>
-							<h2>Ksim</h2>
-							<img 
-								src="https://res.cloudinary.com/dzwfuzxxw/image/upload/v1763477153/Captura_de_tela_de_2025-11-14_15-48-41_hnrejk.png"
-								alt="Ksim"
-								className="project-image"
-							/>
-							<p>Online and in-person testing platform with artificial intelligence for automated assessment and enhanced educational experience.</p>
-						</ScrollStackItem>
-					</ScrollStack>
-				</div>
-			</div>
-		</motion.section>
-	);
+  const go = useCallback(
+    (idx: number) => {
+      setDirection(idx > active ? 1 : -1);
+      setActive(idx);
+    },
+    [active],
+  );
+
+  const next = useCallback(
+    () => go((active + 1) % projects.length),
+    [active, go],
+  );
+  const prev = useCallback(
+    () => go((active - 1 + projects.length) % projects.length),
+    [active, go],
+  );
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") next();
+      if (e.key === "ArrowLeft") prev();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [next, prev]);
+
+  const slideVariants = {
+    enter: (d: number) => ({
+      x: d > 0 ? 600 : -600,
+      opacity: 0,
+      scale: 0.92,
+    }),
+    center: { x: 0, opacity: 1, scale: 1 },
+    exit: (d: number) => ({
+      x: d > 0 ? -600 : 600,
+      opacity: 0,
+      scale: 0.92,
+    }),
+  };
+
+  return (
+    <section
+      id="projects"
+      className="rock-section relative z-10 min-h-screen overflow-hidden py-20 md:py-28"
+      onTouchStart={(e) => (touchStart.current = e.touches[0].clientX)}
+      onTouchEnd={(e) => {
+        const diff = touchStart.current - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 60) diff > 0 ? next() : prev();
+      }}
+    >
+      <div className="rock-section__glow pointer-events-none absolute inset-0" aria-hidden />
+      <div className="rock-noise pointer-events-none absolute inset-0 opacity-[0.3]" aria-hidden />
+
+      <div className="container relative z-10 mx-auto px-6">
+        {/* Header */}
+        <motion.div
+          className="mb-12 md:mb-16"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <p className="text-xs font-semibold uppercase tracking-[0.5em] text-primary">
+            Side A — Setlist
+          </p>
+          <h2 className="font-rock-display mt-2 text-5xl leading-[0.92] tracking-wide text-[#e8dcc4] sm:text-6xl md:text-7xl lg:text-8xl">
+            TRABALHOS{" "}
+            <span className="text-primary">SELECIONADOS</span>
+          </h2>
+        </motion.div>
+
+        {/* Main carousel area */}
+        <div className="grid gap-8 lg:grid-cols-[1fr_380px] lg:gap-12 items-start">
+          {/* Active project display */}
+          <div className="relative min-h-[480px] md:min-h-[520px]">
+            <AnimatePresence mode="wait" custom={direction}>
+              <motion.div
+                key={project.id}
+                custom={direction}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
+                className="relative w-full overflow-hidden rounded-2xl border border-white/10 bg-black/40 backdrop-blur-sm"
+              >
+                {/* Image */}
+                <div className="relative aspect-[16/9] w-full overflow-hidden">
+                  <img
+                    src={project.imageUrl}
+                    alt={project.imageAlt}
+                    className="h-full w-full object-cover object-top"
+                    loading="lazy"
+                  />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+
+                  {/* Track number badge */}
+                  <span className="absolute left-5 top-5 font-rock-display text-6xl leading-none text-white/10 md:text-8xl">
+                    {String(active + 1).padStart(2, "0")}
+                  </span>
+                </div>
+
+                {/* Info overlay */}
+                <div className="relative z-10 -mt-24 p-6 md:p-8">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.45em] text-primary">
+                    {project.label ?? project.category}
+                  </p>
+                  <h3 className="font-rock-display mt-1 text-4xl tracking-wide text-white md:text-5xl lg:text-6xl">
+                    {project.title}
+                  </h3>
+                  <p className="mt-3 max-w-xl font-rock-body text-sm leading-relaxed text-stone-400 md:text-base">
+                    {project.description}
+                  </p>
+
+                  {/* Tags */}
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-stone-300"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* CTA */}
+                  <div className="mt-6">
+                    {project.url ? (
+                      <a
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-xs font-bold uppercase tracking-[0.2em] text-primary-foreground transition-transform hover:scale-[1.03]"
+                      >
+                        Abrir projeto
+                        <ExternalLink className="h-3.5 w-3.5" />
+                      </a>
+                    ) : (
+                      <a
+                        href="#contact"
+                        className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-xs font-bold uppercase tracking-[0.2em] text-primary-foreground transition-transform hover:scale-[1.03]"
+                      >
+                        Falar sobre o projeto
+                        <ArrowUpRight className="h-3.5 w-3.5" />
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Navigation arrows */}
+            <div className="mt-6 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={prev}
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/70 backdrop-blur-sm transition-all hover:border-primary hover:bg-primary/10 hover:text-primary"
+                  aria-label="Projeto anterior"
+                >
+                  <ArrowLeft className="h-5 w-5" />
+                </button>
+                <button
+                  onClick={next}
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/70 backdrop-blur-sm transition-all hover:border-primary hover:bg-primary/10 hover:text-primary"
+                  aria-label="Próximo projeto"
+                >
+                  <ArrowRight className="h-5 w-5" />
+                </button>
+              </div>
+
+              {/* Dots */}
+              <div className="flex items-center gap-2">
+                {projects.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => go(i)}
+                    className={cn(
+                      "h-2 rounded-full transition-all",
+                      i === active
+                        ? "w-8 bg-primary"
+                        : "w-2 bg-white/20 hover:bg-white/40",
+                    )}
+                    aria-label={`Projeto ${i + 1}`}
+                  />
+                ))}
+              </div>
+
+              <span className="font-rock-mono text-xs text-stone-500">
+                {String(active + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
+              </span>
+            </div>
+          </div>
+
+          {/* Track list sidebar */}
+          <motion.div
+            className="hidden lg:block"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+          >
+            <p className="mb-4 font-rock-mono text-[10px] uppercase tracking-[0.4em] text-stone-500">
+              Tracklist completa
+            </p>
+            <ul className="space-y-1 border-l border-white/10 pl-0">
+              {projects.map((p, i) => (
+                <li key={p.id}>
+                  <button
+                    onClick={() => go(i)}
+                    className={cn(
+                      "group flex w-full items-center gap-3 border-l-2 py-3 pl-4 text-left transition-all",
+                      i === active
+                        ? "border-primary bg-white/5 text-white"
+                        : "border-transparent text-stone-500 hover:border-white/20 hover:text-stone-300",
+                    )}
+                  >
+                    <span
+                      className={cn(
+                        "font-rock-mono text-xs",
+                        i === active ? "text-primary" : "text-stone-600",
+                      )}
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <span className="block truncate font-rock-body text-sm font-medium">
+                        {p.title}
+                      </span>
+                      <span className="block truncate text-[10px] uppercase tracking-wider text-stone-600">
+                        {p.label}
+                      </span>
+                    </div>
+                    {i === active && (
+                      <motion.span
+                        className="h-1.5 w-1.5 rounded-full bg-primary"
+                        layoutId="track-dot"
+                        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                      />
+                    )}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        </div>
+
+        {/* Mobile track selector (horizontal scroll) */}
+        <div className="mt-8 lg:hidden">
+          <div className="scrollbar-hide flex gap-3 overflow-x-auto pb-2">
+            {projects.map((p, i) => (
+              <button
+                key={p.id}
+                onClick={() => go(i)}
+                className={cn(
+                  "flex shrink-0 items-center gap-2 rounded-full border px-4 py-2 text-xs font-medium transition-all",
+                  i === active
+                    ? "border-primary bg-primary/10 text-primary"
+                    : "border-white/10 bg-white/5 text-stone-400 hover:text-white",
+                )}
+              >
+                <span className="font-rock-mono text-[10px]">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                {p.title}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }

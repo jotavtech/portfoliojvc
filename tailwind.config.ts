@@ -5,6 +5,16 @@ export default {
   content: ["./client/index.html", "./client/src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        "rock-display": ['"Bebas Neue"', "sans-serif"],
+        "rock-body": ['"DM Sans"', "system-ui", "sans-serif"],
+        "rock-mono": [
+          "ui-monospace",
+          "SFMono-Regular",
+          "Menlo",
+          "monospace",
+        ],
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",

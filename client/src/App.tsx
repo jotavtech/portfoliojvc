@@ -10,6 +10,7 @@ import SectionPlaceholder from "./components/SectionPlaceholder";
 import Footer from "./components/Footer";
 import InitialLoading from "./components/InitialLoading";
 import { Toaster } from "./components/ui/toaster";
+import { ThemeProvider } from "./contexts/ThemeContext";
 
 // Lazy loading sections
 const Projects = lazy(() => import("./components/Projects"));
@@ -110,8 +111,8 @@ function App() {
   }
 
   return (
+    <ThemeProvider>
     <div className="flex flex-col min-h-screen bg-black">
-      <CustomCursor />
       
       <Header 
         activeSection={activeSection} 
@@ -156,8 +157,10 @@ function App() {
       </main>
       
       <Footer />
+      <CustomCursor />
       <Toaster />
     </div>
+    </ThemeProvider>
   );
 }
 

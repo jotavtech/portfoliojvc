@@ -29,6 +29,8 @@ export default function CustomCursor() {
     
     const handleMouseEnter = () => setIsVisible(true);
     const handleMouseLeave = () => setIsVisible(false);
+
+    const autoShowTimer = setTimeout(() => setIsVisible(true), 2000);
     
     const handleLinkHoverEvents = () => {
       const handleMouseOver = () => setIsHovering(true);
@@ -54,6 +56,7 @@ export default function CustomCursor() {
     const cleanup = handleLinkHoverEvents();
     
     return () => {
+      clearTimeout(autoShowTimer);
       document.removeEventListener("mousemove", updateCursorPosition);
       document.removeEventListener("mouseenter", handleMouseEnter);
       document.removeEventListener("mouseleave", handleMouseLeave);
@@ -92,10 +95,10 @@ export default function CustomCursor() {
       <div 
         className="absolute inset-0 rounded-full"
         style={{
-          backgroundColor: isInProjectsSection ? 'transparent' : '#ff4500',
-          boxShadow: isInProjectsSection 
-            ? 'none' 
-            : '0 0 20px rgba(255, 69, 0, 0.6)',
+          backgroundColor: isInProjectsSection ? 'transparent' : 'hsl(var(--primary))',
+          boxShadow: isInProjectsSection
+            ? "none"
+            : "0 0 22px hsl(var(--primary) / 0.55)",
           transition: 'background-color 0.5s ease, box-shadow 0.5s ease',
         }}
       />
@@ -110,16 +113,16 @@ export default function CustomCursor() {
         }}
       />
       
-      {/* Texto "Projects" */}
-      <span 
-        className="relative text-white font-bold text-lg z-10"
+      <span
+        className="font-rock-display relative z-10 text-lg tracking-widest text-[#e8dcc4]"
         style={{
           opacity: isInProjectsSection ? 1 : 0,
-          transform: isInProjectsSection ? 'scale(1)' : 'scale(0)',
-          transition: 'opacity 0.5s ease, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+          transform: isInProjectsSection ? "scale(1)" : "scale(0)",
+          transition:
+            "opacity 0.5s ease, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
         }}
       >
-        Projects
+        SETLIST
       </span>
     </div>
   );

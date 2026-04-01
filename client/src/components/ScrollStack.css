@@ -19,25 +19,25 @@
 
 .scroll-stack-scroller::-webkit-scrollbar-track {
   background: linear-gradient(180deg, 
-    rgba(255, 69, 0, 0.03) 0%, 
-    rgba(255, 99, 71, 0.05) 50%, 
-    rgba(255, 69, 0, 0.03) 100%
+    rgba(var(--primary-rgb), 0.03) 0%, 
+    rgba(var(--primary-rgb), 0.05) 50%, 
+    rgba(var(--primary-rgb), 0.03) 100%
   );
   border-radius: 12px;
-  border: 1px solid rgba(255, 69, 0, 0.08);
-  box-shadow: inset 0 0 15px rgba(255, 69, 0, 0.03);
+  border: 1px solid rgba(var(--primary-rgb), 0.08);
+  box-shadow: inset 0 0 15px rgba(var(--primary-rgb), 0.03);
 }
 
 .scroll-stack-scroller::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, 
-    rgba(255, 69, 0, 0.4) 0%, 
-    rgba(255, 99, 71, 0.6) 50%, 
-    rgba(255, 69, 0, 0.4) 100%
+    rgba(var(--primary-rgb), 0.4) 0%, 
+    rgba(var(--primary-rgb), 0.6) 50%, 
+    rgba(var(--primary-rgb), 0.4) 100%
   );
   border-radius: 12px;
   border: 2px solid rgba(255, 255, 255, 0.15);
   box-shadow: 
-    0 0 15px rgba(255, 69, 0, 0.3),
+    0 0 15px rgba(var(--primary-rgb), 0.3),
     inset 0 0 8px rgba(255, 255, 255, 0.2);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   backdrop-filter: blur(10px);
@@ -45,76 +45,76 @@
 
 .scroll-stack-scroller::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, 
-    rgba(255, 69, 0, 0.7) 0%, 
-    rgba(255, 99, 71, 0.9) 50%, 
-    rgba(255, 69, 0, 0.7) 100%
+    rgba(var(--primary-rgb), 0.7) 0%, 
+    rgba(var(--primary-rgb), 0.9) 50%, 
+    rgba(var(--primary-rgb), 0.7) 100%
   );
   box-shadow: 
-    0 0 25px rgba(255, 69, 0, 0.5),
-    0 0 40px rgba(255, 99, 71, 0.3),
+    0 0 25px rgba(var(--primary-rgb), 0.5),
+    0 0 40px rgba(var(--primary-rgb), 0.3),
     inset 0 0 10px rgba(255, 255, 255, 0.3);
   transform: scaleY(1.2) scaleX(1.1);
 }
 
 .scroll-stack-scroller::-webkit-scrollbar-thumb:active {
   background: linear-gradient(180deg, 
-    rgba(255, 69, 0, 0.9) 0%, 
-    rgba(255, 99, 71, 1) 50%, 
-    rgba(255, 69, 0, 0.9) 100%
+    rgba(var(--primary-rgb), 0.9) 0%, 
+    rgba(var(--primary-rgb), 1) 50%, 
+    rgba(var(--primary-rgb), 0.9) 100%
   );
   box-shadow: 
-    0 0 30px rgba(255, 69, 0, 0.7),
+    0 0 30px rgba(var(--primary-rgb), 0.7),
     inset 0 0 12px rgba(255, 255, 255, 0.4);
 }
 
 /* Dynamic card color reflection */
 .scroll-stack-scroller.card-orange::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, 
-    rgba(255, 69, 0, 0.5) 0%, 
-    rgba(255, 99, 71, 0.7) 50%, 
-    rgba(255, 69, 0, 0.5) 100%
+    rgba(var(--primary-rgb), 0.5) 0%, 
+    rgba(var(--primary-rgb), 0.7) 50%, 
+    rgba(var(--primary-rgb), 0.5) 100%
   );
   box-shadow: 
-    0 0 20px rgba(255, 69, 0, 0.4),
-    0 0 35px rgba(255, 99, 71, 0.3),
+    0 0 20px rgba(var(--primary-rgb), 0.4),
+    0 0 35px rgba(var(--primary-rgb), 0.3),
     inset 0 0 8px rgba(255, 255, 255, 0.25);
 }
 
 .scroll-stack-scroller.card-white::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, 
-    rgba(255, 69, 0, 0.3) 0%, 
-    rgba(255, 99, 71, 0.5) 50%, 
-    rgba(255, 69, 0, 0.3) 100%
+    rgba(var(--primary-rgb), 0.3) 0%, 
+    rgba(var(--primary-rgb), 0.5) 50%, 
+    rgba(var(--primary-rgb), 0.3) 100%
   );
   box-shadow: 
-    0 0 15px rgba(255, 69, 0, 0.3),
-    0 0 25px rgba(255, 99, 71, 0.2),
+    0 0 15px rgba(var(--primary-rgb), 0.3),
+    0 0 25px rgba(var(--primary-rgb), 0.2),
     inset 0 0 6px rgba(255, 255, 255, 0.4);
   border-color: rgba(255, 255, 255, 0.3);
 }
 
 .scroll-stack-scroller.card-black::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, 
-    rgba(255, 69, 0, 0.6) 0%, 
-    rgba(255, 99, 71, 0.8) 50%, 
-    rgba(255, 69, 0, 0.6) 100%
+    rgba(var(--primary-rgb), 0.6) 0%, 
+    rgba(var(--primary-rgb), 0.8) 50%, 
+    rgba(var(--primary-rgb), 0.6) 100%
   );
   box-shadow: 
-    0 0 25px rgba(255, 69, 0, 0.5),
-    0 0 40px rgba(255, 99, 71, 0.4),
+    0 0 25px rgba(var(--primary-rgb), 0.5),
+    0 0 40px rgba(var(--primary-rgb), 0.4),
     inset 0 0 10px rgba(0, 0, 0, 0.3);
-  border-color: rgba(255, 69, 0, 0.3);
+  border-color: rgba(var(--primary-rgb), 0.3);
 }
 
 .scroll-stack-scroller.card-white-black::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, 
-    rgba(255, 69, 0, 0.4) 0%, 
-    rgba(255, 99, 71, 0.6) 50%, 
-    rgba(255, 69, 0, 0.4) 100%
+    rgba(var(--primary-rgb), 0.4) 0%, 
+    rgba(var(--primary-rgb), 0.6) 50%, 
+    rgba(var(--primary-rgb), 0.4) 100%
   );
   box-shadow: 
-    0 0 18px rgba(255, 69, 0, 0.4),
-    0 0 30px rgba(255, 99, 71, 0.3),
+    0 0 18px rgba(var(--primary-rgb), 0.4),
+    0 0 30px rgba(var(--primary-rgb), 0.3),
     inset 0 0 7px rgba(255, 255, 255, 0.3);
 }
 
@@ -126,24 +126,24 @@
 @keyframes scrollbarGlow {
   0%, 100% {
     box-shadow: 
-      0 0 15px rgba(255, 69, 0, 0.4),
-      0 0 30px rgba(255, 99, 71, 0.3),
+      0 0 15px rgba(var(--primary-rgb), 0.4),
+      0 0 30px rgba(var(--primary-rgb), 0.3),
       inset 0 0 8px rgba(255, 255, 255, 0.3);
     background: linear-gradient(180deg, 
-      rgba(255, 69, 0, 0.5) 0%, 
-      rgba(255, 99, 71, 0.7) 50%, 
-      rgba(255, 69, 0, 0.5) 100%
+      rgba(var(--primary-rgb), 0.5) 0%, 
+      rgba(var(--primary-rgb), 0.7) 50%, 
+      rgba(var(--primary-rgb), 0.5) 100%
     );
   }
   50% {
     box-shadow: 
-      0 0 30px rgba(255, 69, 0, 0.6),
-      0 0 50px rgba(255, 99, 71, 0.5),
+      0 0 30px rgba(var(--primary-rgb), 0.6),
+      0 0 50px rgba(var(--primary-rgb), 0.5),
       inset 0 0 12px rgba(255, 255, 255, 0.4);
     background: linear-gradient(180deg, 
-      rgba(255, 69, 0, 0.7) 0%, 
-      rgba(255, 99, 71, 0.9) 50%, 
-      rgba(255, 69, 0, 0.7) 100%
+      rgba(var(--primary-rgb), 0.7) 0%, 
+      rgba(var(--primary-rgb), 0.9) 50%, 
+      rgba(var(--primary-rgb), 0.7) 100%
     );
   }
 }
@@ -182,7 +182,7 @@
 
 /* Card color variations */
 .scroll-stack-card.card-orange {
-  background: linear-gradient(135deg, #ff4500 0%, #ff6347 100%);
+  background: linear-gradient(135deg, var(--primary-hex) 0%, hsl(var(--primary) / 0.8) 100%);
   color: white;
   border: 2px solid rgba(255, 255, 255, 0.1);
 }
@@ -190,19 +190,19 @@
 .scroll-stack-card.card-white {
   background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
   color: #1a1a1a;
-  border: 2px solid rgba(255, 69, 0, 0.1);
+  border: 2px solid rgba(var(--primary-rgb), 0.1);
 }
 
 .scroll-stack-card.card-black {
   background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
   color: white;
-  border: 2px solid rgba(255, 69, 0, 0.3);
+  border: 2px solid rgba(var(--primary-rgb), 0.3);
 }
 
 .scroll-stack-card.card-white-black {
   background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
   color: #1a1a1a;
-  border: 2px solid rgba(255, 69, 0, 0.1);
+  border: 2px solid rgba(var(--primary-rgb), 0.1);
 }
 
 /* Card content styling */
@@ -239,8 +239,8 @@
 
 .scroll-stack-card .project-label {
   display: inline-block;
-  background: rgba(255, 69, 0, 0.2);
-  color: #ff4500;
+  background: rgba(var(--primary-rgb), 0.2);
+  color: var(--primary-hex);
   padding: 0.5rem 1rem;
   border-radius: 20px;
   font-size: 0.9rem;

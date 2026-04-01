@@ -10,25 +10,17 @@ export default function InitialLoading({ onComplete }: InitialLoadingProps) {
   const [flashCount, setFlashCount] = useState(0);
 
   useEffect(() => {
-    // Flash sequence - only 3 blinks
-    const flashSequence = [
-        { delay: 500, color: 'bg-[#ff4500]' },
-  { delay: 500, color: 'bg-[#ff4500]' },
-  { delay: 500, color: 'bg-[#ff4500]' },
-    ];
-
     let currentIndex = 0;
 
     const flashInterval = setInterval(() => {
-      if (currentIndex < flashSequence.length) {
+      if (currentIndex < 3) {
         setFlashCount(currentIndex);
         currentIndex++;
       } else {
         clearInterval(flashInterval);
-        // Aguarda um pouco mais antes de desaparecer
         setTimeout(() => {
           setIsVisible(false);
-          setTimeout(onComplete, 500); // Call onComplete after exit animation
+          setTimeout(onComplete, 500);
         }, 500);
       }
     }, 200);
@@ -36,24 +28,15 @@ export default function InitialLoading({ onComplete }: InitialLoadingProps) {
     return () => clearInterval(flashInterval);
   }, [onComplete]);
 
-  const getBackgroundColor = () => {
-      const colors = [
-    'bg-[#ff4500]',
-    'bg-white',
-    'bg-[#ff4500]',
-    'bg-white',
-    'bg-[#ff4500]',
-    'bg-white',
-    'bg-[#ff4500]',
-  ];
-  return colors[flashCount] || 'bg-[#ff4500]';
-  };
+  const isPrimary = flashCount % 2 === 0;
 
   return (
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          className={`fixed inset-0 z-[9999] flex items-center justify-center ${getBackgroundColor()} transition-colors duration-200`}
+          className={`fixed inset-0 z-[9999] flex items-center justify-center transition-colors duration-200 ${
+            isPrimary ? "bg-primary" : "bg-white"
+          }`}
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
@@ -64,18 +47,19 @@ export default function InitialLoading({ onComplete }: InitialLoadingProps) {
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <motion.h1 
+            <motion.h1
               className="text-6xl md:text-8xl font-bold tracking-tight"
-              style={{ 
-                color: flashCount % 2 === 0 ? '#ffffff' : '#000000',
-                fontFamily: 'Space Grotesk, sans-serif'
+              style={{
+                color: isPrimary ? '#ffffff' : '#000000',
+                fontFamily: 'Space Grotesk, sans-serif',
               }}
             >
-              João<span style={{ color: flashCount % 2 === 0 ? '#000000' : '#ff4500' }}>.</span>
+              João
+              <span style={{ color: isPrimary ? '#000000' : 'var(--primary-hex)' }}>.</span>
             </motion.h1>
           </motion.div>
         </motion.div>
       )}
     </AnimatePresence>
   );
-} 
+}

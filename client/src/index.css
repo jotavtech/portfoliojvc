@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Yesteryear&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
 
 .yesteryear-regular {
   font-family: "Yesteryear", cursive;
@@ -25,7 +26,7 @@
   z-index: 9999;
   width: 12px;
   height: 12px;
-  background-color: #ff4500;
+  background-color: hsl(var(--primary));
   transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
   mix-blend-mode: difference;
 }
@@ -40,7 +41,7 @@ a:hover ~ .cursor-dot,
 button:hover ~ .cursor-dot {
   width: 20px;
   height: 20px;
-  background-color: #ff4500;
+  background-color: hsl(var(--primary));
 }
 
 @media (max-width: 768px) {
@@ -68,50 +69,62 @@ body {
   cursor: none;
 }
 
-/* Variáveis de tema */
-:root {
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
-  --card: 0 0% 100%;
-  --card-foreground: 222.2 84% 4.9%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 222.2 84% 4.9%;
-  --primary: 16 100% 50%;  /* Laranja forte #ff4500 */
-  --primary-foreground: 0 0% 0%;  /* Preto */
-  --secondary: 0 0% 100%;  /* Branco */
-  --secondary-foreground: 142 47% 73%;  /* Verde suave */
-  --muted: 24 20% 95%;
-  --muted-foreground: 24 10% 40%;
-  --accent: 142 47% 73%;
-  --accent-foreground: 0 0% 0%;
-  --destructive: 0 84.2% 60.2%;
+/* ================================================
+   ROCK THEME SYSTEM — QOTSA / AIC / RHCP
+   ================================================ */
+
+/* Default: QOTSA — crimson red, desert rock */
+:root,
+[data-theme="qotsa"] {
+  --primary: 348 72% 44%;
+  --primary-foreground: 40 20% 96%;
+  --primary-hex: #c41e3a;
+  --primary-rgb: 196, 30, 58;
+  --background: 0 0% 3%;
+  --foreground: 40 10% 90%;
+  --card: 0 0% 5%;
+  --card-foreground: 40 10% 90%;
+  --popover: 0 0% 5%;
+  --popover-foreground: 40 10% 90%;
+  --secondary: 0 0% 100%;
+  --secondary-foreground: 0 0% 10%;
+  --muted: 0 0% 12%;
+  --muted-foreground: 0 0% 55%;
+  --accent: 348 50% 25%;
+  --accent-foreground: 40 20% 96%;
+  --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
-  --border: 24 30% 90%;
-  --input: 24 30% 90%;
-  --ring: 142 47% 73%;
+  --border: 0 0% 15%;
+  --input: 0 0% 15%;
+  --ring: 348 72% 44%;
   --radius: 0.5rem;
 }
 
-.dark {
-  --background: 222.2 84% 4.9%;
-  --foreground: 210 40% 98%;
-  --card: 222.2 84% 4.9%;
-  --card-foreground: 210 40% 98%;
-  --popover: 222.2 84% 4.9%;
-  --popover-foreground: 210 40% 98%;
-  --primary: 217.2 91.2% 59.8%;
-  --primary-foreground: 222.2 47.4% 11.2%;
-  --secondary: 217.2 32.6% 17.5%;
-  --secondary-foreground: 210 40% 98%;
-  --muted: 217.2 32.6% 17.5%;
-  --muted-foreground: 215 20.2% 65.1%;
-  --accent: 217.2 32.6% 17.5%;
-  --accent-foreground: 210 40% 98%;
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 210 40% 98%;
-  --border: 217.2 32.6% 17.5%;
-  --input: 217.2 32.6% 17.5%;
-  --ring: 224.3 76.3% 48%;
+/* AIC — grunge green, swamp murk */
+[data-theme="aic"] {
+  --primary: 115 42% 38%;
+  --primary-foreground: 0 0% 100%;
+  --primary-hex: #3d8b37;
+  --primary-rgb: 61, 139, 55;
+  --accent: 115 30% 20%;
+  --accent-foreground: 0 0% 100%;
+  --ring: 115 42% 38%;
+}
+
+/* RHCP — Californication orange, warm funk */
+[data-theme="rhcp"] {
+  --primary: 21 100% 45%;
+  --primary-foreground: 0 0% 100%;
+  --primary-hex: #e65100;
+  --primary-rgb: 230, 81, 0;
+  --accent: 21 60% 22%;
+  --accent-foreground: 0 0% 100%;
+  --ring: 21 100% 45%;
+}
+
+/* Theme transition on all elements that use CSS variables */
+* {
+  transition: color 0.4s ease, background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
 /* Estilo do nome na Hero */
@@ -164,4 +177,308 @@ body {
 .y2k-font {
   font-family: 'Orbitron', monospace;
   font-weight: 900;
+}
+
+/* ============================================
+   REACTBITS EFFECTS - ARTÍSTICO E DE TIRAR O FÔLEGO
+   ============================================ */
+
+/* Glitch Text Effect */
+.glitch-text {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch-text::before {
+  animation: glitch-1 0.3s infinite linear alternate-reverse;
+  clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+}
+
+.glitch-text::after {
+  animation: glitch-2 0.3s infinite linear alternate-reverse;
+  clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+}
+
+@keyframes glitch-1 {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-2px); }
+  40% { transform: translateX(2px); }
+  60% { transform: translateX(-1px); }
+  80% { transform: translateX(1px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes glitch-2 {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(2px); }
+  40% { transform: translateX(-2px); }
+  60% { transform: translateX(1px); }
+  80% { transform: translateX(-1px); }
+  100% { transform: translateX(0); }
+}
+
+/* Split Text Animation */
+.split-text span {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+/* Spotlight Card Glow */
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.spotlight-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    hsl(var(--primary) / 0.18),
+    transparent 50%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+
+/* Magnet Effect */
+.magnet-wrapper {
+  transition: transform 0.15s ease-out;
+}
+
+/* Aurora Background */
+.aurora-bg {
+  background: linear-gradient(
+    135deg,
+    rgba(var(--primary-rgb), 0.1) 0%,
+    rgba(var(--primary-rgb), 0.05) 50%,
+    rgba(var(--primary-rgb), 0.1) 100%
+  );
+}
+
+/* Shiny Text Effect */
+.shiny-text {
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.8) 50%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shine 3s ease-in-out infinite;
+}
+
+@keyframes shine {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+/* Timeline Styles */
+.timeline-line {
+  background: linear-gradient(
+    to bottom,
+    hsl(var(--primary)),
+    hsl(var(--primary) / 0.45),
+    transparent
+  );
+}
+
+/* CountUp Animation */
+.count-up {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Text Pressure Effect */
+.text-pressure span {
+  transition: all 0.1s ease-out;
+}
+
+/* Rotating Text */
+.rotating-text {
+  perspective: 1000px;
+}
+
+/* Magnet Lines */
+.magnet-line {
+  transform-origin: center;
+  transition: all 0.3s ease-out;
+}
+
+/* Scroll animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(
+    135deg,
+    var(--primary-hex) 0%,
+    hsl(var(--primary) / 0.7) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Glow effects */
+.glow-orange {
+  box-shadow: 0 0 20px hsl(var(--primary) / 0.45),
+              0 0 40px hsl(var(--primary) / 0.25),
+              0 0 60px hsl(var(--primary) / 0.12);
+}
+
+.glow-text-orange {
+  text-shadow: 0 0 10px hsl(var(--primary) / 0.75),
+               0 0 20px hsl(var(--primary) / 0.45),
+               0 0 30px hsl(var(--primary) / 0.25);
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Pulse glow */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.35);
+  }
+  50% {
+    box-shadow: 0 0 40px hsl(var(--primary) / 0.65);
+  }
+}
+
+.animate-pulseGlow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* Noise texture overlay */
+.noise-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Glass morphism */
+.glass {
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Gradient borders */
+.gradient-border {
+  position: relative;
+  background: linear-gradient(#000, #000) padding-box,
+              linear-gradient(135deg, var(--primary-hex), hsl(var(--primary) / 0.6)) border-box;
+  border: 2px solid transparent;
+}
+
+/* Selection styles */
+::selection {
+  background: hsl(var(--primary) / 0.35);
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background: hsl(var(--primary) / 0.35);
+  color: #ffffff;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--primary-hex), hsl(var(--primary) / 0.6));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, hsl(var(--primary) / 0.8), var(--primary-hex));
+}
+
+/* Focus styles */
+*:focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+}
+
+/* === Desert rock / gig-poster section (projects) === */
+.rock-section {
+  background: radial-gradient(
+      ellipse 120% 80% at 50% -20%,
+      hsl(var(--primary) / 0.12),
+      transparent 55%
+    ),
+    linear-gradient(180deg, #070504 0%, #0c0a09 40%, #030201 100%);
+}
+
+.rock-section__glow {
+  background: radial-gradient(
+    circle at 80% 30%,
+    hsl(var(--primary) / 0.08) 0%,
+    transparent 45%
+  );
+}
+
+.rock-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+/* Hide scrollbar but keep scroll functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }

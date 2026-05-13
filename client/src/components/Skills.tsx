@@ -35,7 +35,6 @@ export default function Skills() {
   return (
     <section
       ref={ref}
-      id="skills"
       className="min-h-screen bg-black py-20 relative overflow-hidden"
     >
       {/* MagnetLines Background */}
@@ -87,7 +86,7 @@ export default function Skills() {
               transition={{ duration: 0.5, delay: 0.1 * index }}
             >
               <SpotlightCard 
-                className="p-6 text-center h-full"
+                className="h-full rounded-none border border-[#1A1A1A] bg-[#0D0D0D]/95 p-6 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]"
                 spotlightColor={`${skill.color}40`}
               >
                 <motion.div 

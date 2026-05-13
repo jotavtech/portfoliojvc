@@ -13,6 +13,21 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        "rock-display": ['"Bebas Neue"', "sans-serif"],
+        "rock-body": ['"DM Sans"', "system-ui", "sans-serif"],
+        "rock-mono": [
+          "ui-monospace",
+          "SFMono-Regular",
+          "Menlo",
+          "monospace",
+        ],
+        "punk-display": ['"Metal Mania"', "cursive"],
+        "jota-display": ['Anton', '"Bebas Neue"', "sans-serif"],
+        /** Grossa / quadrada — menus punks (tipo concert poster) */
+        "menu-punk": ['"Archivo Black"', "Anton", "sans-serif"],
+        marker: ['"Permanent Marker"', "cursive"],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -47,6 +62,24 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        wild: "hsl(var(--wild))",
+      },
+      boxShadow: {
+        collage:
+          "6px 8px 0 rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.06), inset 0 1px 0 rgba(255,255,255,0.05)",
+        "collage-wild":
+          "4px 6px 0 hsl(var(--wild) / 0.35), 6px 10px 0 rgba(0,0,0,0.45)",
+      },
+      keyframes: {
+        grain: {
+          "0%, 100%": { transform: "translate(0, 0)" },
+          "25%": { transform: "translate(-1.5%, 1%)" },
+          "50%": { transform: "translate(1%, -1%)" },
+          "75%": { transform: "translate(-0.5%, -0.5%)" },
+        },
+      },
+      animation: {
+        grain: "grain 7s steps(6) infinite",
       },
       borderRadius: {
         lg: "var(--radius)",

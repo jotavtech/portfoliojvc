@@ -3,11 +3,12 @@ import { useIntersectionObserver } from "../hooks/use-intersection-observer.js";
 import { cn } from "../lib/utils.js";
 import { contactInfo, socialLinks, ContactInfo, SocialLink } from "../lib/constants.js";
 import { motion } from "framer-motion";
-import { MapPin, Mail, Phone, ExternalLink, Github, Instagram, Linkedin, Send, Sparkles } from "lucide-react";
+import { MapPin, Mail, Phone, ExternalLink, Github, Linkedin, Send, Sparkles, MessageCircle } from "lucide-react";
 import ColorBends from "./ColorBends";
 import SplitText from "./SplitText";
 import SpotlightCard from "./SpotlightCard";
 import Magnet from "./Magnet";
+import { BRAND_MOTION } from "@/lib/brand-motion";
 
 export default function Contact() {
   const { ref, isInView } = useIntersectionObserver({ threshold: 0.1, triggerOnce: true });
@@ -58,19 +59,19 @@ export default function Contact() {
         return <Linkedin size={20} className="text-white" />;
       case "github":
         return <Github size={20} className="text-white" />;
-      case "instagram":
-        return <Instagram size={20} className="text-white" />;
+      case "whatsapp":
+        return <MessageCircle size={20} className="text-white" />;
       default:
         return <ExternalLink size={20} className="text-white" />;
     }
   };
 
   return (
-    <section id="contact" className="pt-64 md:pt-80 lg:pt-96 pb-20 relative overflow-hidden group">
+    <section ref={ref} className="pt-64 md:pt-80 lg:pt-96 pb-20 relative overflow-hidden group">
       {/* ColorBends Animated Background */}
       <div className="absolute inset-0 z-0 pointer-events-none select-none">
         <ColorBends
-          colors={["#ff5c7a", "#8a5cff", "#00ffd1"]}
+          colors={["#8a1020", "#c41e3a", "#1a0707"]}
           rotation={30}
           speed={0.3}
           scale={1.2}
@@ -120,6 +121,37 @@ export default function Contact() {
               Se você tem um projeto que gostaria de discutir, entre em contato!
             </motion.p>
 
+            <motion.div
+              className="mt-10"
+              initial={{ opacity: 0, y: 18 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.55, delay: 0.15 }}
+            >
+              <motion.a
+                href="https://wa.me/5583999290376"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative flex min-h-[52px] w-full flex-col items-center justify-center gap-2 overflow-hidden border-2 border-primary bg-[#0D0D0D] px-5 py-10 font-jota-display text-lg uppercase tracking-[0.14em] text-[#F3F3F3] shadow-[0_0_35px_rgba(196,30,58,0.35)] sm:text-xl md:text-2xl"
+                whileHover={{ scale: 1.02, boxShadow: BRAND_MOTION.boxElevated }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <span
+                  className="pointer-events-none absolute inset-0 opacity-40 mix-blend-screen"
+                  style={{
+                    background:
+                      "linear-gradient(105deg, transparent 35%, rgba(196,30,58,0.22) 50%, transparent 65%)",
+                    backgroundSize: "200% 100%",
+                    animation: "shine 3.5s ease-in-out infinite",
+                  }}
+                  aria-hidden
+                />
+                LET&apos;S BUILD SOMETHING INSANE
+              </motion.a>
+              <p className="mt-4 text-center text-sm text-white/55">
+                Available for freelance and creative projects.
+              </p>
+            </motion.div>
+
             <div className="space-y-4 mt-8">
               {contactInfo.map((info: ContactInfo, index: number) => (
                 <motion.div
@@ -145,7 +177,7 @@ export default function Contact() {
                 <Magnet key={index} padding={40} magnetStrength={0.4}>
                   <motion.a
                     href={link.url}
-                    className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-lg border border-white/20 flex items-center justify-center hover:bg-primary hover:border-primary transition-all duration-300"
+                    className="flex h-12 min-h-[48px] w-12 min-w-[48px] items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-lg transition-all duration-300 hover:border-primary hover:bg-primary"
                     aria-label={link.label}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
@@ -161,7 +193,7 @@ export default function Contact() {
 
           <SpotlightCard 
             className="p-8"
-            spotlightColor="rgba(var(--primary-rgb), 0.2)"
+            spotlightColor={BRAND_MOTION.spotlightSoft}
           >
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -236,7 +268,7 @@ export default function Contact() {
               <motion.button
                 type="submit"
                 className="w-full py-4 bg-primary text-primary-foreground font-bold rounded-xl hover:opacity-90 transition-all duration-300 shadow-lg shadow-primary/30 flex items-center justify-center gap-2"
-                whileHover={{ scale: 1.02, boxShadow: "0 20px 40px rgba(var(--primary-rgb), 0.4)" }}
+                whileHover={{ scale: 1.02, boxShadow: BRAND_MOTION.boxElevated }}
                 whileTap={{ scale: 0.98 }}
               >
                 <Send className="w-5 h-5" />

@@ -52,7 +52,6 @@ export default function Projects() {
 
   return (
     <section
-      id="projects"
       className="rock-section relative z-10 min-h-screen overflow-hidden py-20 md:py-28"
       onTouchStart={(e) => (touchStart.current = e.touches[0].clientX)}
       onTouchEnd={(e) => {
@@ -64,21 +63,35 @@ export default function Projects() {
       <div className="rock-noise pointer-events-none absolute inset-0 opacity-[0.3]" aria-hidden />
 
       <div className="container relative z-10 mx-auto px-6">
-        {/* Header */}
         <motion.div
-          className="mb-12 md:mb-16"
-          initial={{ opacity: 0, y: -20 }}
+          className="relative mb-12 overflow-hidden rounded-sm border border-white/10 bg-[#111] md:mb-16"
+          initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.65 }}
         >
-          <p className="text-xs font-semibold uppercase tracking-[0.5em] text-primary">
-            Side A — Setlist
-          </p>
-          <h2 className="font-rock-display mt-2 text-5xl leading-[0.92] tracking-wide text-[#e8dcc4] sm:text-6xl md:text-7xl lg:text-8xl">
-            TRABALHOS{" "}
-            <span className="text-primary">SELECIONADOS</span>
-          </h2>
+          <div className="relative aspect-[20/11] max-h-[400px] w-full md:aspect-[2.5/1]">
+            <img
+              src="/images/playoff-projects-hero-ref.png"
+              alt="PlayOff — referência visual / capa editorial"
+              className="h-full w-full object-cover object-center opacity-[0.92] contrast-[1.06]"
+              loading="lazy"
+              decoding="async"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black via-black/65 to-black/25" />
+            <div className="absolute bottom-6 left-6 max-w-xl md:bottom-10 md:left-10">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.5em] text-primary">
+                JOTA CHAVES · PROJETOS
+              </p>
+              <h2 className="font-rock-display mt-3 text-4xl uppercase leading-[0.92] tracking-wide text-[#e8dcc4] sm:text-5xl md:text-7xl lg:text-8xl">
+                TRABALHOS{" "}
+                <span className="text-primary">SELECIONADOS</span>
+              </h2>
+              <p className="mt-3 max-w-md font-rock-body text-xs uppercase tracking-[0.35em] text-[#BDBDBD]/80">
+                Side A — Setlist · capa de álbum · deploy-ready builds
+              </p>
+            </div>
+          </div>
         </motion.div>
 
         {/* Main carousel area */}
@@ -94,7 +107,7 @@ export default function Projects() {
                 animate="center"
                 exit="exit"
                 transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
-                className="relative w-full overflow-hidden rounded-2xl border border-white/10 bg-black/40 backdrop-blur-sm"
+                className="relative w-full overflow-hidden torn-paper border-2 border-wild/25 bg-black/50 shadow-collage backdrop-blur-sm"
               >
                 {/* Image */}
                 <div className="relative aspect-[16/9] w-full overflow-hidden">

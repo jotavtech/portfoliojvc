@@ -186,7 +186,7 @@ const Timeline: React.FC = () => {
                   className={`inline-block p-6 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 ${
                     item.current ? "border-primary/50 shadow-lg shadow-primary/20" : ""
                   }`}
-                  whileHover={{ scale: 1.02, borderColor: "rgba(var(--primary-rgb), 0.5)" }}
+                  whileHover={{ scale: 1.02, borderColor: "rgba(196, 30, 58, 0.5)" }}
                   transition={{ duration: 0.3 }}
                 >
                   <span className="text-primary font-bold text-sm uppercase tracking-wider">

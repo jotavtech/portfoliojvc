@@ -12,7 +12,7 @@ interface SpotlightCardProps {
 const SpotlightCard: React.FC<SpotlightCardProps> = ({
   children,
   className = "",
-  spotlightColor = "rgba(var(--primary-rgb, 196, 30, 58), 0.25)",
+  spotlightColor = "rgba(196, 30, 58, 0.25)",
   spotlightSize = 300,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);

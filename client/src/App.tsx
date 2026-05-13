@@ -11,6 +11,10 @@ import Footer from "./components/Footer";
 import InitialLoading from "./components/InitialLoading";
 import { Toaster } from "./components/ui/toaster";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { PortfolioAudioProvider } from "./contexts/PortfolioAudioContext";
+import SmoothScrollProvider from "./providers/SmoothScrollProvider";
+import GlobalEffects, { JotaMotionShell } from "./components/GlobalEffects";
+import ScrollChapters from "./components/ScrollChapters";
 
 // Lazy loading sections
 const Projects = lazy(() => import("./components/Projects"));
@@ -29,16 +33,19 @@ const SectionLoader = () => (
 );
 
 // Componente wrapper para lazy loading inteligente
-const LazySection = ({ 
-  component: Component, 
-  onLoad, 
+const LazySection = ({
+  component: Component,
+  onLoad,
   rootMargin = "-20%",
-  placeholderHeight = "min-h-screen"
-}: { 
-  component: React.ComponentType<any>; 
+  placeholderHeight = "min-h-screen",
+  anchorId,
+}: {
+  component: React.ComponentType<any>;
   onLoad?: () => void;
   rootMargin?: string;
   placeholderHeight?: string;
+  /** id estável para âncoras / scroll-spy mesmo antes do chunk carregar */
+  anchorId?: string;
 }) => {
   const { sectionRef, isVisible } = useLazySection({
     threshold: 0.1,
@@ -47,7 +54,11 @@ const LazySection = ({
   });
 
   return (
-    <div ref={sectionRef as any}>
+    <div
+      ref={sectionRef as any}
+      id={anchorId}
+      className={anchorId ? "scroll-mt-[5.5rem]" : undefined}
+    >
       {isVisible ? (
         <Suspense fallback={<SectionLoader />}>
           <Component />
@@ -106,22 +117,35 @@ function App() {
     setIsLoading(false);
   };
 
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.documentElement.setAttribute("data-pause-overlay", "open");
+    } else {
+      document.documentElement.removeAttribute("data-pause-overlay");
+    }
+    return () => document.documentElement.removeAttribute("data-pause-overlay");
+  }, [mobileMenuOpen]);
+
   if (isLoading) {
     return <InitialLoading onComplete={handleLoadingComplete} />;
   }
 
   return (
     <ThemeProvider>
-    <div className="flex flex-col min-h-screen bg-black">
-      
+    <PortfolioAudioProvider>
+    <SmoothScrollProvider>
+    <GlobalEffects />
+    <div className="jota-pause-grayscale-target flex min-h-screen flex-col bg-black">
       <Header 
         activeSection={activeSection} 
         mobileMenuOpen={mobileMenuOpen}
         toggleMobileMenu={toggleMobileMenu}
         logoTransformed={logoTransformed}
       />
+
+      <JotaMotionShell className="flex flex-1 flex-col">
       
-      <main>
+      <main className="flex-1">
         <SectionObserver>
           <Hero 
             showSocialLinks={showSocialLinks} 
@@ -129,37 +153,46 @@ function App() {
           />
         </SectionObserver>
 
-        <LazySection 
-          component={Projects} 
-          onLoad={() => markSectionLoaded('projects')}
+        <ScrollChapters />
+
+        <LazySection
+          component={Projects}
+          anchorId="projects"
+          onLoad={() => markSectionLoaded("projects")}
           rootMargin="-20%"
         />
 
-        <LazySection 
-          component={About} 
-          onLoad={() => markSectionLoaded('about')}
+        <LazySection
+          component={About}
+          anchorId="about"
+          onLoad={() => markSectionLoaded("about")}
           rootMargin="-20%"
         />
 
-        <LazySection 
-          component={Skills} 
-          onLoad={() => markSectionLoaded('skills')}
+        <LazySection
+          component={Skills}
+          anchorId="skills"
+          onLoad={() => markSectionLoaded("skills")}
           rootMargin="-20%"
         />
 
         {/* Gradiente de transição entre Skills e Contato removido */}
 
-        <LazySection 
-          component={Contact} 
-          onLoad={() => markSectionLoaded('contact')}
+        <LazySection
+          component={Contact}
+          anchorId="contact"
+          onLoad={() => markSectionLoaded("contact")}
           rootMargin="-20%"
         />
       </main>
       
       <Footer />
-      <CustomCursor />
-      <Toaster />
+    </JotaMotionShell>
     </div>
+    <CustomCursor />
+    <Toaster />
+    </SmoothScrollProvider>
+    </PortfolioAudioProvider>
     </ThemeProvider>
   );
 }

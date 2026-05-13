@@ -25,9 +25,25 @@ export type Tool = {
   icon: string;
 };
 
+/** Retrato About (Cloudinary) — substituir só alterando esta constante */
+export const ABOUT_PORTRAIT_URL =
+  "https://res.cloudinary.com/dzwfuzxxw/image/upload/v1778693394/923ab890-18b2-4aca-accb-827fe9021fb6_s2bp9g.png";
+
 export const projects: Project[] = [
   {
     id: 1,
+    label: "Music",
+    title: "PlayOff",
+    description:
+      "Real-time music battle with dynamic voting system, real-time ranking and interactive interface for music competitions.",
+    imageUrl: "/images/playoff-projects-hero-ref.png",
+    imageAlt: "PlayOff — interface editorial de batalhas musicais",
+    category: "web",
+    tags: ["JavaScript", "Vue.js", "Node.js"],
+    accent: "blood",
+  },
+  {
+    id: 2,
     label: "Dashboard",
     title: "DashMEBoard",
     description:
@@ -37,71 +53,6 @@ export const projects: Project[] = [
     imageAlt: "DashMEBoard dashboard",
     category: "web",
     tags: ["Blade", "Laravel", "MariaDB"],
-    accent: "void",
-  },
-  {
-    id: 2,
-    label: "E-commerce",
-    title: "Cynthia Makes",
-    description:
-      "E-commerce specialized in makeup and beauty products with modern interface, advanced filtering system and optimized shopping experience.",
-    imageUrl:
-      "https://res.cloudinary.com/dzwfuzxxw/image/upload/v1748972944/2025-06-03_13-54_aj7yd0.png",
-    imageAlt: "Cynthia Makes e-commerce",
-    category: "web",
-    tags: ["TypeScript", "React", "Vite", "Tailwind CSS"],
-    accent: "cream",
-  },
-  {
-    id: 3,
-    label: "Comparison",
-    title: "Comparate",
-    description:
-      "Car comparison website based on FIPE table with detailed price analysis, technical specifications and value history.",
-    imageUrl:
-      "https://res.cloudinary.com/dzwfuzxxw/image/upload/v1748972944/comparate_ea3kgx.png",
-    imageAlt: "Comparate car comparison",
-    category: "web",
-    tags: ["React", "Express", "API REST"],
-    accent: "rust",
-  },
-  {
-    id: 4,
-    label: "Literature",
-    title: "Folheando",
-    description:
-      "Book evaluation and discovery platform with review system, personalized recommendations and reader community.",
-    imageUrl:
-      "https://res.cloudinary.com/dzwfuzxxw/image/upload/v1748972944/folheando_u5ifrg.png",
-    imageAlt: "Folheando books",
-    category: "web",
-    tags: ["React", "TypeScript", "Vite", "Tailwind CSS"],
-    accent: "gold",
-  },
-  {
-    id: 5,
-    label: "Music",
-    title: "PlayOff",
-    description:
-      "Real-time music battle with dynamic voting system, real-time ranking and interactive interface for music competitions.",
-    imageUrl:
-      "https://res.cloudinary.com/vicentimartins/image/upload/c_crop,g_center,w_0.98,h_0.85,fl_relative/v1774622830/d9f3e816-cba4-40fd-a9d2-abc59930898e.png",
-    imageAlt: "PlayOff music battles",
-    category: "web",
-    tags: ["JavaScript", "Vue.js", "Node.js"],
-    accent: "blood",
-  },
-  {
-    id: 6,
-    label: "Education",
-    title: "Ksim",
-    description:
-      "Online and in-person testing platform with artificial intelligence for automated assessment and enhanced educational experience.",
-    imageUrl:
-      "https://res.cloudinary.com/dzwfuzxxw/image/upload/v1763477153/Captura_de_tela_de_2025-11-14_15-48-41_hnrejk.png",
-    imageAlt: "Ksim assessment platform",
-    category: "web",
-    tags: ["React", "TypeScript", "AI"],
     accent: "void",
   },
 ];
@@ -147,7 +98,7 @@ export type SocialLink = {
 export const socialLinks: SocialLink[] = [
   { name: "linkedin", url: "https://www.linkedin.com/in/joão-vitor-chaves-761b102b5/", label: "Jota Chaves LinkedIn" },
   { name: "github", url: "https://github.com/jotavtech", label: "Jota Chaves GitHub" },
-  { name: "instagram", url: "https://instagram.com/jvc.martinss", label: "Jota Chaves Instagram" }
+  { name: "whatsapp", url: "https://wa.me/5583999290376", label: "WhatsApp — João Martins" }
 ];
 
 export type ContactInfo = {

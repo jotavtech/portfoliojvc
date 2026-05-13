@@ -1,13 +1,16 @@
 import { motion } from "framer-motion";
 import { useMemo, useState, useEffect } from "react";
 import LightRays from "./LightRays";
-import { ArrowUpRight, MapPin, Calendar, Code2, Heart, Zap, Coffee, Rocket } from "lucide-react";
+import { MapPin, Calendar, Code2, Heart, Zap, Coffee, Rocket } from "lucide-react";
 import CircularText from './CircularText';
 import SplitText from './SplitText';
 import SpotlightCard from './SpotlightCard';
 import GlitchText from './GlitchText';
 import CountUp from './CountUp';
-import Timeline from './Timeline';
+import Timeline from "./Timeline";
+import BorderGlow from "./BorderGlow";
+import { BRAND_HEX, BRAND_MOTION } from "@/lib/brand-motion";
+import { ABOUT_PORTRAIT_URL } from "@/lib/constants";
 
 const calculateAge = (birthDate: Date): number => {
   const today = new Date();
@@ -19,8 +22,11 @@ const calculateAge = (birthDate: Date): number => {
   return age;
 };
 
+const CAREER_START_YEAR = 2019;
+
 const calculateYearsExperience = (): number => {
-  return new Date().getFullYear() - 2020;
+  const y = new Date().getFullYear() - CAREER_START_YEAR;
+  return Math.max(5, y);
 };
 
 export default function About() {
@@ -56,11 +62,21 @@ export default function About() {
     { icon: <Rocket className="w-5 h-5" />, text: "Innovation" },
   ];
 
+  const [reducedMotion, setReducedMotion] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReducedMotion(mq.matches);
+    const fn = () => setReducedMotion(mq.matches);
+    mq.addEventListener("change", fn);
+    return () => mq.removeEventListener("change", fn);
+  }, []);
+
   return (
-    <section 
-      id="about" 
+    <section
       className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden bg-black py-20"
     >
+      <div className="rock-noise pointer-events-none absolute inset-0 z-[2] opacity-[0.25]" aria-hidden />
+
       {/* LightRays background */}
       <div style={{ 
         width: '100%', 
@@ -86,7 +102,7 @@ export default function About() {
       </div>
 
       {/* Overlay com desfoque sutil */}
-      <div className="absolute inset-0 bg-black/20 backdrop-blur-[1px] z-2" />
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-[0.5px] z-[3]" />
 
       <div className="container mx-auto px-6 relative z-10 flex flex-col items-center">
         {/* CircularText destacado no topo da seção About */}
@@ -107,7 +123,7 @@ export default function About() {
           transition={{ duration: 0.8 }}
         >
           <GlitchText 
-            text="WHO IS JOTA?" 
+            text="WHO IS JOTA CHAVES?" 
             className="text-5xl md:text-7xl font-black space-grotesk-bold"
             speed={0.8}
             enableOnHover={true}
@@ -115,42 +131,74 @@ export default function About() {
         </motion.div>
 
         <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-16 w-full max-w-7xl">
-          {/* Imagem à esquerda com SpotlightCard */}
-          <motion.div 
-            className="w-full lg:w-auto flex justify-center relative"
-            initial={{ opacity: 0, x: -50 }}
+          {/* Perfil — painel QOTSA / Hero (sem polaroid) */}
+          <motion.div
+            className="relative z-10 flex w-full justify-center lg:w-auto"
+            initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
+            transition={{ duration: 0.65, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
           >
-            <SpotlightCard className="p-2 pb-8 !overflow-visible" spotlightColor="rgba(var(--primary-rgb), 0.3)">
-              <div className="relative">
-                <span className="absolute left-1/2 -translate-x-1/2 top-8 md:top-6 text-white font-serif italic text-lg md:text-xl lg:text-2xl whitespace-nowrap pointer-events-none select-none z-20" style={{textShadow: '0 2px 8px #0008'}}>Fullstack Development</span>
-                <img
-                  src="https://res.cloudinary.com/dzwfuzxxw/image/upload/f_auto,q_auto,w_1000/v1753372753/5f6be734-92a8-4231-84c8-4ef6c21f7e2d_dqadw0.jpg"
-                  alt="João Vitor"
-                  className="w-96 h-96 object-cover rounded-lg filter grayscale hover:grayscale-0 transition-all duration-700"
-                />
-                <div className="absolute -top-4 -right-4">
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                  >
-                    <ArrowUpRight className="w-8 h-8 text-primary" />
-                  </motion.div>
-                </div>
+            <div className="relative w-full max-w-[300px] sm:max-w-[340px]">
+              <BorderGlow
+                className="w-full [&_.border-glow-inner]:overflow-hidden [&_.border-glow-inner]:rounded-lg"
+                borderRadius={16}
+                backgroundColor="#050505"
+                glowColor="348 72 44"
+                glowRadius={44}
+                glowIntensity={1.05}
+                edgeSensitivity={30}
+                animated={!reducedMotion}
+                colors={["#24060a", "#c41e3a", "#080203"]}
+              >
+                <div className="flex flex-col bg-[#050505]">
+                  <div className="flex items-center justify-between gap-3 border-b border-white/10 bg-black/90 px-4 py-2.5">
+                    <span className="font-menu-punk text-[10px] uppercase tracking-[0.22em] text-primary">
+                      Perfil
+                    </span>
+                    <span className="font-rock-mono text-[9px] uppercase tracking-[0.4em] text-white/40">
+                      JVC · live
+                    </span>
+                  </div>
 
-                {/* Info badge */}
-                <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 z-10 flex gap-3">
-                  <motion.div 
-                    className="px-4 py-2 bg-primary rounded-full flex items-center gap-2 text-primary-foreground text-sm font-bold shadow-lg shadow-primary/30"
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <MapPin className="w-4 h-4" />
-                    João Pessoa, PB
-                  </motion.div>
+                  <div className="relative aspect-[4/5] w-full overflow-hidden">
+                    <img
+                      src={ABOUT_PORTRAIT_URL}
+                      alt="João Martins — retrato"
+                      className="h-full w-full object-cover object-[center_12%] contrast-[1.06] grayscale transition-[filter] duration-500 hover:grayscale-0"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <div
+                      className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-black/15 to-black/50"
+                      aria-hidden
+                    />
+                    <div
+                      className="pointer-events-none absolute left-3 top-3 h-8 w-8 border-l-2 border-t-2 border-primary/80"
+                      aria-hidden
+                    />
+                    <div
+                      className="pointer-events-none absolute right-3 top-3 h-8 w-8 border-r-2 border-t-2 border-primary/60"
+                      aria-hidden
+                    />
+
+                    <div className="absolute inset-x-0 bottom-0 border-t border-white/10 bg-black/80 px-4 py-3.5 backdrop-blur-sm">
+                      <p className="font-menu-punk text-[13px] uppercase leading-snug tracking-[0.12em] text-[#eaeaea] md:text-sm">
+                        Fullstack × UI
+                      </p>
+                      <div className="mt-2 flex items-center gap-2 border-l-2 border-primary pl-3">
+                        <MapPin className="h-3.5 w-3.5 shrink-0 text-primary" aria-hidden />
+                        <span className="font-rock-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-white/85">
+                          João Pessoa, PB
+                        </span>
+                      </div>
+                      <p className="mt-1.5 font-rock-mono text-[9px] uppercase tracking-[0.35em] text-white/45">
+                        {age} anos · ID stack
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </SpotlightCard>
+              </BorderGlow>
+            </div>
           </motion.div>
 
           {/* Conteúdo à direita */}
@@ -162,21 +210,21 @@ export default function About() {
           >
             {/* Quick Stats */}
             <div className="grid grid-cols-3 gap-4 mb-8">
-              <SpotlightCard className="p-4 text-center">
+              <SpotlightCard className="border border-white/10 bg-black/55 p-4 text-center backdrop-blur-[1px]" spotlightColor={BRAND_MOTION.spotlightSoft}>
                 <div className="text-3xl font-black text-primary space-grotesk-bold">
                   <CountUp to={age} duration={2} />
                 </div>
-                <p className="text-white/70 text-xs uppercase tracking-wider mt-1">Anos</p>
+                <p className="mt-1 font-rock-mono text-[10px] uppercase tracking-[0.25em] text-white/55">Anos</p>
               </SpotlightCard>
-              
-              <SpotlightCard className="p-4 text-center">
+
+              <SpotlightCard className="border border-white/10 bg-black/55 p-4 text-center backdrop-blur-[1px]" spotlightColor={BRAND_MOTION.spotlightSoft}>
                 <div className="text-3xl font-black text-primary space-grotesk-bold">
                   <CountUp to={yearsExperience} duration={2} suffix="+" />
                 </div>
-                <p className="text-white/70 text-xs uppercase tracking-wider mt-1">XP Coding</p>
+                <p className="mt-1 font-rock-mono text-[10px] uppercase tracking-[0.25em] text-white/55">XP Coding</p>
               </SpotlightCard>
-              
-              <SpotlightCard className="p-4 text-center relative overflow-hidden">
+
+              <SpotlightCard className="relative overflow-hidden border border-white/10 bg-black/55 p-4 text-center backdrop-blur-[1px]" spotlightColor={BRAND_MOTION.spotlightSoft}>
                 {isGraduated ? (
                   <>
                     <motion.div
@@ -198,7 +246,9 @@ export default function About() {
                     <div className="text-3xl font-black text-primary space-grotesk-bold">
                       <CountUp to={days} duration={2} />
                     </div>
-                    <p className="text-white/70 text-xs uppercase tracking-wider mt-1">Dias p/ Formatura</p>
+                    <p className="mt-1 font-rock-mono text-[10px] uppercase tracking-[0.22em] text-white/55">
+                      Dias p/ Formatura
+                    </p>
                   </>
                 )}
               </SpotlightCard>
@@ -224,7 +274,7 @@ export default function About() {
               transition={{ duration: 0.7, delay: 0.4 }}
             >
               <span className="text-primary text-6xl yesteryear-regular italic">"</span>
-              E aí! Sou um desenvolvedor full stack de <span className="text-primary font-black">{age} anos</span>, nascido e criado em João Pessoa, Paraíba. 
+              Sou <span className="text-primary font-black">João Martins (Jota Chaves)</span>, desenvolvedor full stack nível pleno com mais de <span className="text-primary font-black">{yearsExperience} anos</span> de experiência profissional, e tenho <span className="text-primary font-black">{age} anos</span>. Nasci e cresci em João Pessoa, Paraíba. 
               Minha jornada na programação começou em 2020, e desde então venho me dedicando a criar experiências digitais excepcionais 
               que combinam design intuitivo com funcionalidade impecável.
             </motion.p>
@@ -266,8 +316,8 @@ export default function About() {
               {passions.map((passion, index) => (
                 <motion.div
                   key={index}
-                  className="flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-lg border border-white/10 rounded-full text-white/80 text-sm"
-                  whileHover={{ scale: 1.05, borderColor: "rgba(var(--primary-rgb), 0.5)", color: "var(--primary-hex)" }}
+                  className="flex min-h-[48px] items-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-3 text-white/80 backdrop-blur-lg text-sm"
+                  whileHover={{ scale: 1.05, borderColor: BRAND_MOTION.borderHover, color: BRAND_HEX }}
                   transition={{ duration: 0.2 }}
                 >
                   {passion.icon}
@@ -286,7 +336,7 @@ export default function About() {
               <motion.a
                 href="#contact"
                 className="inline-flex items-center gap-3 px-8 py-4 bg-primary text-white font-bold rounded-full text-lg shadow-lg shadow-primary/30"
-                whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(var(--primary-rgb), 0.4)" }}
+                whileHover={{ scale: 1.05, boxShadow: BRAND_MOTION.boxElevated }}
                 whileTap={{ scale: 0.95 }}
               >
                 <Calendar className="w-5 h-5" />

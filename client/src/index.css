@@ -1,8 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Metal+Mania&family=Permanent+Marker&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Yesteryear&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Oswald:wght@400;500;600;700&display=swap');
 
 .yesteryear-regular {
   font-family: "Yesteryear", cursive;
@@ -73,7 +74,7 @@ body {
    ROCK THEME SYSTEM — QOTSA / AIC / RHCP
    ================================================ */
 
-/* Default: QOTSA — crimson red, desert rock */
+/* Default / QOTSA — crimson desert rock */
 :root,
 [data-theme="qotsa"] {
   --primary: 348 72% 44%;
@@ -98,6 +99,10 @@ body {
   --input: 0 0% 15%;
   --ring: 348 72% 44%;
   --radius: 0.5rem;
+  /* Accent secundário — magenta contido vs vermelho QOTSA */
+  --wild: 310 65% 48%;
+  --wild-hex: #d934a0;
+  --paper-radius: 0.35rem;
 }
 
 /* AIC — grunge green, swamp murk */
@@ -109,6 +114,8 @@ body {
   --accent: 115 30% 20%;
   --accent-foreground: 0 0% 100%;
   --ring: 115 42% 38%;
+  --wild: 285 75% 62%;
+  --wild-hex: #e879f9;
 }
 
 /* RHCP — Californication orange, warm funk */
@@ -120,6 +127,8 @@ body {
   --accent: 21 60% 22%;
   --accent-foreground: 0 0% 100%;
   --ring: 21 100% 45%;
+  --wild: 45 100% 58%;
+  --wild-hex: #ffc107;
 }
 
 /* Theme transition on all elements that use CSS variables */
@@ -267,9 +276,9 @@ body {
 .aurora-bg {
   background: linear-gradient(
     135deg,
-    rgba(var(--primary-rgb), 0.1) 0%,
-    rgba(var(--primary-rgb), 0.05) 50%,
-    rgba(var(--primary-rgb), 0.1) 100%
+    rgb(196 30 58 / 0.1) 0%,
+    rgb(196 30 58 / 0.05) 50%,
+    rgb(196 30 58 / 0.1) 100%
   );
 }
 
@@ -481,4 +490,107 @@ body {
 }
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+/* === Zine / colagem utilities === */
+.torn-paper {
+  clip-path: polygon(
+    0% 4%,
+    3% 0%,
+    97% 0%,
+    100% 5%,
+    100% 95%,
+    97% 100%,
+    3% 100%,
+    0% 96%
+  );
+}
+
+.sticker-tape {
+  box-shadow:
+    var(--wild-hex, #ff29c7) 4px 4px 0 0,
+    rgba(0, 0, 0, 0.55) 8px 10px 0 0,
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+.polaroid-frame {
+  background: linear-gradient(145deg, #f8f4ec 0%, #e8e0d4 100%);
+  padding: 0.75rem 0.75rem 2.5rem;
+  box-shadow:
+    10px 12px 0 rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(0, 0, 0, 0.2);
+  transform: rotate(-2.5deg);
+}
+
+/* --- Atmosfera global (CRT / surveillance / VHS) --- */
+.global-effects-stack {
+  isolation: isolate;
+}
+
+.jota-motion-shell {
+  transition: filter 0.14s ease-out;
+  transform: translateZ(0);
+}
+
+html[data-jota-scroll-motion="active"] .jota-motion-shell {
+  filter: blur(0.42px) saturate(1.03);
+}
+
+@keyframes scanlines-drift-kf {
+  0% {
+    transform: translateY(0) translateZ(0);
+  }
+  100% {
+    transform: translateY(4px) translateZ(0);
+  }
+}
+
+.scanlines-drift {
+  animation: scanlines-drift-kf 14s linear infinite;
+}
+
+@keyframes global-vhs-flicker-kf {
+  0%,
+  91%,
+  100% {
+    opacity: 0.008;
+  }
+  93% {
+    opacity: 0.052;
+  }
+  94% {
+    opacity: 0.015;
+  }
+  96% {
+    opacity: 0.041;
+  }
+}
+
+.global-vhs-flicker {
+  animation: global-vhs-flicker-kf 5.2s steps(1, end) infinite;
+}
+
+html[data-pause-overlay="open"] .jota-pause-grayscale-target {
+  filter: grayscale(1) contrast(1.08);
+  transition: filter 0.45s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-grain,
+  .grain-anim {
+    animation: none !important;
+  }
+
+  html[data-jota-scroll-motion="active"] .jota-motion-shell {
+    filter: none;
+  }
+
+  .scanlines-drift {
+    animation: none !important;
+  }
+
+  .global-vhs-flicker {
+    animation: none !important;
+    opacity: 0 !important;
+  }
 }

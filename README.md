@@ -1,78 +1,104 @@
-# Portfólio de Jota Chaves
+<div align="center">
 
-Este é um portfólio moderno construído com React, Framer Motion e TailwindCSS, seguindo o estilo do modelo Arpeggio.
+# Portfolio 3.0 — `jotavtech`
 
-## Recursos
+#### Industrial · dark · cinematic. Built like a machine, shipped like a record.
 
-- Design moderno com cores azul e laranja
-- Animações suaves com Framer Motion
-- Menu de navegação com efeito de backdrop blur
-- Seções completas: Início, Projetos, Habilidades, Sobre e Contato
-- Totalmente responsivo para todos os dispositivos
-- 100% frontend (sem backend ou banco de dados)
+[![Next.js](https://img.shields.io/badge/Next.js-15-070707?style=flat-square&logo=next.js&labelColor=070707&color=E8E8E8)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-070707?style=flat-square&logo=typescript&labelColor=070707&color=E8E8E8)](https://www.typescriptlang.org/)
+[![Tailwind](https://img.shields.io/badge/Tailwind-3-070707?style=flat-square&logo=tailwindcss&labelColor=070707&color=E8E8E8)](https://tailwindcss.com/)
+[![CI](https://img.shields.io/github/actions/workflow/status/jotavtech/portfoliojvc/ci.yml?style=flat-square&label=ci&labelColor=070707&color=FF3B1F)](https://github.com/jotavtech/portfoliojvc/actions)
+[![License: MIT](https://img.shields.io/badge/license-MIT-FF3B1F?style=flat-square&labelColor=070707)](LICENSE)
 
-## Como fazer deploy na Vercel
+</div>
 
-### Passo 1: Preparar os arquivos
+---
 
-O projeto já está configurado para ser deployado na Vercel como um site estático. Não há dependências de backend ou banco de dados.
+## EN
 
-### Passo 2: Fazer upload para GitHub
+Personal portfolio of **João Vitor Chaves Félix** — fullstack engineer, designer of industrial-looking interfaces, based in João Pessoa, Brazil.
 
-1. Crie um novo repositório no GitHub
-2. Suba os arquivos do projeto para o repositório
+### Stack
 
-```bash
-git init
-git add .
-git commit -m "Versão inicial do portfólio"
-git branch -M main
-git remote add origin [URL DO SEU REPOSITÓRIO]
-git push -u origin main
+- **Next.js 15** — App Router, RSC, Edge OG.
+- **TypeScript** — strict.
+- **TailwindCSS 3.4** — custom design tokens (`ink`, `chrome`, `rust`).
+- **Framer Motion** — micro-interactions, clip-path reveals.
+- **GSAP + Lenis** — scroll-driven scenes, buttery scroll.
+- **Canvas / shaders** — `/lab` experiments.
+
+### Architecture
+
+```
+app/
+  layout.tsx              fonts, Lenis, Grain, Header, Footer
+  page.tsx                home — 7 sections
+  projects/[slug]/        case studies (statically generated)
+  lab/                    experimental WebGL/canvas playground
+  opengraph-image.tsx     edge-rendered OG
+  sitemap.ts / robots.ts
+components/
+  chrome/                 Header · Footer · BootSequence · LenisProvider
+  primitives/             ChromeText · TerminalLabel · PaneFrame · Magnetic · ScrambleText · Grain · Scanlines
+  sections/               Hero · SelectedProjects · Experience · Technologies · About · Contact · LabTeaser
+  lab/                    ChromeField · WatchNode · AudioBus · NoiseLoom
+content/                  projects · experience · stack · site (data layer)
+lib/                      fonts · motion · utils
 ```
 
-### Passo 3: Deploy na Vercel
+### Design system
 
-1. Acesse [vercel.com](https://vercel.com) e faça login com sua conta GitHub
-2. Clique em "New Project"
-3. Selecione o repositório que você acabou de criar
-4. Na configuração do projeto:
-   - Framework Preset: Vite
-   - Build Command: vite build
-   - Output Directory: dist
-5. Clique em "Deploy"
+| Token            | Value              | Purpose                       |
+| ---------------- | ------------------ | ----------------------------- |
+| `ink`            | `#070707`          | matte black background        |
+| `chrome-100`     | `#E8E8E8`          | primary foreground            |
+| `chrome-300/500` | `#A8A8A8 / #6E6E6E`| secondary type                |
+| `rust-500`       | `#FF3B1F`          | accent (CTAs, REC, status)    |
+| `hairline`       | `rgba(255 255 255 / .08)` | 1px UI borders         |
 
-A Vercel vai automaticamente reconhecer que este é um projeto Vite e configurar tudo corretamente.
-
-### Passo 4: Configurações personalizadas (opcional)
-
-Após o deploy, você pode configurar:
-- Um domínio personalizado
-- Variáveis de ambiente (se necessário no futuro)
-- Configurações de performance
-
-## Atualização do site
-
-Quando quiser atualizar o site:
-
-1. Faça as alterações necessárias no código
-2. Envie as alterações para o GitHub:
+### Run locally
 
 ```bash
-git add .
-git commit -m "Descrição das alterações"
-git push
-```
-
-A Vercel detectará automaticamente as mudanças e fará um novo deploy.
-
-## Desenvolvimento local
-
-Para rodar o projeto localmente:
-
-```bash
+nvm use            # node 20
 npm install
-npm run dev
+npm run dev        # http://localhost:3000
 ```
 
-O site estará disponível em `http://localhost:5173`.
+Production:
+
+```bash
+npm run build
+npm start
+```
+
+Quality gates (also enforced by CI):
+
+```bash
+npm run lint
+npm run typecheck
+npm run format:check
+```
+
+### Deploy
+
+Optimized for **Vercel**. Push to `main` triggers preview/prod deploys. Static routes are pre-rendered; `/lab` is fully client-side; OG image is edge.
+
+### License
+
+MIT © 2026 João Vitor Chaves Félix
+
+---
+
+## PT-BR (resumo)
+
+Portfólio pessoal industrial/cromado. Reescrita 3.0 em Next.js 15 com design system próprio (matte black, chrome silver, accent rust burn), scroll cinético, animações com Framer Motion e GSAP, e um `/lab` com experiências em canvas e WebGL.
+
+- `npm install && npm run dev` para rodar local.
+- CI executa lint + typecheck + build em todo PR.
+- Deploy automático na Vercel.
+
+### Links
+
+- [jotavtech / github](https://github.com/jotavtech)
+- [linkedin / joaovitorchaves27](https://www.linkedin.com/in/joaovitorchaves27/)
+- [whatsapp · +55 83 99929-0376](https://wa.me/5583999290376)

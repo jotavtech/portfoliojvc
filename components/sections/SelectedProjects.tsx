@@ -66,7 +66,7 @@ function ProjectRow({
   index: number;
   active: boolean;
 }) {
-  const href = project.href ?? `#work`;
+  const href = project.href ?? `/projects/${project.slug}`;
   return (
     <motion.a
       href={href}

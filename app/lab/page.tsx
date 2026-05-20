@@ -59,7 +59,7 @@ export default function LabPage() {
           </div>
           <Link
             href="/"
-            className="inline-flex items-center gap-2 font-mono text-eyebrow uppercase tracking-[0.32em] text-chrome-400 hover:text-chrome-100"
+            className="relative z-20 inline-flex items-center gap-2 font-mono text-eyebrow uppercase tracking-[0.32em] text-chrome-400 hover:text-chrome-100"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             back to home

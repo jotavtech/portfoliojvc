@@ -7,6 +7,8 @@ export const site = {
   email: "martinsjoao1227@gmail.com",
   phone: "+55 83 99929-0376",
   url: "https://jotachaves.dev",
+  thumbnail:
+    "https://res.cloudinary.com/dzwfuzxxw/image/upload/v1779293945/28cf8079-3205-433a-9657-3751ac61508f_fhnytn.png",
   description:
     "Fullstack engineer building product-grade interfaces with React, TypeScript and PHP. Industrial, dark and precise.",
   social: {
@@ -15,11 +17,11 @@ export const site = {
     whatsapp: "https://wa.me/5583999290376",
   },
   nav: [
-    { id: "work", label: "Work", href: "#work" },
-    { id: "experience", label: "Experience", href: "#experience" },
-    { id: "stack", label: "Stack", href: "#stack" },
-    { id: "about", label: "About", href: "#about" },
-    { id: "contact", label: "Contact", href: "#contact" },
+    { id: "work", label: "Work", href: "/#work" },
+    { id: "experience", label: "Experience", href: "/#experience" },
+    { id: "stack", label: "Stack", href: "/#stack" },
+    { id: "about", label: "About", href: "/#about" },
+    { id: "contact", label: "Contact", href: "/#contact" },
     { id: "lab", label: "Lab", href: "/lab" },
   ],
 } as const;

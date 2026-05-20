@@ -7,7 +7,7 @@ export type Project = {
   year: string;
   role: string;
   stack: string[];
-  status: "live" | "in-development" | "archived";
+  status: "live" | "archived";
   href?: string;
   repo?: string;
   cover: string;
@@ -55,32 +55,21 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "yii-clinic",
+    slug: "atribuicao-prefeitura-jacarei",
     index: "03",
-    title: "Clinic Operations",
-    tagline: "Yii2 ERP for a healthcare network.",
+    title: "Atribuição Prefeitura de Jacareí",
+    tagline: "Sistema interno para fluxos operacionais municipais.",
     summary:
-      "Sistema de gestão para rede de clínicas — agenda médica, prontuários, faturamento. Arquitetura modular em Yii2 com permissionamento granular e auditoria completa.",
+      "Sistema de atribuição para a Prefeitura de Jacareí - SP, com foco em organização operacional, rastreabilidade de processos e interface administrativa clara para uso diário.",
     year: "2024",
-    role: "Backend · DBA",
-    stack: ["PHP", "Yii2", "MySQL", "Redis", "Docker"],
+    role: "Fullstack · Public Sector",
+    stack: ["PHP", "Yii2", "MySQL", "Bootstrap", "JavaScript"],
     status: "live",
-    cover: "/assets/projects/clinic.svg",
+    cover: "/assets/projects/atribuicao-jacarei.svg",
     accent: "chrome",
-  },
-  {
-    slug: "portfolio-3",
-    index: "04",
-    title: "Portfolio 3.0",
-    tagline: "This site. A machine pretending to be an album.",
-    summary:
-      "Reescrita completa em Next.js 15 com design system industrial-cromado, scroll cinético via Lenis, animações com GSAP ScrollTrigger e Framer Motion. Lighthouse 95+.",
-    year: "2026",
-    role: "Design · Engineering",
-    stack: ["Next.js 15", "TypeScript", "Tailwind", "GSAP", "Lenis"],
-    status: "live",
-    repo: "https://github.com/jotavtech/portfoliojvc",
-    cover: "/assets/projects/portfolio-3.svg",
-    accent: "rust",
+    kpis: [
+      { label: "Scope", value: "Municipal" },
+      { label: "Context", value: "Jacareí-SP" },
+    ],
   },
 ];

@@ -1,13 +1,13 @@
 <div align="center">
 
-# Portfolio 3.0 — `jotavtech`
+# Jotavtech Portfolio — 3.0
 
 #### Industrial · dark · cinematic. Built like a machine, shipped like a record.
 
 [![Next.js](https://img.shields.io/badge/Next.js-15-070707?style=flat-square&logo=next.js&labelColor=070707&color=E8E8E8)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-070707?style=flat-square&logo=typescript&labelColor=070707&color=E8E8E8)](https://www.typescriptlang.org/)
 [![Tailwind](https://img.shields.io/badge/Tailwind-3-070707?style=flat-square&logo=tailwindcss&labelColor=070707&color=E8E8E8)](https://tailwindcss.com/)
-[![CI](https://img.shields.io/github/actions/workflow/status/jotavtech/portfoliojvc/ci.yml?style=flat-square&label=ci&labelColor=070707&color=FF3B1F)](https://github.com/jotavtech/portfoliojvc/actions)
+[![CI](https://img.shields.io/github/actions/workflow/status/jotavtech/jotavtech-portfolio/ci.yml?style=flat-square&label=ci&labelColor=070707&color=FF3B1F)](https://github.com/jotavtech/jotavtech-portfolio/actions)
 [![License: MIT](https://img.shields.io/badge/license-MIT-FF3B1F?style=flat-square&labelColor=070707)](LICENSE)
 
 </div>

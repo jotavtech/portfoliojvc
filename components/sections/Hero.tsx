@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowDownRight } from "lucide-react";
@@ -151,7 +152,7 @@ export function Hero() {
               </li>
               <li className="flex justify-between gap-4">
                 <span className="text-chrome-600">mode</span>
-                <span className="text-rust-400">AVAILABLE</span>
+                <span className="text-rust-400">DISPONIVEL</span>
               </li>
             </ul>
           </motion.aside>
@@ -171,21 +172,21 @@ export function Hero() {
 
           <div className="flex items-center gap-3">
             <Magnetic>
-              <a
-                href="#work"
+              <Link
+                href="/#work"
                 className="group inline-flex items-center gap-3 border border-chrome-300/40 px-5 py-3 font-mono text-eyebrow uppercase tracking-[0.32em] text-chrome-100 transition-colors hover:border-rust-500 hover:bg-rust-500 hover:text-ink"
               >
                 <span>Selected work</span>
                 <ArrowDownRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
-              </a>
+              </Link>
             </Magnetic>
             <Magnetic>
-              <a
-                href="#contact"
+              <Link
+                href="/#contact"
                 className="inline-flex items-center gap-3 px-5 py-3 font-mono text-eyebrow uppercase tracking-[0.32em] text-chrome-400 transition-colors hover:text-chrome-100"
               >
                 <span className="h-1.5 w-1.5 bg-rust-500" /> Open channel
-              </a>
+              </Link>
             </Magnetic>
           </div>
         </motion.div>

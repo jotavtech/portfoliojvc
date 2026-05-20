@@ -28,6 +28,15 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: site.name, url: site.social.github }],
   creator: site.name,
+  icons: {
+    icon: [
+      { url: site.thumbnail, type: "image/png" },
+      { url: site.thumbnail, sizes: "32x32", type: "image/png" },
+      { url: site.thumbnail, sizes: "192x192", type: "image/png" },
+    ],
+    shortcut: site.thumbnail,
+    apple: [{ url: site.thumbnail, type: "image/png" }],
+  },
   openGraph: {
     title: `${site.name} — ${site.role}`,
     description: site.description,
@@ -35,11 +44,20 @@ export const metadata: Metadata = {
     siteName: site.alias,
     locale: "pt_BR",
     type: "website",
+    images: [
+      {
+        url: site.thumbnail,
+        width: 1018,
+        height: 746,
+        alt: `${site.alias} monogram`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${site.name} — ${site.role}`,
     description: site.description,
+    images: [site.thumbnail],
   },
   robots: {
     index: true,

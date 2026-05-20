@@ -30,7 +30,7 @@ export function About() {
         >
           <div className="relative aspect-[3/4] w-full overflow-hidden border border-hairline-strong bg-ink-900">
             <Image
-              src="/assets/portrait.png"
+              src="https://res.cloudinary.com/dzwfuzxxw/image/upload/v1778693394/923ab890-18b2-4aca-accb-827fe9021fb6_s2bp9g.png"
               alt={site.name}
               fill
               sizes="(min-width: 768px) 440px, 100vw"
@@ -49,7 +49,7 @@ export function About() {
               · subject_27_12_05
             </div>
             <div className="absolute bottom-3 right-3 font-mono text-[10px] uppercase tracking-[0.32em] text-chrome-300">
-              · still_alive
+              · disponivel
             </div>
           </div>
 

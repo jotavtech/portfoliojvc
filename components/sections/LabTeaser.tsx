@@ -14,6 +14,23 @@ const EXPERIMENTS = [
   { id: "004", name: "noise_loom", note: "fractal gradient mill" },
 ];
 
+const RADIAL_LINES = [
+  { x2: "90", y2: "50" },
+  { x2: "84.641", y2: "70" },
+  { x2: "70", y2: "84.641" },
+  { x2: "50", y2: "90" },
+  { x2: "30", y2: "84.641" },
+  { x2: "15.359", y2: "70" },
+  { x2: "10", y2: "50" },
+  { x2: "15.359", y2: "30" },
+  { x2: "30", y2: "15.359" },
+  { x2: "50", y2: "10" },
+  { x2: "70", y2: "15.359" },
+  { x2: "84.641", y2: "30" },
+];
+
+const LOOM_LINES = ["10", "20", "30", "40", "50", "60", "70", "80"];
+
 export function LabTeaser() {
   return (
     <section
@@ -106,21 +123,14 @@ function ExpGlyph({ index }: { index: number }) {
       <circle cx="50" cy="50" r="3" fill="currentColor" strokeWidth="0" />
     </svg>,
     <svg key="2" viewBox="0 0 100 100" className="h-full w-full stroke-chrome-400" fill="none">
-      {[...Array(12)].map((_, i) => (
-        <line
-          key={i}
-          x1="50"
-          y1="50"
-          x2={50 + Math.cos((i / 12) * Math.PI * 2) * 40}
-          y2={50 + Math.sin((i / 12) * Math.PI * 2) * 40}
-          strokeWidth="0.5"
-        />
+      {RADIAL_LINES.map((line, i) => (
+        <line key={i} x1="50" y1="50" x2={line.x2} y2={line.y2} strokeWidth="0.5" />
       ))}
       <circle cx="50" cy="50" r="40" strokeWidth="0.3" />
     </svg>,
     <svg key="3" viewBox="0 0 100 100" className="h-full w-full stroke-chrome-400" fill="none">
-      {[...Array(8)].map((_, i) => (
-        <line key={i} x1="0" y1={10 + i * 10} x2="100" y2={10 + i * 10} strokeWidth="0.5" />
+      {LOOM_LINES.map((y) => (
+        <line key={y} x1="0" y1={y} x2="100" y2={y} strokeWidth="0.5" />
       ))}
     </svg>,
   ];

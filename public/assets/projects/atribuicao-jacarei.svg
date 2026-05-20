@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#070707" />
+      <stop offset="0.52" stop-color="#111111" />
+      <stop offset="1" stop-color="#1F1F1F" />
+    </linearGradient>
+    <pattern id="grid" width="56" height="56" patternUnits="userSpaceOnUse">
+      <path d="M 56 0 L 0 0 0 56" fill="none" stroke="rgba(255,255,255,0.055)" stroke-width="1" />
+    </pattern>
+    <linearGradient id="chrome" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F5F5F5" />
+      <stop offset="0.45" stop-color="#A8A8A8" />
+      <stop offset="1" stop-color="#6E6E6E" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)" />
+  <rect width="1200" height="675" fill="url(#grid)" />
+  <rect x="72" y="72" width="1056" height="531" fill="none" stroke="rgba(255,255,255,0.16)" />
+  <g transform="translate(96,104)" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
+    <text fill="#FF3B1F" letter-spacing="6" font-size="12">· PREFEITURA DE JACAREI - SP / ATRIBUICAO</text>
+    <text y="142" font-size="104" font-weight="700" letter-spacing="-4" fill="url(#chrome)">ATRIBUICAO</text>
+    <text y="252" font-size="104" font-weight="700" letter-spacing="-4" fill="#8A8A8A">MUNICIPAL</text>
+    <text y="320" fill="#6E6E6E" letter-spacing="3" font-size="13">PHP · YII2 · MYSQL · JAVASCRIPT</text>
+  </g>
+  <g transform="translate(810,150)" stroke="#E8E8E8" stroke-width="1" fill="none" opacity="0.44">
+    <rect x="0" y="0" width="260" height="330" />
+    <line x1="0" y1="64" x2="260" y2="64" />
+    <line x1="0" y1="128" x2="260" y2="128" />
+    <line x1="0" y1="192" x2="260" y2="192" />
+    <line x1="0" y1="256" x2="260" y2="256" />
+    <circle cx="226" cy="32" r="7" fill="#FF3B1F" stroke="none" />
+    <path d="M32 32h112M32 96h172M32 160h132M32 224h184M32 288h118" />
+  </g>
+  <rect x="0" y="670" width="1200" height="5" fill="#FF3B1F" />
+</svg>

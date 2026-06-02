@@ -5,7 +5,7 @@
   "description": "João Vitor Chaves — Portfolio 3.0 (monorepo root)",
   "scripts": {
     "dev": "npm run dev --prefix joaovitrineportfolio",
-    "build": "npm run build --prefix joaovitrineportfolio",
+    "build": "cd joaovitrineportfolio && npm run build",
     "start": "npm run start --prefix joaovitrineportfolio",
     "lint": "npm run lint --prefix joaovitrineportfolio",
     "typecheck": "npm run typecheck --prefix joaovitrineportfolio",

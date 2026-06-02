@@ -1,5 +1,5 @@
 {
   "framework": "nextjs",
-  "installCommand": "npm ci --prefix joaovitrineportfolio",
-  "buildCommand": "npm run build --prefix joaovitrineportfolio"
+  "installCommand": "cd joaovitrineportfolio && npm ci",
+  "buildCommand": "cd joaovitrineportfolio && npm run build && cp -r .next ../.next"
 }

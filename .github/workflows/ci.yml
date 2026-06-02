@@ -24,15 +24,19 @@ jobs:
           cache: npm
 
       - name: install
+        working-directory: joaovitrineportfolio
         run: npm ci
 
       - name: lint
+        working-directory: joaovitrineportfolio
         run: npm run lint
 
       - name: typecheck
+        working-directory: joaovitrineportfolio
         run: npm run typecheck
 
       - name: build
+        working-directory: joaovitrineportfolio
         run: npm run build
         env:
           NEXT_TELEMETRY_DISABLED: "1"

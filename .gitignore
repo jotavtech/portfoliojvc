@@ -5,7 +5,9 @@ node_modules/
 
 # next.js
 .next/
+joaovitrineportfolio/.next/
 out/
+joaovitrineportfolio/out/
 build/
 dist/
 

@@ -9,7 +9,8 @@ import { ChromeText } from "@/components/primitives/ChromeText";
 type Params = Promise<{ slug: string }>;
 
 export function generateStaticParams() {
-  return projects.map((p) => ({ slug: p.slug }));
+  // Featured projects (e.g. atlas-command-center) ship their own dedicated route.
+  return projects.filter((p) => !p.featured).map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Params }) {

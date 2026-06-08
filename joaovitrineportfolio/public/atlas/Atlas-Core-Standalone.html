@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Atlas Command Core — Prototype</title>
+    <!--
+      PLACEHOLDER FILE.
+      Replace this file with your real Atlas-Core-Standalone.html.
+      The portfolio embeds whatever lives at /atlas/Atlas-Core-Standalone.html,
+      so simply overwriting this file is all that's needed — no code changes.
+    -->
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        background: #070707;
+        color: #e8e8e8;
+        font-family: ui-monospace, "SF Mono", Menlo, monospace;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+        background-size: 48px 48px;
+      }
+      .stage {
+        text-align: center;
+        perspective: 900px;
+      }
+      .core {
+        position: relative;
+        width: 220px;
+        height: 220px;
+        margin: 0 auto 56px;
+        transform-style: preserve-3d;
+        animation: spin 18s linear infinite;
+      }
+      .ring {
+        position: absolute;
+        inset: 0;
+        border: 1px solid rgba(200, 200, 200, 0.45);
+        border-radius: 50%;
+      }
+      .ring:nth-child(1) { transform: rotateY(0deg); }
+      .ring:nth-child(2) { transform: rotateY(60deg); }
+      .ring:nth-child(3) { transform: rotateY(120deg); }
+      .ring:nth-child(4) { transform: rotateX(60deg); border-color: rgba(255, 59, 31, 0.5); }
+      .ring:nth-child(5) { transform: rotateX(120deg); }
+      .nucleus {
+        position: absolute;
+        top: 50%; left: 50%;
+        width: 26px; height: 26px;
+        margin: -13px 0 0 -13px;
+        background: #e8e8e8;
+        border-radius: 50%;
+        box-shadow: 0 0 40px 6px rgba(232, 232, 232, 0.25);
+      }
+      .label { font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase; color: #8a8a8a; }
+      .title { margin: 14px 0 8px; font-size: 22px; letter-spacing: -0.01em; color: #f5f5f5; }
+      .sub { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #525252; }
+      .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #ff3b1f; margin-right: 8px; vertical-align: middle; animation: pulse 2.4s ease-in-out infinite; }
+      @keyframes spin { to { transform: rotateY(360deg) rotateX(8deg); } }
+      @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+      @media (prefers-reduced-motion: reduce) { .core { animation: none; } }
+    </style>
+  </head>
+  <body>
+    <div class="stage">
+      <div class="core">
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="nucleus"></div>
+      </div>
+      <div class="label"><span class="dot"></span>ATLAS SYSTEM / ATL-01</div>
+      <h1 class="title">Atlas Command Core</h1>
+      <p class="sub">Interactive prototype · placeholder render</p>
+    </div>
+  </body>
+</html>

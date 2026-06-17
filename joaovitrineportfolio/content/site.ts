@@ -4,7 +4,7 @@ export const site = {
   role: "Fullstack Engineer · Design Engineer · Interface + Production",
   location: "João Pessoa · Brazil",
   birthYear: 2005,
-  email: "martinsjoao1227@gmail.com",
+  email: "jotavtechdev@gmail.com",
   phone: "+55 83 99929-0376",
   url: "https://jotachaves.dev",
   thumbnail:

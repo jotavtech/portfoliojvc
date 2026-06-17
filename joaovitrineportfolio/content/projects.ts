@@ -6,6 +6,7 @@ export type Project = {
   summary: string;
   approach?: string;
   outcome?: string;
+  teardownHref?: string;
   year: string;
   role: string;
   stack: string[];
@@ -49,6 +50,7 @@ export const projects: Project[] = [
       "Modular PHP/Yii2 architecture with MySQL, strict component isolation, and an interface built for daily non-technical users. No framework overhead — every decision oriented toward operational reliability.",
     outcome:
       "5,000+ municipal workers active daily across 3+ municipalities. Replaced a manual process with traceable, auditable workflows. In production since 2024.",
+    teardownHref: "/lab#atrib-teardown",
     year: "2024",
     role: "Fullstack · Public Sector",
     stack: ["PHP", "Yii2", "MySQL", "Bootstrap", "JavaScript"],
@@ -72,6 +74,7 @@ export const projects: Project[] = [
       "Vue 3 frontend over Node.js + Socket.IO for sub-120ms real-time sync. PostgreSQL for persistent rankings. UX modeled on competitive sports scoring — information density without cognitive overload.",
     outcome:
       "Live product handling 5K concurrent users. Ranking and voting systems run in real time without polling. Users return session after session — this is a working product, not a showcase.",
+    teardownHref: "/lab#playoff-teardown",
     year: "2024",
     role: "Fullstack · Product",
     stack: ["Vue 3", "Node.js", "Socket.IO", "PostgreSQL", "Tailwind"],

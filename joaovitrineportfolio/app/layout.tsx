@@ -5,6 +5,7 @@ import { LenisProvider } from "@/components/chrome/LenisProvider";
 import { Header } from "@/components/chrome/Header";
 import { Footer } from "@/components/chrome/Footer";
 import { KeyboardNav } from "@/components/chrome/KeyboardNav";
+import { BootSequenceGate } from "@/components/chrome/BootSequenceGate";
 import { Grain } from "@/components/primitives/Grain";
 import { Scanlines } from "@/components/primitives/Scanlines";
 import "./globals.css";
@@ -91,12 +92,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body className="relative bg-ink text-chrome-100 antialiased">
         <LenisProvider />
+        <BootSequenceGate />
         <Header />
         <KeyboardNav />
         <main className="relative">{children}</main>
         <Footer />
+        {/* atmosphere — grain + scanlines + vignette */}
         <Grain opacity={0.06} />
         <Scanlines opacity={0.035} />
+        <div
+          aria-hidden
+          className="vignette pointer-events-none fixed inset-0 z-[1]"
+        />
       </body>
     </html>
   );

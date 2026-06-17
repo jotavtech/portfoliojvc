@@ -7,6 +7,7 @@ import { ArrowUpRight } from "lucide-react";
 import { projects } from "@/content/projects";
 import { TerminalLabel } from "@/components/primitives/TerminalLabel";
 import { ChromeText } from "@/components/primitives/ChromeText";
+import { MockupFrame } from "@/components/primitives/MockupFrame";
 import { ease } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
@@ -51,6 +52,7 @@ export function SelectedProjects() {
               key={active}
               cover={flagship.find((p) => p.slug === active)?.cover}
               accent={flagship.find((p) => p.slug === active)?.accent}
+              title={flagship.find((p) => p.slug === active)?.title}
             />
           )}
         </AnimatePresence>
@@ -130,9 +132,11 @@ function ProjectRow({
 function FloatingPreview({
   cover,
   accent,
+  title,
 }: {
   cover?: string;
   accent?: "rust" | "chrome";
+  title?: string;
 }) {
   if (!cover) return null;
   return (
@@ -143,25 +147,24 @@ function FloatingPreview({
       transition={{ duration: 0.35, ease: ease.outExpo }}
       className="pointer-events-none fixed bottom-10 right-10 z-[40] hidden md:block"
     >
-      <div
-        className={cn(
-          "relative h-[220px] w-[340px] overflow-hidden border bg-ink-900",
-          accent === "rust" ? "border-rust-500/60 shadow-glow" : "border-chrome-300/30",
-        )}
+      <MockupFrame
+        label={title ?? "preview"}
+        status="live"
+        accent={accent}
+        className="w-[340px]"
       >
-        <Image
-          src={cover}
-          alt=""
-          fill
-          sizes="340px"
-          className="object-cover"
-          unoptimized
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent" />
-        <div className="absolute left-3 top-3 font-mono text-[9px] uppercase tracking-[0.32em] text-chrome-300">
-          PREVIEW · LIVE
+        <div className="relative h-[200px] w-full">
+          <Image
+            src={cover}
+            alt=""
+            fill
+            sizes="340px"
+            className="object-cover"
+            unoptimized
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent" />
         </div>
-      </div>
+      </MockupFrame>
     </motion.div>
   );
 }

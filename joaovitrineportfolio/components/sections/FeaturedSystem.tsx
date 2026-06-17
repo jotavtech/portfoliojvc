@@ -1,12 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { TerminalLabel } from "@/components/primitives/TerminalLabel";
 import { ChromeText } from "@/components/primitives/ChromeText";
+import { MockupFrame } from "@/components/primitives/MockupFrame";
 import { ease } from "@/lib/motion";
+
+const AtlasCore = dynamic(
+  () => import("@/components/sections/AtlasCore").then((m) => m.AtlasCore),
+  { ssr: false },
+);
 
 const HREF = "/projects/atlas-command-center";
 
@@ -79,35 +85,47 @@ export function FeaturedSystem() {
           </div>
         </motion.div>
 
-        {/* visual */}
+        {/* Atlas Command Core — WebGL */}
         <motion.div
           initial={{ opacity: 0, scale: 0.97 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8, ease: ease.outExpo }}
+          className="relative"
         >
-          <Link
-            href={HREF}
-            className="group relative block overflow-hidden border border-hairline-strong bg-ink-900"
-          >
-            <div className="relative aspect-[16/10] w-full">
-              <Image
-                src="/assets/projects/atlas-command-center.svg"
-                alt="Atlas Command Center"
-                fill
-                sizes="(min-width: 768px) 720px, 100vw"
-                className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-                unoptimized
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
+          <MockupFrame label="ATL-01" status="live" accent="rust">
+            {/* live canvas */}
+            <AtlasCore className="aspect-[16/10] w-full" />
+
+            {/* scanline overlay */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 opacity-[0.035]"
+              style={{
+                backgroundImage:
+                  "repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(255,255,255,0.5) 2px, rgba(255,255,255,0.5) 3px)",
+              }}
+            />
+
+            {/* nodes indicator */}
+            <div className="pointer-events-none absolute right-3 bottom-3 flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-[0.32em]">
+              <span className="h-1.5 w-1.5 animate-pulse bg-rust-500" />
+              <span className="text-rust-400">8 nodes · click to navigate</span>
             </div>
-            <div className="flex items-center justify-between border-t border-hairline px-5 py-4">
-              <span className="font-mono text-[10px] uppercase tracking-[0.32em] text-chrome-400">
-                ATL-01 · interactive 3D prototype
-              </span>
-              <ArrowUpRight className="h-4 w-4 text-chrome-500 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-rust-500" />
-            </div>
-          </Link>
+          </MockupFrame>
+
+          <div className="flex items-center justify-between border-x border-b border-[var(--mockup-border)] bg-ink-900/50 px-5 py-3">
+            <span className="font-mono text-[10px] uppercase tracking-[0.32em] text-chrome-600">
+              Atlas Command Core · interactive · GLSL
+            </span>
+            <Link
+              href={HREF}
+              className="group inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.32em] text-chrome-300 transition-colors hover:text-rust-500"
+            >
+              Case study
+              <ArrowUpRight className="h-3 w-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </Link>
+          </div>
         </motion.div>
       </div>
     </section>

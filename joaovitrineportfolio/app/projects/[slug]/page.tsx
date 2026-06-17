@@ -2,11 +2,12 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
-import { ArrowLeft, ArrowUpRight, Github } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Github, FileText } from "lucide-react";
 import { projects } from "@/content/projects";
 import { site } from "@/content/site";
 import { TerminalLabel } from "@/components/primitives/TerminalLabel";
 import { ChromeText } from "@/components/primitives/ChromeText";
+import { MockupFrame } from "@/components/primitives/MockupFrame";
 
 type Params = Promise<{ slug: string }>;
 
@@ -105,6 +106,15 @@ export default async function ProjectPage({ params }: { params: Params }) {
                 <span>Repository</span>
               </a>
             )}
+            {project.teardownHref && (
+              <Link
+                href={project.teardownHref}
+                className="inline-flex items-center gap-3 border border-hairline-strong px-5 py-3 font-mono text-eyebrow uppercase tracking-[0.32em] text-chrome-400 transition-colors hover:text-chrome-100"
+              >
+                <FileText className="h-3.5 w-3.5" />
+                <span>Engineering teardown</span>
+              </Link>
+            )}
           </div>
         </header>
 
@@ -162,17 +172,23 @@ export default async function ProjectPage({ params }: { params: Params }) {
         </section>
 
         {project.cover && (
-          <figure className="mt-16 border border-hairline">
-            <div className="relative aspect-[16/9] w-full overflow-hidden bg-ink-900">
-              <Image
-                src={project.cover}
-                alt={project.title}
-                fill
-                sizes="(min-width: 1100px) 1100px, 100vw"
-                className="object-cover"
-                unoptimized
-              />
-            </div>
+          <figure className="mt-16">
+            <MockupFrame
+              label={project.title}
+              status={project.status}
+              accent={project.accent}
+            >
+              <div className="relative aspect-[16/9] w-full overflow-hidden bg-ink-900">
+                <Image
+                  src={project.cover}
+                  alt={project.title}
+                  fill
+                  sizes="(min-width: 1100px) 1100px, 100vw"
+                  className="object-cover"
+                  unoptimized
+                />
+              </div>
+            </MockupFrame>
           </figure>
         )}
       </div>

@@ -1,8 +1,9 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { TerminalLabel } from "@/components/primitives/TerminalLabel";
 import { ChromeText } from "@/components/primitives/ChromeText";
+import { teardowns } from "@/content/teardowns";
 
 const ChromeField = dynamic(() => import("@/components/lab/ChromeField").then((m) => m.ChromeField));
 const NoiseLoom = dynamic(() => import("@/components/lab/NoiseLoom").then((m) => m.NoiseLoom));
@@ -38,7 +39,8 @@ const EXPERIMENTS = [
 
 export const metadata = {
   title: "Lab",
-  description: "Experimental playground — WebGL, canvas, motion physics, audio reactive.",
+  description:
+    "Experimental playground and engineering teardowns — WebGL, canvas, motion physics, plus the how behind the flagship systems.",
 };
 
 export default function LabPage() {
@@ -136,6 +138,84 @@ export default function LabPage() {
                 </p>
               ))}
             </div>
+          </div>
+        </div>
+
+        {/* ── Engineering teardowns ───────────────────────────────────── */}
+        <div className="mt-24">
+          <TerminalLabel variant="rust">· ENGINEERING TEARDOWNS</TerminalLabel>
+          <h2 className="mt-4 font-display text-display-md font-semibold leading-[0.96] tracking-tightest">
+            <ChromeText>The how</ChromeText>{" "}
+            <ChromeText variant="muted">behind the flagships</ChromeText>
+          </h2>
+          <p className="mt-5 max-w-2xl font-display text-base leading-relaxed text-chrome-400 md:text-lg">
+            Short reads on the engineering decisions — the constraints, the trade-offs, and why each
+            system is built the way it is.
+          </p>
+
+          <div className="mt-12 space-y-px">
+            {teardowns.map((t) => (
+              <section
+                key={t.id}
+                id={t.id}
+                className="scroll-mt-28 border border-hairline bg-ink-900"
+              >
+                <div className="flex flex-wrap items-center justify-between gap-3 border-b border-hairline px-5 py-3 font-mono text-[10px] uppercase tracking-[0.32em] md:px-8">
+                  <span className="text-rust-500">{t.project}</span>
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-chrome-600">
+                    {t.metrics.map((m) => (
+                      <span key={m.label}>
+                        {m.label}: <span className="text-chrome-300">{m.value}</span>
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="p-5 md:p-8">
+                  <h3 className="max-w-3xl font-display text-2xl font-semibold leading-tight tracking-tight text-chrome-100 md:text-3xl">
+                    {t.title}
+                  </h3>
+                  <p className="mt-4 max-w-2xl font-display text-base leading-relaxed text-chrome-300 md:text-lg">
+                    {t.intro}
+                  </p>
+
+                  <ul className="mt-6 flex flex-wrap gap-1.5">
+                    {t.stack.map((s) => (
+                      <li
+                        key={s}
+                        className="border border-hairline px-2 py-1 font-mono text-[10px] uppercase tracking-[0.22em] text-chrome-400"
+                      >
+                        {s}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="mt-10 divide-y divide-hairline border-y border-hairline">
+                    {t.sections.map((s) => (
+                      <div
+                        key={s.label}
+                        className="grid gap-3 py-7 md:grid-cols-[200px_1fr] md:gap-10"
+                      >
+                        <div className="font-mono text-eyebrow uppercase tracking-[0.32em] text-rust-400">
+                          {s.label}
+                        </div>
+                        <p className="max-w-2xl font-display text-base leading-relaxed text-chrome-300 md:text-lg">
+                          {s.body}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <Link
+                    href={t.projectHref}
+                    className="group mt-8 inline-flex items-center gap-3 border border-chrome-300/40 px-5 py-3 font-mono text-eyebrow uppercase tracking-[0.32em] text-chrome-100 transition-colors hover:border-rust-500 hover:bg-rust-500 hover:text-ink"
+                  >
+                    <span>View the project</span>
+                    <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  </Link>
+                </div>
+              </section>
+            ))}
           </div>
         </div>
       </div>

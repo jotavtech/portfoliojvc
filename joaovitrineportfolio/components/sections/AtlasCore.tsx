@@ -145,7 +145,6 @@ function OrbitalNode({
   angle,
   radius,
   speed,
-  label,
   href,
 }: (typeof NODES)[number]) {
   const meshRef = useRef<THREE.Mesh>(null);

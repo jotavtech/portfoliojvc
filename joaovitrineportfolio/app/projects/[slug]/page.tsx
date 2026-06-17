@@ -8,6 +8,7 @@ import { site } from "@/content/site";
 import { TerminalLabel } from "@/components/primitives/TerminalLabel";
 import { ChromeText } from "@/components/primitives/ChromeText";
 import { MockupFrame } from "@/components/primitives/MockupFrame";
+import { StatCounter } from "@/components/primitives/StatCounter";
 
 type Params = Promise<{ slug: string }>;
 
@@ -22,6 +23,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   if (!project) return {};
   const ogTitle = `${project.title} · ${site.alias}`;
   const description = project.outcome ?? project.tagline;
+  // OG/Twitter images are provided by the co-located opengraph-image.tsx route
+  // (a designed card generated per project), so we don't set images here.
   return {
     title: project.title,
     description,
@@ -32,15 +35,11 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
       siteName: site.alias,
       locale: "en_US",
       type: "article",
-      images: project.cover
-        ? [{ url: project.cover, alt: project.title }]
-        : undefined,
     },
     twitter: {
       card: "summary_large_image",
       title: ogTitle,
       description,
-      images: project.cover ? [project.cover] : undefined,
     },
   };
 }
@@ -147,7 +146,10 @@ export default async function ProjectPage({ params }: { params: Params }) {
                       <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-chrome-500">
                         {k.label}
                       </span>
-                      <span className="font-display text-xl text-chrome-100">{k.value}</span>
+                      <StatCounter
+                        value={k.value}
+                        className="font-display text-xl text-chrome-100"
+                      />
                     </li>
                   ))}
                 </ul>

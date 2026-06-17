@@ -14,7 +14,7 @@ export default function NotFound() {
           </ChromeText>
         </h1>
         <p className="mx-auto mt-6 max-w-md font-mono text-[11px] uppercase tracking-[0.22em] text-chrome-400">
-          A página solicitada não existe nesta máquina.
+          The requested route does not exist on this machine.
         </p>
         <Link
           href="/"

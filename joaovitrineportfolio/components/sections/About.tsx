@@ -8,10 +8,10 @@ import { ease } from "@/lib/motion";
 import { site } from "@/content/site";
 
 const PRINCIPLES = [
-  "Pixel é arquitetura, não decoração.",
-  "Performance > efeito.",
-  "Densidade > esvaziamento.",
-  "Personalidade > template.",
+  "Pixel is architecture, not decoration.",
+  "Performance over spectacle.",
+  "Density over emptiness.",
+  "Constraint is the spec.",
 ];
 
 export function About() {
@@ -49,7 +49,7 @@ export function About() {
               · subject_27_12_05
             </div>
             <div className="absolute bottom-3 right-3 font-mono text-[10px] uppercase tracking-[0.32em] text-chrome-300">
-              · disponivel
+              · available
             </div>
           </div>
 
@@ -77,21 +77,21 @@ export function About() {
             className="mt-10 space-y-5 font-display text-base leading-relaxed text-chrome-300 md:text-lg"
           >
             <p>
-              Sou{" "}
-              <span className="text-chrome-100">fullstack engineer brasileiro</span>, baseado em João
-              Pessoa. Construo produtos digitais que funcionam como instrumentos — densos, sólidos,
-              com personalidade.
+              Brazilian{" "}
+              <span className="text-chrome-100">fullstack engineer</span> based in João Pessoa. I
+              build software like infrastructure — dense, opinionated, built to survive. 10+ systems
+              in production, all solo.
             </p>
             <p>
-              Minha prática combina <span className="text-chrome-100">React/TypeScript no front</span>{" "}
-              e <span className="text-chrome-100">PHP/Laravel/Yii2 no backend</span>, mas o que me
-              move é o que fica nas bordas: motion design, design system, audio, fricção e ritmo.
+              My practice spans{" "}
+              <span className="text-chrome-100">React / TypeScript</span> on the front and{" "}
+              <span className="text-chrome-100">PHP / Laravel / Yii2</span> on the backend — but
+              what drives me is the edge: motion, design systems, audio, and the places where
+              engineering meets interface.
             </p>
             <p>
-              Não acredito em portfólio que parece template. Cada interface que assino tem
-              <span className="text-chrome-100"> arquitetura</span>,
-              <span className="text-chrome-100"> opinião</span> e
-              <span className="text-chrome-100"> mão</span>.
+              Constraint is my design spec. Limited hardware taught me performance. Solo delivery
+              taught me scope. Both still do.
             </p>
           </motion.div>
 

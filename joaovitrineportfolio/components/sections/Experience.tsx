@@ -45,7 +45,7 @@ export function Experience() {
               </h2>
             </div>
             <p className="hidden max-w-xs font-mono text-[11px] uppercase tracking-[0.22em] text-chrome-400 md:block">
-              Scroll para avançar nos blocos. Cada cargo é uma faixa do mixing board.
+              Scroll to advance through blocks. Each role is a lane on the mixing board.
             </p>
           </div>
 

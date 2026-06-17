@@ -4,6 +4,8 @@ export type Project = {
   title: string;
   tagline: string;
   summary: string;
+  approach?: string;
+  outcome?: string;
   year: string;
   role: string;
   stack: string[];
@@ -23,7 +25,7 @@ export const projects: Project[] = [
     title: "Atlas Command Center",
     tagline: "Personal command system for AI, automation & environment.",
     summary:
-      "Sistema de comando pessoal — uma interface físico-digital que unifica IA, automação, controle de smart home, produtividade e inteligência ambiental em uma única camada de comando. Apresentado como protótipo 3D interativo navegável.",
+      "A personal command system designed to unify AI, automation, smart home control, productivity, and environmental intelligence through a single physical-digital interface layer. Presented as a navigable interactive 3D prototype.",
     year: "2025",
     role: "Product · Creative Direction · 3D",
     stack: ["React", "Three.js", "GSAP", "3D Prototype", "Product Design", "UX Strategy"],
@@ -37,12 +39,39 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "playoff",
+    slug: "atribuicao-prefeitura-jacarei",
     index: "01",
-    title: "PlayOff",
-    tagline: "Real-time music battles, ranked & voted.",
+    title: "Atribuição Prefeitura de Jacareí",
+    tagline: "Municipal attribution system — public sector, production scale.",
     summary:
-      "Plataforma de batalhas musicais em tempo real com sistema de votação, ranking dinâmico e interface inspirada em rádio pirata. Foco em latência baixa e UX competitiva.",
+      "Attribution system built for Jacareí City Hall — managing operational workflows, process traceability, and administrative clarity for daily municipal use. 5,000+ active users across 3+ municipalities in production.",
+    approach:
+      "Modular PHP/Yii2 architecture with MySQL, strict component isolation, and an interface built for daily non-technical users. No framework overhead — every decision oriented toward operational reliability.",
+    outcome:
+      "5,000+ municipal workers active daily across 3+ municipalities. Replaced a manual process with traceable, auditable workflows. In production since 2024.",
+    year: "2024",
+    role: "Fullstack · Public Sector",
+    stack: ["PHP", "Yii2", "MySQL", "Bootstrap", "JavaScript"],
+    status: "live",
+    cover: "/assets/projects/atribuicao-jacarei.svg",
+    accent: "chrome",
+    kpis: [
+      { label: "Daily users", value: "5,000+" },
+      { label: "Municipalities", value: "3+" },
+      { label: "Sector", value: "Public" },
+    ],
+  },
+  {
+    slug: "playoff",
+    index: "02",
+    title: "PlayOff",
+    tagline: "Real-time music battle platform — product, not demo.",
+    summary:
+      "Full product: real-time voting, dynamic ranking, and a pirate-radio UI that actually ships. Built for competitive, low-latency music battles at scale. Not a prototype — users are live and sessions are running.",
+    approach:
+      "Vue 3 frontend over Node.js + Socket.IO for sub-120ms real-time sync. PostgreSQL for persistent rankings. UX modeled on competitive sports scoring — information density without cognitive overload.",
+    outcome:
+      "Live product handling 5K concurrent users. Ranking and voting systems run in real time without polling. Users return session after session — this is a working product, not a showcase.",
     year: "2024",
     role: "Fullstack · Product",
     stack: ["Vue 3", "Node.js", "Socket.IO", "PostgreSQL", "Tailwind"],
@@ -53,16 +82,20 @@ export const projects: Project[] = [
     accent: "rust",
     kpis: [
       { label: "Latency", value: "<120ms" },
-      { label: "Concurrent", value: "5k users" },
+      { label: "Concurrent", value: "5K users" },
     ],
   },
   {
     slug: "dashmeboard",
-    index: "02",
+    index: "03",
     title: "DashMEBoard",
     tagline: "Operational dashboard for distributed teams.",
     summary:
-      "Painel de gestão de dados com visualizações avançadas e fluxos editoriais. Construído em Laravel com Blade templates, otimizado para times pequenos em alta rotação.",
+      "Data management dashboard with advanced visualizations and editorial workflows. Built on Laravel with Blade templates, optimized for small teams running at high velocity.",
+    approach:
+      "Laravel with Blade templates kept the stack thin and deployable. Alpine.js for reactive UI without full SPA overhead. 12 modules, zero external dashboard dependencies.",
+    outcome:
+      "30+ active organizations running editorial workflows on it. Built and iterated solo — tight feedback loop between builder and users in the field.",
     year: "2024",
     role: "Fullstack",
     stack: ["Laravel", "Blade", "MariaDB", "Alpine.js", "Tailwind"],
@@ -72,24 +105,6 @@ export const projects: Project[] = [
     kpis: [
       { label: "Modules", value: "12" },
       { label: "Active orgs", value: "30+" },
-    ],
-  },
-  {
-    slug: "atribuicao-prefeitura-jacarei",
-    index: "03",
-    title: "Atribuição Prefeitura de Jacareí",
-    tagline: "Sistema interno para fluxos operacionais municipais.",
-    summary:
-      "Sistema de atribuição para a Prefeitura de Jacareí - SP, com foco em organização operacional, rastreabilidade de processos e interface administrativa clara para uso diário.",
-    year: "2024",
-    role: "Fullstack · Public Sector",
-    stack: ["PHP", "Yii2", "MySQL", "Bootstrap", "JavaScript"],
-    status: "live",
-    cover: "/assets/projects/atribuicao-jacarei.svg",
-    accent: "chrome",
-    kpis: [
-      { label: "Scope", value: "Municipal" },
-      { label: "Context", value: "Jacareí-SP" },
     ],
   },
 ];

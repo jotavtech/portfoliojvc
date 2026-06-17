@@ -92,19 +92,16 @@ export default async function ProjectPage({ params }: { params: Params }) {
             <Block label="01 · Challenge">
               <p>{project.summary}</p>
             </Block>
-            <Block label="02 · Approach">
-              <p>
-                Arquitetura modular, foco em performance e UX competitiva. Componentes isolados,
-                tipagem rigorosa e estados explícitos. Cada decisão técnica documentada para
-                garantir manutenção a longo prazo.
-              </p>
-            </Block>
-            <Block label="03 · Outcome">
-              <p>
-                Entrega em produção dentro do escopo, com Lighthouse acima de 90 e adoção real
-                pelos usuários finais. Métricas operacionais documentadas internamente.
-              </p>
-            </Block>
+            {project.approach && (
+              <Block label="02 · Approach">
+                <p>{project.approach}</p>
+              </Block>
+            )}
+            {project.outcome && (
+              <Block label="03 · Outcome">
+                <p>{project.outcome}</p>
+              </Block>
+            )}
           </div>
 
           <aside className="space-y-6">

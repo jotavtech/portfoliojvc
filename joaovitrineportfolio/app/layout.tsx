@@ -17,11 +17,15 @@ export const metadata: Metadata = {
   description: site.description,
   keywords: [
     "fullstack engineer",
+    "design engineer",
     "react",
     "next.js",
     "typescript",
     "laravel",
     "yii2",
+    "cinematic interfaces",
+    "production engineering",
+    "remote engineer",
     "portfolio",
     "joão vitor chaves",
     "jotavtech",
@@ -42,7 +46,7 @@ export const metadata: Metadata = {
     description: site.description,
     url: site.url,
     siteName: site.alias,
-    locale: "pt_BR",
+    locale: "en_US",
     type: "website",
     images: [
       {
@@ -80,7 +84,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
-      lang="pt-BR"
+      lang="en"
       className={`${fontDisplay.variable} ${fontBody.variable} ${fontMono.variable}`}
       suppressHydrationWarning
     >

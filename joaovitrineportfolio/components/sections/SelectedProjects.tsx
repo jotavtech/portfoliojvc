@@ -10,6 +10,8 @@ import { ChromeText } from "@/components/primitives/ChromeText";
 import { ease } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
+const flagship = projects.filter((p) => !p.featured);
+
 export function SelectedProjects() {
   const [active, setActive] = useState<string | null>(null);
 
@@ -25,13 +27,13 @@ export function SelectedProjects() {
             </h2>
           </div>
           <p className="max-w-md font-mono text-[11px] uppercase leading-relaxed tracking-[0.22em] text-chrome-400">
-            Quatro projetos representativos da prática atual — produção, escala e
-            <span className="text-chrome-100"> intenção</span>.
+            Three production systems — real users, real scale,
+            <span className="text-chrome-100"> solo delivery</span>.
           </p>
         </header>
 
         <ul className="divide-y divide-hairline border-y border-hairline">
-          {projects.map((p, i) => (
+          {flagship.map((p, i) => (
             <li
               key={p.slug}
               onMouseEnter={() => setActive(p.slug)}
@@ -47,8 +49,8 @@ export function SelectedProjects() {
           {active && (
             <FloatingPreview
               key={active}
-              cover={projects.find((p) => p.slug === active)?.cover}
-              accent={projects.find((p) => p.slug === active)?.accent}
+              cover={flagship.find((p) => p.slug === active)?.cover}
+              accent={flagship.find((p) => p.slug === active)?.accent}
             />
           )}
         </AnimatePresence>

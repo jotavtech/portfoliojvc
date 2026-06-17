@@ -21,7 +21,7 @@ export function Technologies() {
             </h2>
           </div>
           <p className="max-w-md font-mono text-[11px] uppercase leading-relaxed tracking-[0.22em] text-chrome-400">
-            Mixing board pessoal. Cada lane representa anos em produção — não meses de tutorial.
+            Personal mixing board. Each lane represents years in production — not months of tutorials.
           </p>
         </header>
 

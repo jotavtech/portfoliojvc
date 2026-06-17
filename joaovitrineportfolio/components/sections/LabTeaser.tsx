@@ -54,9 +54,9 @@ export function LabTeaser() {
             <ChromeText>The lab</ChromeText>
           </h2>
           <p className="mt-6 max-w-lg font-display text-base leading-relaxed text-chrome-300 md:text-lg">
-            Espaço aberto para experiências em <span className="text-chrome-100">WebGL</span>,
-            motion <span className="text-chrome-100">physics</span>, áudio reativo e shaders.
-            Sem briefing, sem cliente — só máquina e mão.
+            Open space for experiments in <span className="text-chrome-100">WebGL</span>,
+            motion <span className="text-chrome-100">physics</span>, reactive audio and shaders.
+            No brief, no client — just the machine and the code.
           </p>
 
           <Link

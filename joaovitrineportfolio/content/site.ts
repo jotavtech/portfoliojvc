@@ -1,7 +1,7 @@
 export const site = {
   name: "João Vitor Chaves",
   alias: "jotavtech",
-  role: "Fullstack Engineer · Design Engineer",
+  role: "Fullstack Engineer · Design Engineer · Interface + Production",
   location: "João Pessoa · Brazil",
   birthYear: 2005,
   email: "martinsjoao1227@gmail.com",
@@ -10,7 +10,7 @@ export const site = {
   thumbnail:
     "https://res.cloudinary.com/dzwfuzxxw/image/upload/v1779293945/28cf8079-3205-433a-9657-3751ac61508f_fhnytn.png",
   description:
-    "Fullstack engineer building product-grade interfaces with React, TypeScript and PHP. Industrial, dark and precise.",
+    "Fullstack engineer bridging cinematic interfaces with production-grade engineering. 10+ systems in production, built solo. React, TypeScript, PHP.",
   social: {
     github: "https://github.com/jotavtech",
     linkedin: "https://www.linkedin.com/in/joaovitorchaves27/",
@@ -23,5 +23,6 @@ export const site = {
     { id: "about", label: "About", href: "/#about" },
     { id: "contact", label: "Contact", href: "/#contact" },
     { id: "lab", label: "Lab", href: "/lab" },
+    { id: "resume", label: "Resume", href: "/resume" },
   ],
 } as const;

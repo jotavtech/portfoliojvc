@@ -1,10 +1,13 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, ArrowUpRight, Github } from "lucide-react";
+import type { Metadata } from "next";
+import { ArrowLeft, ArrowUpRight, Github, FileText } from "lucide-react";
 import { projects } from "@/content/projects";
+import { site } from "@/content/site";
 import { TerminalLabel } from "@/components/primitives/TerminalLabel";
 import { ChromeText } from "@/components/primitives/ChromeText";
+import { MockupFrame } from "@/components/primitives/MockupFrame";
 
 type Params = Promise<{ slug: string }>;
 
@@ -13,13 +16,32 @@ export function generateStaticParams() {
   return projects.filter((p) => !p.featured).map((p) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata({ params }: { params: Params }) {
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { slug } = await params;
   const project = projects.find((p) => p.slug === slug);
   if (!project) return {};
+  const ogTitle = `${project.title} · ${site.alias}`;
+  const description = project.outcome ?? project.tagline;
   return {
     title: project.title,
-    description: project.tagline,
+    description,
+    openGraph: {
+      title: ogTitle,
+      description,
+      url: `${site.url}/projects/${project.slug}`,
+      siteName: site.alias,
+      locale: "en_US",
+      type: "article",
+      images: project.cover
+        ? [{ url: project.cover, alt: project.title }]
+        : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: ogTitle,
+      description,
+      images: project.cover ? [project.cover] : undefined,
+    },
   };
 }
 
@@ -84,6 +106,15 @@ export default async function ProjectPage({ params }: { params: Params }) {
                 <span>Repository</span>
               </a>
             )}
+            {project.teardownHref && (
+              <Link
+                href={project.teardownHref}
+                className="inline-flex items-center gap-3 border border-hairline-strong px-5 py-3 font-mono text-eyebrow uppercase tracking-[0.32em] text-chrome-400 transition-colors hover:text-chrome-100"
+              >
+                <FileText className="h-3.5 w-3.5" />
+                <span>Engineering teardown</span>
+              </Link>
+            )}
           </div>
         </header>
 
@@ -92,19 +123,16 @@ export default async function ProjectPage({ params }: { params: Params }) {
             <Block label="01 · Challenge">
               <p>{project.summary}</p>
             </Block>
-            <Block label="02 · Approach">
-              <p>
-                Arquitetura modular, foco em performance e UX competitiva. Componentes isolados,
-                tipagem rigorosa e estados explícitos. Cada decisão técnica documentada para
-                garantir manutenção a longo prazo.
-              </p>
-            </Block>
-            <Block label="03 · Outcome">
-              <p>
-                Entrega em produção dentro do escopo, com Lighthouse acima de 90 e adoção real
-                pelos usuários finais. Métricas operacionais documentadas internamente.
-              </p>
-            </Block>
+            {project.approach && (
+              <Block label="02 · Approach">
+                <p>{project.approach}</p>
+              </Block>
+            )}
+            {project.outcome && (
+              <Block label="03 · Outcome">
+                <p>{project.outcome}</p>
+              </Block>
+            )}
           </div>
 
           <aside className="space-y-6">
@@ -144,17 +172,23 @@ export default async function ProjectPage({ params }: { params: Params }) {
         </section>
 
         {project.cover && (
-          <figure className="mt-16 border border-hairline">
-            <div className="relative aspect-[16/9] w-full overflow-hidden bg-ink-900">
-              <Image
-                src={project.cover}
-                alt={project.title}
-                fill
-                sizes="(min-width: 1100px) 1100px, 100vw"
-                className="object-cover"
-                unoptimized
-              />
-            </div>
+          <figure className="mt-16">
+            <MockupFrame
+              label={project.title}
+              status={project.status}
+              accent={project.accent}
+            >
+              <div className="relative aspect-[16/9] w-full overflow-hidden bg-ink-900">
+                <Image
+                  src={project.cover}
+                  alt={project.title}
+                  fill
+                  sizes="(min-width: 1100px) 1100px, 100vw"
+                  className="object-cover"
+                  unoptimized
+                />
+              </div>
+            </MockupFrame>
           </figure>
         )}
       </div>

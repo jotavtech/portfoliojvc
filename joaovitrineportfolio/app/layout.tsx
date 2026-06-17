@@ -4,6 +4,8 @@ import { site } from "@/content/site";
 import { LenisProvider } from "@/components/chrome/LenisProvider";
 import { Header } from "@/components/chrome/Header";
 import { Footer } from "@/components/chrome/Footer";
+import { KeyboardNav } from "@/components/chrome/KeyboardNav";
+import { BootSequenceGate } from "@/components/chrome/BootSequenceGate";
 import { Grain } from "@/components/primitives/Grain";
 import { Scanlines } from "@/components/primitives/Scanlines";
 import "./globals.css";
@@ -17,11 +19,15 @@ export const metadata: Metadata = {
   description: site.description,
   keywords: [
     "fullstack engineer",
+    "design engineer",
     "react",
     "next.js",
     "typescript",
     "laravel",
     "yii2",
+    "cinematic interfaces",
+    "production engineering",
+    "remote engineer",
     "portfolio",
     "joão vitor chaves",
     "jotavtech",
@@ -42,7 +48,7 @@ export const metadata: Metadata = {
     description: site.description,
     url: site.url,
     siteName: site.alias,
-    locale: "pt_BR",
+    locale: "en_US",
     type: "website",
     images: [
       {
@@ -80,17 +86,30 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
-      lang="pt-BR"
+      lang="en"
       className={`${fontDisplay.variable} ${fontBody.variable} ${fontMono.variable}`}
       suppressHydrationWarning
     >
       <body className="relative bg-ink text-chrome-100 antialiased">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[999] focus:bg-ink focus:px-4 focus:py-2 focus:font-mono focus:text-[11px] focus:uppercase focus:tracking-[0.32em] focus:text-chrome-100 focus:outline focus:outline-rust-500"
+        >
+          Skip to content
+        </a>
         <LenisProvider />
+        <BootSequenceGate />
         <Header />
-        <main className="relative">{children}</main>
+        <KeyboardNav />
+        <main id="main-content" className="relative">{children}</main>
         <Footer />
+        {/* atmosphere — grain + scanlines + vignette */}
         <Grain opacity={0.06} />
         <Scanlines opacity={0.035} />
+        <div
+          aria-hidden
+          className="vignette pointer-events-none fixed inset-0 z-[1]"
+        />
       </body>
     </html>
   );

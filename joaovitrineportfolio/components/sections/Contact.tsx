@@ -42,8 +42,8 @@ export function Contact() {
             <ChromeText variant="muted">channel</ChromeText>
           </h2>
           <p className="mt-6 max-w-md font-display text-base leading-relaxed text-chrome-300 md:text-lg">
-            Para projetos, contratos ou conversa sobre engenharia, design e música.
-            Resposta em até 24h em dias úteis.
+            For projects, contracts, or a conversation about engineering and design.
+            Response within 24h — remote-first, available worldwide.
           </p>
 
           <ul className="mt-10 divide-y divide-hairline border-y border-hairline">

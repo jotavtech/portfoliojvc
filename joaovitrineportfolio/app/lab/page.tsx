@@ -53,8 +53,8 @@ export default function LabPage() {
               <ChromeText variant="muted">area</ChromeText>
             </h1>
             <p className="mt-6 max-w-xl font-display text-base leading-relaxed text-chrome-300 md:text-lg">
-              Playground sem briefing. Mini-experiências em canvas, css e motion physics. Toque,
-              passe o mouse, ouça.
+              No brief, no client. Mini-experiments in canvas, CSS, and motion physics. Touch,
+              hover, listen.
             </p>
           </div>
           <Link
@@ -84,6 +84,59 @@ export default function LabPage() {
               </article>
             );
           })}
+        </div>
+
+        {/* ── Lab Artifact: Pumprithm ─────────────────────────────────── */}
+        <div className="mt-px border border-hairline bg-ink-900">
+          <div className="border-b border-hairline px-5 py-3 font-mono text-[10px] uppercase tracking-[0.32em]">
+            <span className="text-chrome-600">LAB ARTIFACT · 005</span>
+            <span className="ml-4 text-rust-500">AI ORCHESTRATION</span>
+          </div>
+          <div className="grid gap-12 p-5 md:grid-cols-[1fr_auto] md:items-start md:p-8">
+            <div>
+              <h2 className="font-display text-2xl font-semibold tracking-tight text-chrome-100 md:text-3xl">
+                Pumprithm
+              </h2>
+              <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.22em] text-chrome-500">
+                Rhythm generator · AI-orchestrated · zero-dependency sandbox
+              </p>
+              <p className="mt-6 max-w-lg font-display text-base leading-relaxed text-chrome-300 md:text-lg">
+                Rhythm and beat generation tool built entirely through AI orchestration. The
+                interesting part isn't the output — it's the{" "}
+                <span className="text-chrome-100">architecture it forced</span>: Web Worker audio
+                pipeline, CSP{" "}
+                <code className="font-mono text-[13px] text-chrome-400">connect-src 'none'</code>{" "}
+                enforcement, and zero runtime dependencies. Clean sandbox, auditable output.
+              </p>
+              <ul className="mt-8 grid gap-3 border-l border-hairline-strong pl-5 md:grid-cols-3">
+                {[
+                  { k: "Architecture", v: "Web Worker + CSP sandbox" },
+                  { k: "Dependencies", v: "Zero runtime" },
+                  { k: "Method", v: "AI orchestrated" },
+                ].map((d) => (
+                  <li key={d.k}>
+                    <p className="font-mono text-[10px] uppercase tracking-[0.32em] text-chrome-600">
+                      {d.k}
+                    </p>
+                    <p className="mt-1 font-display text-sm text-chrome-200">{d.v}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="shrink-0 space-y-2 font-mono text-[10px] uppercase tracking-[0.24em]">
+              <p className="text-chrome-600">Key decisions</p>
+              {[
+                "Web Worker isolates audio from main thread",
+                "CSP blocks all outbound — no side channels",
+                "Comparator chain for rhythm coherence",
+                "Claude Code orchestration → clean architecture",
+              ].map((d) => (
+                <p key={d} className="text-chrome-400">
+                  <span className="text-rust-500">—</span> {d}
+                </p>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>

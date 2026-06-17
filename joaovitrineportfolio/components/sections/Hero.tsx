@@ -13,10 +13,10 @@ import { ease } from "@/lib/motion";
 
 const ROLES = [
   "FULLSTACK ENGINEER",
-  "REACT · TYPESCRIPT",
-  "PHP · LARAVEL · YII2",
   "DESIGN ENGINEER",
-  "PRODUCT THINKING",
+  "INTERFACE · PRODUCTION",
+  "10+ SYSTEMS LIVE",
+  "REMOTE · AVAILABLE",
 ];
 
 export function Hero() {
@@ -148,11 +148,11 @@ export function Hero() {
               </li>
               <li className="flex justify-between gap-4">
                 <span className="text-chrome-600">stack</span>
-                <span className="text-chrome-200">REACT / PHP</span>
+                <span className="text-chrome-200">REACT · TS · PHP</span>
               </li>
               <li className="flex justify-between gap-4">
                 <span className="text-chrome-600">mode</span>
-                <span className="text-rust-400">DISPONIVEL</span>
+                <span className="text-rust-400">AVAILABLE</span>
               </li>
             </ul>
           </motion.aside>
@@ -166,8 +166,9 @@ export function Hero() {
           className="mt-14 flex flex-col items-start gap-6 border-t border-hairline pt-6 md:mt-20 md:flex-row md:items-center md:justify-between md:gap-10"
         >
           <p className="max-w-md font-display text-base leading-relaxed text-chrome-300 md:text-lg">
-            Engenheiro de produto especializado em construir interfaces que parecem
-            <span className="text-chrome-100"> máquinas</span> — densas, precisas e com personalidade.
+            Engineer bridging{" "}
+            <span className="text-chrome-100">cinematic interfaces</span> with production-grade
+            engineering — 10+ systems deployed, built solo.
           </p>
 
           <div className="flex items-center gap-3">

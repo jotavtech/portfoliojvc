@@ -7,8 +7,11 @@ import { ArrowUpRight } from "lucide-react";
 import { projects } from "@/content/projects";
 import { TerminalLabel } from "@/components/primitives/TerminalLabel";
 import { ChromeText } from "@/components/primitives/ChromeText";
+import { MockupFrame } from "@/components/primitives/MockupFrame";
 import { ease } from "@/lib/motion";
 import { cn } from "@/lib/utils";
+
+const flagship = projects.filter((p) => !p.featured);
 
 export function SelectedProjects() {
   const [active, setActive] = useState<string | null>(null);
@@ -25,13 +28,13 @@ export function SelectedProjects() {
             </h2>
           </div>
           <p className="max-w-md font-mono text-[11px] uppercase leading-relaxed tracking-[0.22em] text-chrome-400">
-            Quatro projetos representativos da prática atual — produção, escala e
-            <span className="text-chrome-100"> intenção</span>.
+            Three production systems — real users, real scale,
+            <span className="text-chrome-100"> solo delivery</span>.
           </p>
         </header>
 
         <ul className="divide-y divide-hairline border-y border-hairline">
-          {projects.map((p, i) => (
+          {flagship.map((p, i) => (
             <li
               key={p.slug}
               onMouseEnter={() => setActive(p.slug)}
@@ -47,8 +50,9 @@ export function SelectedProjects() {
           {active && (
             <FloatingPreview
               key={active}
-              cover={projects.find((p) => p.slug === active)?.cover}
-              accent={projects.find((p) => p.slug === active)?.accent}
+              cover={flagship.find((p) => p.slug === active)?.cover}
+              accent={flagship.find((p) => p.slug === active)?.accent}
+              title={flagship.find((p) => p.slug === active)?.title}
             />
           )}
         </AnimatePresence>
@@ -128,9 +132,11 @@ function ProjectRow({
 function FloatingPreview({
   cover,
   accent,
+  title,
 }: {
   cover?: string;
   accent?: "rust" | "chrome";
+  title?: string;
 }) {
   if (!cover) return null;
   return (
@@ -141,25 +147,24 @@ function FloatingPreview({
       transition={{ duration: 0.35, ease: ease.outExpo }}
       className="pointer-events-none fixed bottom-10 right-10 z-[40] hidden md:block"
     >
-      <div
-        className={cn(
-          "relative h-[220px] w-[340px] overflow-hidden border bg-ink-900",
-          accent === "rust" ? "border-rust-500/60 shadow-glow" : "border-chrome-300/30",
-        )}
+      <MockupFrame
+        label={title ?? "preview"}
+        status="live"
+        accent={accent}
+        className="w-[340px]"
       >
-        <Image
-          src={cover}
-          alt=""
-          fill
-          sizes="340px"
-          className="object-cover"
-          unoptimized
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent" />
-        <div className="absolute left-3 top-3 font-mono text-[9px] uppercase tracking-[0.32em] text-chrome-300">
-          PREVIEW · LIVE
+        <div className="relative h-[200px] w-full">
+          <Image
+            src={cover}
+            alt=""
+            fill
+            sizes="340px"
+            className="object-cover"
+            unoptimized
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent" />
         </div>
-      </div>
+      </MockupFrame>
     </motion.div>
   );
 }

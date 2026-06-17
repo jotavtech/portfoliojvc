@@ -91,11 +91,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <body className="relative bg-ink text-chrome-100 antialiased">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[999] focus:bg-ink focus:px-4 focus:py-2 focus:font-mono focus:text-[11px] focus:uppercase focus:tracking-[0.32em] focus:text-chrome-100 focus:outline focus:outline-rust-500"
+        >
+          Skip to content
+        </a>
         <LenisProvider />
         <BootSequenceGate />
         <Header />
         <KeyboardNav />
-        <main className="relative">{children}</main>
+        <main id="main-content" className="relative">{children}</main>
         <Footer />
         {/* atmosphere — grain + scanlines + vignette */}
         <Grain opacity={0.06} />

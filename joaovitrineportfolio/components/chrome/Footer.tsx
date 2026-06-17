@@ -62,6 +62,9 @@ export function Footer() {
       <div className="border-t border-hairline">
         <div className="mx-auto flex max-w-[1440px] flex-col items-start justify-between gap-2 px-4 py-5 font-mono text-[10px] uppercase tracking-[0.24em] text-chrome-600 md:flex-row md:items-center md:px-8">
           <span>© {year} · joão vitor chaves félix · all signals reserved</span>
+          <span className="hidden md:inline text-chrome-700">
+            keyboard · [W] work · [E] experience · [S] stack · [A] about · [C] contact · [L] lab
+          </span>
           <span>build · 3.0.0 · industrial release</span>
         </div>
       </div>

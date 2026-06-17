@@ -259,7 +259,15 @@ export function AtlasCore({ className }: { className?: string }) {
 
   return (
     <div className={className}>
+      {/* visually-hidden description for screen readers */}
+      <span className="sr-only">
+        Atlas Command Core — interactive 3D visualization with 8 orbital nodes representing
+        project domains. Use keyboard shortcuts W, E, S, A, C to navigate sections.
+      </span>
       <Canvas
+        aria-label="Atlas Command Core — 3D orbital navigation"
+        aria-hidden="true"
+        role="img"
         dpr={[1, 1.5]}
         camera={{ position: [0, 0, 5.5], fov: 42 }}
         gl={{ antialias: true, alpha: true }}

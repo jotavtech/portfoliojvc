@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowLeft, ArrowUpRight, FileText } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, FileText, Clock } from "lucide-react";
 import { TerminalLabel } from "@/components/primitives/TerminalLabel";
 import { ChromeText } from "@/components/primitives/ChromeText";
 import { site } from "@/content/site";
@@ -17,44 +17,44 @@ const VERSIONS = [
     label: "ATS / General",
     note: "Keyword-optimized for applicant tracking systems. Maximum compatibility.",
     accent: false,
-    href: "#",
+    href: null,
   },
   {
     id: "fullstack",
     label: "Fullstack Engineer",
     note: "Balanced React + PHP stack depth. Best for product companies.",
     accent: false,
-    href: "#",
+    href: null,
   },
   {
     id: "frontend",
     label: "Frontend Engineer",
     note: "Interface, motion, and design system emphasis. Best for UI-heavy roles.",
     accent: false,
-    href: "#",
+    href: null,
   },
   {
     id: "backend",
     label: "Backend Engineer",
     note: "Architecture, API design, and infrastructure depth.",
     accent: false,
-    href: "#",
+    href: null,
   },
   {
     id: "designer",
     label: "Design Engineer",
     note: "Interface craft, design systems, and motion design. Bridges code and design.",
     accent: true,
-    href: "#",
+    href: null,
   },
   {
     id: "ai",
     label: "AI Engineer",
     note: "AI orchestration, Claude Code workflow, and sandboxed architecture.",
     accent: true,
-    href: "#",
+    href: null,
   },
-] as const;
+];
 
 export default function ResumePage() {
   return (
@@ -81,21 +81,16 @@ export default function ResumePage() {
         </header>
 
         <ul className="mt-14 divide-y divide-hairline border-y border-hairline">
-          {VERSIONS.map((v, i) => (
-            <li key={v.id}>
-              <a
-                href={v.href}
-                target="_blank"
-                rel="noreferrer"
-                className="group flex items-center justify-between gap-6 py-6 transition-colors hover:bg-ink-900/40 md:py-8 md:px-4"
-              >
+          {VERSIONS.map((v, i) => {
+            const inner = (
+              <>
                 <div className="flex items-start gap-6">
                   <span className="mt-1 font-mono text-eyebrow uppercase tracking-[0.32em] text-chrome-600">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <div>
                     <div className="flex flex-wrap items-center gap-3">
-                      <h2 className="font-display text-2xl font-semibold tracking-tight text-chrome-200 transition-colors group-hover:text-chrome-100 md:text-3xl">
+                      <h2 className={`font-display text-2xl font-semibold tracking-tight md:text-3xl ${v.href ? "transition-colors group-hover:text-chrome-100 text-chrome-200" : "text-chrome-300"}`}>
                         {v.label}
                       </h2>
                       {v.accent && (
@@ -109,13 +104,44 @@ export default function ResumePage() {
                     </p>
                   </div>
                 </div>
-                <div className="flex shrink-0 items-center gap-2 text-chrome-500 transition-colors group-hover:text-rust-500">
-                  <FileText className="h-4 w-4" />
-                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                <div className={`flex shrink-0 items-center gap-2 ${v.href ? "text-chrome-500 transition-colors group-hover:text-rust-500" : "text-chrome-700"}`}>
+                  {v.href ? (
+                    <>
+                      <FileText className="h-4 w-4" />
+                      <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                    </>
+                  ) : (
+                    <>
+                      <Clock className="h-3.5 w-3.5" />
+                      <span className="font-mono text-[9px] uppercase tracking-[0.32em]">Uploading soon</span>
+                    </>
+                  )}
                 </div>
-              </a>
-            </li>
-          ))}
+              </>
+            );
+
+            return (
+              <li key={v.id}>
+                {v.href ? (
+                  <a
+                    href={v.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group flex items-center justify-between gap-6 py-6 transition-colors hover:bg-ink-900/40 md:py-8 md:px-4"
+                  >
+                    {inner}
+                  </a>
+                ) : (
+                  <div
+                    aria-disabled="true"
+                    className="flex cursor-default items-center justify-between gap-6 py-6 opacity-60 md:py-8 md:px-4"
+                  >
+                    {inner}
+                  </div>
+                )}
+              </li>
+            );
+          })}
         </ul>
 
         <div className="mt-12 border border-hairline bg-ink-900/40 p-6 font-mono text-[11px] uppercase tracking-[0.22em] text-chrome-400">

@@ -4,6 +4,7 @@ import { site } from "@/content/site";
 import { LenisProvider } from "@/components/chrome/LenisProvider";
 import { Header } from "@/components/chrome/Header";
 import { Footer } from "@/components/chrome/Footer";
+import { KeyboardNav } from "@/components/chrome/KeyboardNav";
 import { Grain } from "@/components/primitives/Grain";
 import { Scanlines } from "@/components/primitives/Scanlines";
 import "./globals.css";
@@ -91,6 +92,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="relative bg-ink text-chrome-100 antialiased">
         <LenisProvider />
         <Header />
+        <KeyboardNav />
         <main className="relative">{children}</main>
         <Footer />
         <Grain opacity={0.06} />

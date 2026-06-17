@@ -1,8 +1,10 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
 import { ArrowLeft, ArrowUpRight, Github } from "lucide-react";
 import { projects } from "@/content/projects";
+import { site } from "@/content/site";
 import { TerminalLabel } from "@/components/primitives/TerminalLabel";
 import { ChromeText } from "@/components/primitives/ChromeText";
 
@@ -13,13 +15,32 @@ export function generateStaticParams() {
   return projects.filter((p) => !p.featured).map((p) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata({ params }: { params: Params }) {
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { slug } = await params;
   const project = projects.find((p) => p.slug === slug);
   if (!project) return {};
+  const ogTitle = `${project.title} · ${site.alias}`;
+  const description = project.outcome ?? project.tagline;
   return {
     title: project.title,
-    description: project.tagline,
+    description,
+    openGraph: {
+      title: ogTitle,
+      description,
+      url: `${site.url}/projects/${project.slug}`,
+      siteName: site.alias,
+      locale: "en_US",
+      type: "article",
+      images: project.cover
+        ? [{ url: project.cover, alt: project.title }]
+        : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: ogTitle,
+      description,
+      images: project.cover ? [project.cover] : undefined,
+    },
   };
 }
 
